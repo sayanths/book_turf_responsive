@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/view/bottom_nav.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/widgets/custom_formfield.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/widgets/glass_container.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/view/signup_page.dart';
@@ -90,14 +91,15 @@ class LoginPageMobile extends StatelessWidget {
                             width: size.width / 2,
                             child: ElevatedButton(
                               onPressed: () {
-                                // loginController.onLoginButtonPress();
-                                // loginController.loginApi();
+                                Get.to(
+                                  () =>  BottomNavigationMobile(),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: const Color.fromARGB(255, 0, 20, 238),
                                 shape: const StadiumBorder(),
                               ),
-                              child: Text("Log in"),
+                              child: const Text("Log in"),
                             ),
                           ),
                           height10,
@@ -113,7 +115,7 @@ class LoginPageMobile extends StatelessWidget {
                                   child: Text(
                                 " Click here",
                                 style: gfontsubtitlefont(
-                                    cl: Color.fromARGB(255, 0, 255, 255)),
+                                    cl: const Color.fromARGB(255, 0, 255, 255)),
                               )),
                             ],
                           ),
@@ -126,12 +128,13 @@ class LoginPageMobile extends StatelessWidget {
                               ),
                               InkWell(
                                   onTap: () {
-                                    Get.to(() => SignUpPageMobile());
+                                    Get.to(() => const SignUpPageMobile());
                                   },
                                   child: Text(
                                     " Click here",
                                     style: gfontsubtitlefont(
-                                        cl: Color.fromARGB(255, 0, 255, 255)),
+                                        cl: const Color.fromARGB(
+                                            255, 0, 255, 255)),
                                   )),
                             ],
                           ),
