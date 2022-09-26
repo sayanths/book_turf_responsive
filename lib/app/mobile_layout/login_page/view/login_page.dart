@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/widgets/custom_formfield.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/widgets/glass_container.dart';
+import 'package:turf_book_second_project/app/mobile_layout/signup_page/view/signup_page.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
@@ -98,63 +100,64 @@ class LoginPageMobile extends StatelessWidget {
                               child: Text("Log in"),
                             ),
                           ),
-                             height10,
-              Row(
-                children: [
-                  Text(
-                    "Forgot password ? ",
-                    style: gfontsubtitlefont(cl: white),
-                  ),
-                  InkWell(
-                      // onTap: () =>
-                      //     Get.to(() => ForgotpasswordView()),
-                      child: Text(
-                        " Click here",
-                        style: gfontsubtitlefont(
-                            cl: Color.fromARGB(255, 0, 255, 255)),
-                      )),
-                ],
-              ),
-              height10,
-              Row(
-                children: [
-                  Text(
-                    "Don't have an account ? ",
-                    style: gfontsubtitlefont(cl: white),
-                  ),
-                  InkWell(
-                      // onTap: () => Get.to(() => SignupView(),
-                      //     transition: Transition.upToDown),
-                      child: Text(
-                        " Click here",
-                        style: gfontsubtitlefont(
-                            cl: Color.fromARGB(255, 0, 255, 255)),
-                      )),
-                ],
-              ),
-              height30,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Image.network(
-                      "https://res.cloudinary.com/sayanth/image/upload/v1662220924/zara%27s%20shopping%20app/zara%20shopping/google_vnwqmg.png",
-                      height: 50,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                     // Get.to(() => PhoneloginView());
-                    },
-                    child: Image.network(
-                      "https://res.cloudinary.com/sayanth/image/upload/v1663998187/toppng.com-registration-and-login-screen-mobile-phone-registration-smartphone-icon-black-980x980_cqgduv.png",
-                      height: 55,
-                      color: white,
-                    ),
-                  ),
-                ],
-              ),
+                          height10,
+                          Row(
+                            children: [
+                              Text(
+                                "Forgot password ? ",
+                                style: gfontsubtitlefont(cl: white),
+                              ),
+                              InkWell(
+                                  // onTap: () =>
+                                  //     Get.to(() => ForgotpasswordView()),
+                                  child: Text(
+                                " Click here",
+                                style: gfontsubtitlefont(
+                                    cl: Color.fromARGB(255, 0, 255, 255)),
+                              )),
+                            ],
+                          ),
+                          height10,
+                          Row(
+                            children: [
+                              Text(
+                                "Don't have an account ? ",
+                                style: gfontsubtitlefont(cl: white),
+                              ),
+                              InkWell(
+                                  onTap: () {
+                                    Get.to(() => SignUpPageMobile());
+                                  },
+                                  child: Text(
+                                    " Click here",
+                                    style: gfontsubtitlefont(
+                                        cl: Color.fromARGB(255, 0, 255, 255)),
+                                  )),
+                            ],
+                          ),
+                          height30,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                onTap: () {},
+                                child: Image.network(
+                                  "https://res.cloudinary.com/sayanth/image/upload/v1662220924/zara%27s%20shopping%20app/zara%20shopping/google_vnwqmg.png",
+                                  height: 50,
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  // Get.to(() => PhoneloginView());
+                                },
+                                child: Image.network(
+                                  "https://res.cloudinary.com/sayanth/image/upload/v1663998187/toppng.com-registration-and-login-screen-mobile-phone-registration-smartphone-icon-black-980x980_cqgduv.png",
+                                  height: 55,
+                                  color: white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
