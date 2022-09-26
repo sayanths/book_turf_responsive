@@ -1,3 +1,3 @@
 import 'package:get/get.dart';
 
-class NotificationMobile extends GetxController {}
+class NotificationMobileController extends GetxController {}
