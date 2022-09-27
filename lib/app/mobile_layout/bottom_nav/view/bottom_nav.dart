@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/favourite/view/bottom_nav.dart';
-import 'package:turf_book_second_project/app/mobile_layout/home_page/view/bottom_nav.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/view/home_page.dart';
 import 'package:turf_book_second_project/app/mobile_layout/notification/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/notification/view/bottom_nav.dart';
 import 'package:turf_book_second_project/app/mobile_layout/profile/view/bottom_nav.dart';
