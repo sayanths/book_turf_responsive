@@ -76,6 +76,7 @@ class HomePageMobile extends StatelessWidget {
                       return const CustomSnackImageShower();
                     })),
               ),
+              
             ],
           ),
         ),
