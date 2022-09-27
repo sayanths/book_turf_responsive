@@ -10,63 +10,66 @@ class CustomSnackImageShower extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Container(
-          height: size.height / 3.6,
-          width: size.width / 2.2,
-          decoration: BoxDecoration(
-            color: Colors.white10,
-            image: DecorationImage(
-              image: NetworkImage(
-                "https://etimg.etb2bimg.com/photo/76543014.cms",
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Stack(
+        children: [
+          Container(
+            height: size.height / 3.6,
+            width: size.width / 2.2,
+            decoration: BoxDecoration(
+              color: Colors.white10,
+              image: const DecorationImage(
+                image: NetworkImage(
+                  "https://5.imimg.com/data5/LC/IL/MY-14051731/football-turf-500x500.jpg",
+                ),
+                fit: BoxFit.cover,
               ),
-              fit: BoxFit.cover,
+              borderRadius: BorderRadius.circular(15),
             ),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                left: 120,
-                top: -9,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.favorite,
-                    color: red,
-                    size: 30.0,
+            child: Stack(
+              children: [
+                Positioned(
+                  left: 120,
+                  top: -9,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.favorite,
+                      color: red,
+                      size: 30.0,
+                    ),
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: 0,
-                child: Stack(
-                  children: [
-                    Container(
-                      height: 40,
-                      width: size.width / 2.2,
-                      decoration: BoxDecoration(
-                        color: white,
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15)),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Benz",
-                          style: gfontsubtitlefont(
-                              cl: black, sz: 20, fw: FontWeight.bold),
+                Positioned(
+                  bottom: 0,
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: 40,
+                        width: size.width / 2.2,
+                        decoration: const BoxDecoration(
+                          color: white,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Turf",
+                            style: gfontsubtitlefont(
+                                cl: black, sz: 20, fw: FontWeight.bold),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
