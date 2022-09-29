@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/widgets/custom_formfield.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/widgets/glass_container.dart';
+import 'package:turf_book_second_project/app/mobile_layout/signup_page/controller/signup_controller.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
@@ -11,73 +13,73 @@ class SignUpPageMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
+    final signUpController = Get.put(SignUpControllerMobile());
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: black,
+      backgroundColor: const Color.fromARGB(255, 0, 69, 2),
       body: SafeArea(
         child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                height50,
-                CustomBackArrowWithTitle(
-                  title: 'Create an Account',
-                ),
-                height50,
-                LoginGlassContainer(
-                  size: size,
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              height50,
+              const CustomBackArrowWithTitle(
+                title: 'Create an Account',
+              ),
+              height50,
+              LoginGlassContainer(
+                size: size,
+                child: Form(
+                  key: signUpController.signUpKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CustomTextField(
-                        obsureText: false,
-                       // controller: signUpController.nameController,
+                          obsureText: false,
+                          controller: signUpController.emailController,
                           size: size,
-                          icon: Icons.person,
-                          title: " Please enter the user name",
-                          keyboard: TextInputType.name),
+                          icon: Icons.email,
+                          title: " Enter Email",
+                          keyboard: TextInputType.emailAddress),
                       CustomTextField(
-                        obsureText: false,
-                       // controller: signUpController.numberController,
-                          size: size,
-                          icon: Icons.call,
-                          title: " Please enter the number",
-                          keyboard: TextInputType.name),
-                      CustomTextField(
-                        obsureText: false,
-                        //controller: signUpController.passwordController,
+                          obsureText: true,
+                          controller: signUpController.passwordController,
                           size: size,
                           icon: Icons.password,
-                          title: " Please enter the password",
-                          keyboard: TextInputType.name),
+                          title: "  Enter password",
+                          keyboard: TextInputType.visiblePassword),
                       CustomTextField(
-                        obsureText: false,
-                       // controller: signUpController.confromPasswordController,
+                          obsureText: true,
+                          controller:
+                              signUpController.conformPasswordController,
                           size: size,
                           icon: Icons.password_outlined,
                           title: " conform password",
                           keyboard: TextInputType.name),
-                      SizedBox(
-                        width: size.width / 1.5,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            // Get.offAll(() => BottomnavbarView(),
-                            //     transition: Transition.circularReveal);
-                          },
-                          child: Text("Create"),
-                          style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(255, 55, 0, 255),
-                            shape: StadiumBorder(),
+                     Obx(() {
+                      return SizedBox(
+                          width: size.width / 1.5,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              signUpController.singUp();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color.fromARGB(255, 55, 0, 255),
+                              shape: const StadiumBorder(),
+                            ),
+                            child: signUpController.isLoading.value
+                                ? const CupertinoActivityIndicator()
+                                : const Text("Create"),
                           ),
-                        ),
-                      ),
+                        );
+                     },)
                     ],
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
+        ),
       ),
     );
   }
@@ -100,7 +102,7 @@ class CustomBackArrowWithTitle extends StatelessWidget {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios,
                 color: white,
               )),
