@@ -1,27 +1,27 @@
-class VendorProductModel {
-  bool? status;
-  List<Data>? data;
-  VendorProductModel({
-    this.status,
-    this.data,
+class VendorModel {
+  VendorModel({
+   required this.status,
+   required this.data,
   });
+
+  bool? status;
+  List<Datum> data;
+
+  factory VendorModel.fromJson(Map<String, dynamic> json) => VendorModel(
+        status: json["status"],
+        data: json['data'] == null
+            ? []
+            : List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+      };
 }
 
-class Data {
-  TurfCatogery? turfCatogery;
-  TurfType? turfType;
-  TurfAmenities? turfAmenities;
-  TurfImages? turfImages;
-  TurfTime? turfTime;
-  String? id;
-  String? turfCreatorId;
-  String? turfName;
-  String? turfPlace;
-  String? turfMuncipality;
-  String? turfDistrict;
-  int? v;
-
-  Data({
+class Datum {
+  Datum({
     this.turfCatogery,
     this.turfType,
     this.turfAmenities,
@@ -36,12 +36,25 @@ class Data {
     this.v,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        turfCatogery: json["turf_catogery"],
-        turfType: json["turf_type"],
-        turfAmenities: json["turf_amenities"],
-        turfImages: json["turf_images"],
-        turfTime: json["turf_time"],
+  TurfCatogery? turfCatogery;
+  TurfType? turfType;
+  TurfAmenities? turfAmenities;
+  TurfImages? turfImages;
+  TurfTime? turfTime;
+  String? id;
+  String? turfCreatorId;
+  String? turfName;
+  String? turfPlace;
+  String? turfMuncipality;
+  String? turfDistrict;
+  int? v;
+
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        turfCatogery: TurfCatogery.fromJson(json["turf_catogery"]),
+        turfType: TurfType.fromJson(json["turf_type"]),
+        turfAmenities: TurfAmenities.fromJson(json["turf_amenities"]),
+        turfImages: TurfImages.fromJson(json["turf_images"]),
+        turfTime: TurfTime.fromJson(json["turf_time"]),
         id: json["_id"],
         turfCreatorId: json["turf_creator_id"],
         turfName: json["turf_name"],
@@ -68,13 +81,6 @@ class Data {
 }
 
 class TurfAmenities {
-  bool? turfWashroom;
-  bool? turfWater;
-  bool? turfDressing;
-  bool? turfParcking;
-  bool? turfGallery;
-  bool? turfCafeteria;
-
   TurfAmenities({
     this.turfWashroom,
     this.turfWater,
@@ -83,6 +89,13 @@ class TurfAmenities {
     this.turfGallery,
     this.turfCafeteria,
   });
+
+  bool? turfWashroom;
+  bool? turfWater;
+  bool? turfDressing;
+  bool? turfParcking;
+  bool? turfGallery;
+  bool? turfCafeteria;
 
   factory TurfAmenities.fromJson(Map<String, dynamic> json) => TurfAmenities(
         turfWashroom: json["turf_washroom"],
@@ -104,16 +117,17 @@ class TurfAmenities {
 }
 
 class TurfCatogery {
-  bool? turfCricket;
-  bool? turfFootball;
-  bool? turfBadminton;
-  bool? turfYoga;
   TurfCatogery({
     this.turfCricket,
     this.turfFootball,
     this.turfBadminton,
     this.turfYoga,
   });
+
+  bool? turfCricket;
+  bool? turfFootball;
+  bool? turfBadminton;
+  bool? turfYoga;
 
   factory TurfCatogery.fromJson(Map<String, dynamic> json) => TurfCatogery(
         turfCricket: json["turf_cricket"],

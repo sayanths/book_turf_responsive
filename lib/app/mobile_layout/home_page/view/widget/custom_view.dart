@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
+import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 
 class CustomSnackImageShower extends StatelessWidget {
-  const CustomSnackImageShower({Key? key}) : super(key: key);
+  final Datum data;
+   CustomSnackImageShower({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +23,9 @@ class CustomSnackImageShower extends StatelessWidget {
             width: size.width / 2.2,
             decoration: BoxDecoration(
               color: Colors.white10,
-              image: const DecorationImage(
+              image:  DecorationImage(
                 image: NetworkImage(
-                  "https://5.imimg.com/data5/LC/IL/MY-14051731/football-turf-500x500.jpg",
+                  data.turfImages!.turfImages3.toString(),
                 ),
                 fit: BoxFit.cover,
               ),
@@ -56,7 +60,7 @@ class CustomSnackImageShower extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            "Turf",
+                            data.turfName.toString(),
                             style: gfontsubtitlefont(
                                 cl: black, sz: 20, fw: FontWeight.bold),
                           ),
