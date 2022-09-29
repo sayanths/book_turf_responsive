@@ -15,7 +15,7 @@ class SignUpModel {
 
 class SignUpResponse {
   bool? status;
-  int? id;
+  String? id;
 
   SignUpResponse({
     this.status,

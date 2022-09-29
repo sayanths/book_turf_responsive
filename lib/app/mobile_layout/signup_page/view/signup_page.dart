@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/widgets/custom_formfield.dart';
@@ -15,7 +16,7 @@ class SignUpPageMobile extends StatelessWidget {
     final signUpController = Get.put(SignUpControllerMobile());
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: black,
+      backgroundColor: const Color.fromARGB(255, 0, 69, 2),
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -45,7 +46,7 @@ class SignUpPageMobile extends StatelessWidget {
                           controller: signUpController.passwordController,
                           size: size,
                           icon: Icons.password,
-                          title: " Please enter the password",
+                          title: "  Enter password",
                           keyboard: TextInputType.visiblePassword),
                       CustomTextField(
                           obsureText: true,
@@ -55,19 +56,23 @@ class SignUpPageMobile extends StatelessWidget {
                           icon: Icons.password_outlined,
                           title: " conform password",
                           keyboard: TextInputType.name),
-                      SizedBox(
-                        width: size.width / 1.5,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            signUpController.onSignUpPressed();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(255, 55, 0, 255),
-                            shape: const StadiumBorder(),
+                     Obx(() {
+                      return SizedBox(
+                          width: size.width / 1.5,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              signUpController.singUp();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color.fromARGB(255, 55, 0, 255),
+                              shape: const StadiumBorder(),
+                            ),
+                            child: signUpController.isLoading.value
+                                ? const CupertinoActivityIndicator()
+                                : const Text("Create"),
                           ),
-                          child: const Text("Create"),
-                        ),
-                      ),
+                        );
+                     },)
                     ],
                   ),
                 ),

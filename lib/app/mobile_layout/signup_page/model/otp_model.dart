@@ -1,5 +1,5 @@
 class OtpModel {
-  int? otp;
+  String? otp;
   int? id;
 
   OtpModel({
@@ -10,6 +10,7 @@ class OtpModel {
   Map<String, dynamic> toJson() => {
         "user_otp": otp,
         "_id": id,
+       
       };
 }
 
