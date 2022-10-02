@@ -71,20 +71,23 @@ class HomePageMobile extends StatelessWidget {
               ),
               GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
                 return homeCntrl.vendorTurfList.isEmpty
-                ?Shimmer.fromColors(child: Container(), baseColor: grey, highlightColor: red)
-                :LimitedBox(
-                  maxHeight: size.height,
-                  child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(5),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: homeController.vendorTurfList.length,
-                      itemBuilder: (context, index) {
-                        final data = homeController.vendorTurfList[index];
-                        return CustomSnackImageShower(data: data);
-                      }),
-                );
+                    ? Shimmer.fromColors(
+                        baseColor: grey,
+                        highlightColor: red,
+                        child: Container())
+                    : LimitedBox(
+                        maxHeight: size.height,
+                        child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(5),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: homeController.vendorTurfList.length,
+                            itemBuilder: (context, index) {
+                              final data = homeController.vendorTurfList[index];
+                              return CustomSnackImageShower(data: data);
+                            }),
+                      );
               }),
             ],
           ),
