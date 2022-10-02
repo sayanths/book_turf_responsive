@@ -23,9 +23,9 @@ class HomePageMobile extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 219, 219, 219),
-        toolbarHeight: 70,
+        toolbarHeight: 50,
       ),
-      drawer: const Drawer(),
+      // drawer: const Drawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -66,6 +66,7 @@ class HomePageMobile extends StatelessWidget {
                         style: gfontsubtitlefont(cl: black),
                       ),
                     ),
+                    
                   ],
                 ),
               ),
@@ -76,7 +77,33 @@ class HomePageMobile extends StatelessWidget {
                         highlightColor: red,
                         child: Container())
                     : LimitedBox(
-                        maxHeight: size.height,
+                        maxHeight: size.height/3,
+                        child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(5),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: homeController.vendorTurfList.length,
+                            itemBuilder: (context, index) {
+                              final data = homeController.vendorTurfList[index];
+                              return CustomSnackImageShower(data: data);
+                            }),
+                      );
+              }),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("Top Rated",style: Lato(cl: black, sz: 25, fw: FontWeight.bold),)),
+              ),
+              GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
+                return homeCntrl.vendorTurfList.isEmpty
+                    ? Shimmer.fromColors(
+                        baseColor: grey,
+                        highlightColor: red,
+                        child: Container())
+                    : LimitedBox(
+                        maxHeight: size.height/3,
                         child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
                             shrinkWrap: true,
