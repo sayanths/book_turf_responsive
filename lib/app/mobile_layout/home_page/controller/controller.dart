@@ -3,6 +3,7 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/model/produ
 import 'package:turf_book_second_project/app/mobile_layout/home_page/service/get_service.dart';
 
 class HomePageControllerMobile extends GetxController {
+  RxBool isFavourite = false.obs;
   List<Datum> vendorTurfList = [];
 
   fetchDetails() async {

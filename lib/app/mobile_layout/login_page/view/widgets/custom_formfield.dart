@@ -48,6 +48,7 @@ class CustomTextField extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
+                
                 child: TextFormField(
                   obscureText: obsureText,
                   validator: validate,

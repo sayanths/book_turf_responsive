@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:turf_book_second_project/app/mobile_layout/book_now/view/payment.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/widgets.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
@@ -23,7 +21,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
   void initState() {
     super.initState();
     _amountController = TextEditingController();
-      _razorpay = Razorpay();
+    _razorpay = Razorpay();
     _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSucess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWallet);
@@ -54,6 +52,8 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
             ),
             height30,
             const FullScreenTitle(title: "Amenities"),
+           
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: const [
@@ -74,7 +74,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
           ],
         ),
         bottomNavigationBar: Container(
-          height: size.height / 5,
+          height: size.height / 10,
           width: size.width,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -85,39 +85,19 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
               ],
             ),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50),
-              topRight: Radius.circular(50),
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
           ),
           child: Column(
             children: [
               height10,
               height10,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  FullViewCallAndChat(
-                    colorx: darkBlue,
-                    function: () {},
-                    title: 'Chat',
-                    icon: Icons.message,
-                  ),
-                  FullViewCallAndChat(
-                    colorx: darkBlue,
-                    function: () {},
-                    title: 'call',
-                    icon: Icons.call,
-                  ),
-                ],
-              ),
-              height10,
-              height10,
               InkWell(
                 onTap: () {
-                  //Get.to(() => const BookNow());
                   var options = {
                     "key": "rzp_test_g9wjrkJkmYw27N",
-                   // "amount": num.parse(_amountController.text) * 100,
+                    // "amount": num.parse(_amountController.text) * 100,
                     "name": "new project",
                     "description": "payment for our work",
                     "prefill": {
@@ -134,22 +114,27 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                     print(e.toString());
                   }
                 },
-                child: Container(
-                  height: size.height / 20,
-                  width: size.width / 1.2,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Book Now",
-                      style: gfontsubtitlefont(
-                        cl: white,
-                        fw: FontWeight.bold,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      height: size.height / 20,
+                      width: size.width / 1.9,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 0, 0, 0),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Book Now",
+                          style: gfontsubtitlefont(
+                            cl: white,
+                            fw: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ],
