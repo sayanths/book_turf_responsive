@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/carbon.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/search.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
@@ -12,15 +15,17 @@ class HomePageMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.put(HomePageControllerMobile());
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 219, 219, 219),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 219, 219, 219),
-        toolbarHeight: 70,
+        toolbarHeight: 50,
       ),
-      drawer: const Drawer(),
+      // drawer: const Drawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -61,21 +66,56 @@ class HomePageMobile extends StatelessWidget {
                         style: gfontsubtitlefont(cl: black),
                       ),
                     ),
+                    
                   ],
                 ),
               ),
-              LimitedBox(
-                maxHeight: size.height,
-                child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(5),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 10,
-                    itemBuilder: ((context, index) {
-                      return const CustomSnackImageShower();
-                    })),
+              GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
+                return homeCntrl.vendorTurfList.isEmpty
+                    ? Shimmer.fromColors(
+                        baseColor: grey,
+                        highlightColor: red,
+                        child: Container())
+                    : LimitedBox(
+                        maxHeight: size.height/3,
+                        child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(5),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: homeController.vendorTurfList.length,
+                            itemBuilder: (context, index) {
+                              final data = homeController.vendorTurfList[index];
+                              return CustomSnackImageShower(data: data);
+                            }),
+                      );
+              }),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("Top Rated",style: Lato(cl: black, sz: 25, fw: FontWeight.bold),)),
               ),
+              GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
+                return homeCntrl.vendorTurfList.isEmpty
+                    ? Shimmer.fromColors(
+                        baseColor: grey,
+                        highlightColor: red,
+                        child: Container())
+                    : LimitedBox(
+                        maxHeight: size.height/3,
+                        child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(5),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: homeController.vendorTurfList.length,
+                            itemBuilder: (context, index) {
+                              final data = homeController.vendorTurfList[index];
+                              return CustomSnackImageShower(data: data);
+                            }),
+                      );
+              }),
             ],
           ),
         ),

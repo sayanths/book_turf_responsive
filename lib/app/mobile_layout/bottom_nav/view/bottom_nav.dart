@@ -31,7 +31,7 @@ class BottomNavigationMobile extends StatelessWidget {
               }),
               type: BottomNavigationBarType.fixed,
               items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
                 BottomNavigationBarItem(icon: Icon(Icons.favorite), label: ''),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.notification_add), label: ''),

@@ -53,6 +53,7 @@ class LoginPageMobile extends StatelessWidget {
                             )),
                         height10,
                         CustomTextField(
+                          width: size.width / 1.5,
                           controller: loginController.emailController,
                           obsureText: false,
                           keyboard: TextInputType.emailAddress,
@@ -64,6 +65,7 @@ class LoginPageMobile extends StatelessWidget {
                           height: size.height / 25,
                         ),
                         CustomTextField(
+                             width: size.width / 1.5,
                           controller: loginController.passwordController,
                           obsureText: true,
                           keyboard: TextInputType.number,

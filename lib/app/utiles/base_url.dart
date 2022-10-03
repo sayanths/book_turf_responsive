@@ -3,4 +3,6 @@ class BaseUrl {
   static const String login = 'account/login-email';
   static const String signUp = 'account/signup-email';
   static const String otp = 'account/verify-email-otp';
+  static const String fetchData = 'user/allTurf';
+
 }

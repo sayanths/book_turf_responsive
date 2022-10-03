@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
-
-
 class CustomTextField extends StatelessWidget {
+  final double width;
   final TextInputType keyboard;
   final IconData icon;
   final String title;
@@ -18,7 +17,7 @@ class CustomTextField extends StatelessWidget {
     required this.keyboard,
     this.controller,
     this.validate,
-    required this.obsureText,
+    required this.obsureText, required this.width,
   }) : super(key: key);
 
   final Size size;
@@ -26,7 +25,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size.width / 1.5,
+      width: width,
       child: Row(
         children: [
           Expanded(
@@ -38,7 +37,7 @@ class CustomTextField extends StatelessWidget {
           Expanded(
             flex: 4,
             child: Container(
-              height: size.height/13,
+              height: size.height / 13,
               width: size.width / 1.5,
               decoration: BoxDecoration(
                 color: white,
@@ -49,6 +48,7 @@ class CustomTextField extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
+                
                 child: TextFormField(
                   obscureText: obsureText,
                   validator: validate,
