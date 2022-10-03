@@ -101,3 +101,21 @@ class FullScreenMainHeading extends StatelessWidget {
     );
   }
 }
+
+class TimingWidget extends StatelessWidget {
+  final String title;
+  final String price;
+  const TimingWidget({
+    Key? key, required this.title, required this.price,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(title),
+        Text(price),
+      ],
+    );
+  }
+}

@@ -1,13 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/view/payment.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/widgets.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
-class FullScreenMobile extends StatelessWidget {
+class FullScreenMobile extends StatefulWidget {
   final Datum data;
   const FullScreenMobile({super.key, required this.data});
+
+  @override
+  State<FullScreenMobile> createState() => _FullScreenMobileState();
+}
+
+class _FullScreenMobileState extends State<FullScreenMobile> {
+  late TextEditingController _amountController;
+  late Razorpay _razorpay;
+  @override
+  void initState() {
+    super.initState();
+    _amountController = TextEditingController();
+      _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSucess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWallet);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +42,35 @@ class FullScreenMobile extends StatelessWidget {
         backgroundColor: white,
         body: Column(
           children: [
-            FullScreenTitle(title: data.turfName.toString()),
+            FullScreenTitle(title: widget.data.turfName.toString()),
             Hero(
-             // transitionOnUserGestures: true,
+              // transitionOnUserGestures: true,
               tag: 'image1',
-              child: Image.network(data.turfImages!.turfImages3.toString(),
+              child: Image.network(
+                  widget.data.turfImages!.turfImages3.toString(),
                   height: size.height / 4,
                   width: size.width / 1.1,
                   fit: BoxFit.cover),
             ),
             height30,
             const FullScreenTitle(title: "Amenities"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                TimingWidget(
+                  price: '800',
+                  title: 'Morning',
+                ),
+                TimingWidget(
+                  price: '1200',
+                  title: 'AfterNoon',
+                ),
+                TimingWidget(
+                  price: '1500',
+                  title: 'Evening',
+                ),
+              ],
+            ),
           ],
         ),
         bottomNavigationBar: Container(
@@ -74,19 +112,42 @@ class FullScreenMobile extends StatelessWidget {
               ),
               height10,
               height10,
-              Container(
-                height: size.height / 20,
-                width: size.width / 1.2,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 0, 0, 0),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Center(
-                  child: Text(
-                    "Book Now",
-                    style: gfontsubtitlefont(
-                      cl: white,
-                      fw: FontWeight.bold,
+              InkWell(
+                onTap: () {
+                  //Get.to(() => const BookNow());
+                  var options = {
+                    "key": "rzp_test_g9wjrkJkmYw27N",
+                   // "amount": num.parse(_amountController.text) * 100,
+                    "name": "new project",
+                    "description": "payment for our work",
+                    "prefill": {
+                      "contact": "7055451245",
+                      "email": "mveli620@gmail.com"
+                    },
+                    "external": {
+                      "wallets": ["paytm"]
+                    }
+                  };
+                  try {
+                    _razorpay.open(options);
+                  } catch (e) {
+                    print(e.toString());
+                  }
+                },
+                child: Container(
+                  height: size.height / 20,
+                  width: size.width / 1.2,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 0, 0, 0),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Book Now",
+                      style: gfontsubtitlefont(
+                        cl: white,
+                        fw: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -96,6 +157,18 @@ class FullScreenMobile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void handlePaymentSucess() {
+    print("Payment Sucess");
+  }
+
+  handlePaymentError() {
+    print("Payment Failed");
+  }
+
+  handleExternalWallet() {
+    print("external  wallet");
   }
 }
 

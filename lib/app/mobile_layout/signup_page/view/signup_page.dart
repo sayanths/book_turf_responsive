@@ -35,6 +35,7 @@ class SignUpPageMobile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CustomTextField(
+                           width: size.width / 1.5,
                           obsureText: false,
                           controller: signUpController.emailController,
                           size: size,
@@ -42,6 +43,7 @@ class SignUpPageMobile extends StatelessWidget {
                           title: " Enter Email",
                           keyboard: TextInputType.emailAddress),
                       CustomTextField(
+                           width: size.width / 1.5,
                           obsureText: true,
                           controller: signUpController.passwordController,
                           size: size,
@@ -49,6 +51,7 @@ class SignUpPageMobile extends StatelessWidget {
                           title: "  Enter password",
                           keyboard: TextInputType.visiblePassword),
                       CustomTextField(
+                           width: size.width / 1.5,
                           obsureText: true,
                           controller:
                               signUpController.conformPasswordController,
