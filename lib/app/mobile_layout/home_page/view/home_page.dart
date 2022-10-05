@@ -6,6 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/search.dart';
+import 'package:turf_book_second_project/app/mobile_layout/view_all/view/view_all.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
@@ -25,7 +26,6 @@ class HomePageMobile extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 219, 219, 219),
         toolbarHeight: 50,
       ),
-      // drawer: const Drawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -60,13 +60,14 @@ class HomePageMobile extends StatelessWidget {
                     ),
                     const Spacer(),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => ViewAll(),transition: Transition.cupertino);
+                      },
                       child: Text(
                         "view All",
                         style: gfontsubtitlefont(cl: black),
                       ),
                     ),
-                    
                   ],
                 ),
               ),
@@ -77,7 +78,7 @@ class HomePageMobile extends StatelessWidget {
                         highlightColor: red,
                         child: Container())
                     : LimitedBox(
-                        maxHeight: size.height/3,
+                        maxHeight: size.height / 3,
                         child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
                             shrinkWrap: true,
@@ -93,8 +94,11 @@ class HomePageMobile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text("Top Rated",style: Lato(cl: black, sz: 25, fw: FontWeight.bold),)),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Top Rated",
+                      style: Lato(cl: black, sz: 25, fw: FontWeight.bold),
+                    )),
               ),
               GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
                 return homeCntrl.topRatedList.isEmpty
@@ -103,7 +107,7 @@ class HomePageMobile extends StatelessWidget {
                         highlightColor: red,
                         child: Container())
                     : LimitedBox(
-                        maxHeight: size.height/3,
+                        maxHeight: size.height / 3,
                         child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
                             shrinkWrap: true,

@@ -44,6 +44,7 @@ dependencies:
   iconify_flutter: ^0.0.4
   iconify: ^0.0.1
   url_launcher: ^6.1.6
+  carousel_slider: ^4.1.1
  
 
   

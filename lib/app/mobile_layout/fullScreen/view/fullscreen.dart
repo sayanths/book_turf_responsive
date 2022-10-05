@@ -19,14 +19,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 class FullScreenMobile extends StatefulWidget {
   final Datum data;
-  const FullScreenMobile({
-    super.key,
-    required this.data,
-  });
-
+  const FullScreenMobile({super.key, required this.data});
   @override
   State<FullScreenMobile> createState() => _FullScreenMobileState();
 }
+
 class _FullScreenMobileState extends State<FullScreenMobile> {
   @override
   Widget build(BuildContext context) {
@@ -70,10 +67,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                 ],
               ),
               height30,
-              const FullScreenTitle(
-                title: "Amenities",
-                size: 20,
-              ),
+              const FullScreenTitle(title: "Amenities", size: 20),
               height10,
               Wrap(
                 children: [
