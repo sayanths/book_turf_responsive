@@ -17,6 +17,7 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/model/produ
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FullScreenMobile extends StatefulWidget {
   final Datum data;
@@ -42,6 +43,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
   Widget build(BuildContext context) {
     final viewFull = Get.put(ViewFullScreen());
     final size = MediaQuery.of(context).size;
+    final Uri url = Uri.parse(widget.data.turfInfo!.turfMap.toString());
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -122,15 +124,32 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                           title: "Parking",
                         )
                       : sizedboxCoustom,
+                  widget.data.turfAmenities!.turfWater == true
+                      ? AmenitiesWidget(
+                          size: size,
+                          iconify: const Iconify(
+                            Ri.water_flash_fill,
+                          ),
+                          title: "Water",
+                        )
+                      : sizedboxCoustom,
+                  widget.data.turfAmenities!.turfDressing == true
+                      ? AmenitiesWidget(
+                          size: size,
+                          iconify: const Iconify(
+                            Ri.shirt_fill,
+                          ),
+                          title: "Dressing",
+                        )
+                      : sizedboxCoustom,
                 ],
               ),
               height10,
               height10,
               const FullScreenTitle(
-                title: "Ground Suits ",
+                title: "Ground Suits for ",
                 size: 20,
               ),
-              
               height30,
               Wrap(
                 children: [
@@ -171,6 +190,24 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                         : sizedboxCoustom,
                   ),
                 ],
+              ),
+              height30,
+              ElevatedButton.icon(
+                onPressed: (() async {
+                  final Uri url =
+                      Uri.parse(widget.data.turfInfo!.turfMap.toString());
+
+                  if (await launchUrl(url)) {
+                    await launchUrl(Uri());
+                  }
+                }),
+                icon: const Iconify(
+                  Map.map_pin,
+                  color: white,
+                ),
+                label: const Text("Show the Location"),
+                style: ElevatedButton.styleFrom(
+                    shape: const StadiumBorder(), backgroundColor: red),
               ),
             ],
           ),
