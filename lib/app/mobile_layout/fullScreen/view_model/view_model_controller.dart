@@ -1,10 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-
-class ViewFullScreen extends GetxController {
-  
-
-
-
-}
+class ViewFullScreen extends GetxController {}

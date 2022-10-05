@@ -97,7 +97,7 @@ class HomePageMobile extends StatelessWidget {
                   child: Text("Top Rated",style: Lato(cl: black, sz: 25, fw: FontWeight.bold),)),
               ),
               GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
-                return homeCntrl.vendorTurfList.isEmpty
+                return homeCntrl.topRatedList.isEmpty
                     ? Shimmer.fromColors(
                         baseColor: grey,
                         highlightColor: red,
@@ -109,9 +109,9 @@ class HomePageMobile extends StatelessWidget {
                             shrinkWrap: true,
                             padding: const EdgeInsets.all(5),
                             scrollDirection: Axis.horizontal,
-                            itemCount: homeController.vendorTurfList.length,
+                            itemCount: homeController.topRatedList.length,
                             itemBuilder: (context, index) {
-                              final data = homeController.vendorTurfList[index];
+                              final data = homeController.topRatedList[index];
                               return CustomSnackImageShower(data: data);
                             }),
                       );
