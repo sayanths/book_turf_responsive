@@ -12,3 +12,8 @@ const height50 = SizedBox(
 const width15 = SizedBox(
   height: 15,
 );
+
+const sizedboxCoustom = SizedBox(
+  height: 1,
+  width: 1,
+);
