@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 
-class AllCategory extends StatelessWidget {
-  final Datum data;
-
-  const AllCategory({
+class BatmintonCategory extends StatelessWidget {
+  const BatmintonCategory({
     Key? key,
-     required this.data,
   }) : super(key: key);
 
   @override
@@ -21,9 +17,9 @@ class AllCategory extends StatelessWidget {
           width: size.width / 2,
           decoration: BoxDecoration(
             color: Colors.white10,
-            image: DecorationImage(
+            image: const DecorationImage(
               image: NetworkImage(
-                data.turfImages!.turfImages2.toString(),
+                "https://5.imimg.com/data5/SELLER/Default/2021/8/BN/IO/OF/111042024/50mm-artificial-turf-grass-mat-for-football-ground-1000x1000.jpg",
               ),
               fit: BoxFit.cover,
             ),
@@ -58,7 +54,7 @@ class AllCategory extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          data.turfName.toString(),
+                          'Turf 4',
                           style: gfontsubtitlefont(
                               cl: black, sz: 20, fw: FontWeight.bold),
                           textAlign: TextAlign.center,

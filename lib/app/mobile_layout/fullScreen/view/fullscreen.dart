@@ -6,6 +6,7 @@ import 'package:iconify_flutter/icons/ic.dart';
 import 'package:iconify_flutter/icons/iconoir.dart';
 import 'package:iconify_flutter/icons/map.dart';
 import 'package:iconify_flutter/icons/ri.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/view/widgets/custom_back_button.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/amenities.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/bottom_nav.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/custom_appbar.dart';
@@ -31,6 +32,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: const CustomBackButton(),
           elevation: 0,
           backgroundColor: white,
           iconTheme: const IconThemeData(color: black),
@@ -41,7 +43,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
             children: [
               CustomAppBar(
                 mainTitle: widget.data.turfName.toString(),
-                color: widget.data.turfInfo!.turfIsAvailale == true
+                color: widget.data.turfInfo!.turfIsAvailale!
                     ? const Color.fromARGB(255, 3, 199, 10)
                     : Colors.red,
                 rating: widget.data.turfInfo!.turfRating.toString(),
@@ -71,7 +73,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
               height10,
               Wrap(
                 children: [
-                  widget.data.turfAmenities!.turfWashroom == true
+                  widget.data.turfAmenities!.turfWashroom!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(
@@ -80,14 +82,14 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                           title: "Washroom",
                         )
                       : sizedboxCoustom,
-                  widget.data.turfAmenities!.turfCafeteria == true
+                  widget.data.turfAmenities!.turfCafeteria!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(Ic.baseline_local_cafe),
                           title: "Cafe",
                         )
                       : sizedboxCoustom,
-                  widget.data.turfAmenities!.turfGallery == true
+                  widget.data.turfAmenities!.turfGallery!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(
@@ -96,7 +98,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                           title: "Gallery",
                         )
                       : sizedboxCoustom,
-                  widget.data.turfAmenities!.turfParking == true
+                  widget.data.turfAmenities!.turfParking!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(
@@ -105,7 +107,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                           title: "Parking",
                         )
                       : sizedboxCoustom,
-                  widget.data.turfAmenities!.turfWater == true
+                  widget.data.turfAmenities!.turfWater!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(
@@ -114,7 +116,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                           title: "Water",
                         )
                       : sizedboxCoustom,
-                  widget.data.turfAmenities!.turfDressing == true
+                  widget.data.turfAmenities!.turfDressing!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(
@@ -135,7 +137,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
               Wrap(
                 children: [
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfCricket == true
+                    child: widget.data.turfCatogery!.turfCricket!
                         ? const GroundSuitsWidget(
                             icon: Iconify(
                               EmojioneMonotone.cricket,
@@ -144,7 +146,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfFootball == true
+                    child: widget.data.turfCatogery!.turfFootball!
                         ? const GroundSuitsWidget(
                             icon: Iconify(
                               Bx.football,
@@ -153,7 +155,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfBadminton == true
+                    child: widget.data.turfCatogery!.turfBadminton!
                         ? const GroundSuitsWidget(
                             icon: Iconify(
                               EmojioneMonotone.badminton,
@@ -162,7 +164,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfYoga == true
+                    child: widget.data.turfCatogery!.turfYoga!
                         ? const GroundSuitsWidget(
                             icon: Iconify(
                               Iconoir.yoga,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:turf_book_second_project/app/mobile_layout/view_all/view_model/view_all_controller.dart';
+import 'package:turf_book_second_project/app/mobile_layout/view_all/controller/view_all_controller.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class ChoiceChipWidget extends StatelessWidget {

@@ -41,6 +41,7 @@ class CustomBottomNav extends StatelessWidget {
           InkWell(
             onTap: () {
               Get.to(
+                transition: Transition.cupertino,
                 () => BookNow(
                   data: widget.data,
                 ),
@@ -74,4 +75,3 @@ class CustomBottomNav extends StatelessWidget {
     );
   }
 }
-

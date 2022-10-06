@@ -61,7 +61,8 @@ class HomePageMobile extends StatelessWidget {
                     const Spacer(),
                     InkWell(
                       onTap: () {
-                        Get.to(() => ViewAll(),transition: Transition.cupertino);
+                        Get.to(() => const ViewAll(),
+                            transition: Transition.cupertino);
                       },
                       child: Text(
                         "view All",

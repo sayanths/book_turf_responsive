@@ -1,0 +1,83 @@
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/service/get_service.dart';
+import 'package:turf_book_second_project/app/mobile_layout/view_all/view/widget/all_category.dart';
+import 'package:turf_book_second_project/app/mobile_layout/view_all/view/widget/circket.dart';
+
+class ViewAllMobileController extends GetxController {
+  List<Datum> cricket = [];
+  List<Datum> football = [];
+  List<Datum> batminton = [];
+  List<Datum> yoga = [];
+  List<Datum> allThings = [];
+  bool newValue = false;
+  int defaultChoicIndex = 0;
+  List<String> choiceList = [
+    'All',
+    'Cricket',
+    'Football',
+    'Batminton',
+    'yoga',
+  ];
+
+  choiceChipOnPress(bool value, int index) {
+    newValue = value;
+    defaultChoicIndex = index;
+    update();
+  }
+
+  List<Widget> choiceListWidget = [
+    GetBuilder<ViewAllMobileController>(
+      builder: (controller) {
+        return ListView.builder(
+          itemCount: controller.allThings.length,
+          itemBuilder: (context, index) {
+            final data = controller.allThings[index];
+            return AllCategory(data: data);
+          },
+        );
+      },
+    ),
+     GetBuilder<ViewAllMobileController>(
+      builder: (controller) {
+        return ListView.builder(
+          itemCount: controller.cricket.length,
+          itemBuilder: (context, index) {
+            final data = controller.cricket[index];
+            return CricketCategory(data: data);
+          },
+        );
+      },
+    ),
+  ];
+
+  fetchDetails() async {
+    VendorModel? response = await GetApiService().getTurfData();
+    if (response != null) {
+      if (response.status!) {
+        allThings.clear();
+        allThings.addAll(response.data);
+        forCricket();
+      }
+    }
+    update();
+  }
+
+  forCricket() {
+    for (var element in allThings) {
+      if (element.turfCatogery!.turfCricket == true) {
+        cricket.add(element);
+      }
+    }
+    update();
+  }
+
+
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchDetails();
+  }
+}

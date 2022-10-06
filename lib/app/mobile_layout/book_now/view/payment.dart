@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/widgets.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/view/widgets/custom_back_button.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
@@ -18,10 +21,10 @@ class BookNow extends StatefulWidget {
 }
 
 class _BookNowState extends State<BookNow> {
+  //int selected = 0;
   late Razorpay _razorpay;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _razorpay = Razorpay();
@@ -32,80 +35,37 @@ class _BookNowState extends State<BookNow> {
 
   @override
   Widget build(BuildContext context) {
+    final bookContrlNow = Get.put(BookController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TimingWidget(
-                  price: widget.data.turfTime!.timeMorning.toString(),
-                  title: 'Morning',
-                ),
-                TimingWidget(
-                  price: widget.data.turfTime!.timeAfternoon.toString(),
-                  title: 'AfterNoon',
-                ),
-                TimingWidget(
-                  price: widget.data.turfTime!.timeEvening.toString(),
-                  title: 'Evening',
-                ),
-              ],
-            ),
+            const Align(
+                alignment: Alignment.topLeft, child: CustomBackButton()),
             height30,
-            Row(
-              children: [
-                DropdownButton<String>(
-                  hint: const Text('1400'),
-                  items: <String>[
-                    '800',
-                    '1200',
-                    '1400',
-                  ].map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (_) {},
-                ),
-              ],
-            ),
-            // Container(
-            //   height: 60,
-            //   width: 60,
-            //   color: red,
-            // ),
-            ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-              child: Container(
-                width: 70,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-                  border: Border.all(color: grey, width: 1),
-                ),
-                child: Row(
+            GetBuilder<BookController>(
+              builder: (controller) {
+                return Column(
                   children: [
-                    const SizedBox(
-                      height: 50,
-                      width: 8,
+                    const FullScreenTitle(title: "Select Price", size: 25),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        controller.customRadio("Morning",
+                            widget.data.turfTime!.timeMorning.toString(), 1),
+                        controller.customRadio("Afternoon",
+                            widget.data.turfTime!.timeAfternoon.toString(), 2),
+                        controller.customRadio("Evening",
+                            widget.data.turfTime!.timeEvening.toString(), 3),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: const [
-                          Text('oct'),
-                          Text('5'),
-                          Text('THU'),
-                        ],
-                      ),
-                    )
+                    height30,
+                    const FullScreenTitle(title: "Select day", size: 25),
                   ],
-                ),
-              ),
-            ),
+                );
+              },
+            )
           ],
         ),
       ),
