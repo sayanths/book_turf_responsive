@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/carbon.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/search.dart';
-import 'package:turf_book_second_project/app/mobile_layout/location/view/location.dart';
 import 'package:turf_book_second_project/app/mobile_layout/view_all/view/view_all.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
@@ -30,7 +27,7 @@ class HomePageMobile extends StatelessWidget {
               Search(size: size),
               height10,
               height10,
-              CurrentLocation(),
+              // CurrentLocation(),
               height10,
               height10,
               Padding(
@@ -111,4 +108,3 @@ class HomePageMobile extends StatelessWidget {
     );
   }
 }
-

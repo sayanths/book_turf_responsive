@@ -28,6 +28,7 @@ class LoginControllerMobile extends GetxController {
       if (response.status!) {
         Get.offAll(() => const BottomNavigationMobile());
       } else {
+        // ignore: avoid_print
         print(response.message.toString());
       }
     } else {

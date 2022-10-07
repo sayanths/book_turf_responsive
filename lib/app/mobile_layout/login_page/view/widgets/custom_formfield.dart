@@ -17,14 +17,15 @@ class CustomTextField extends StatelessWidget {
     required this.keyboard,
     this.controller,
     this.validate,
-    required this.obsureText, required this.width,
+    required this.obsureText,
+    required this.width,
   }) : super(key: key);
 
   final Size size;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       child: Row(
         children: [
@@ -39,7 +40,7 @@ class CustomTextField extends StatelessWidget {
             child: Container(
               height: size.height / 13,
               width: size.width / 1.5,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: white,
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(10),
@@ -48,7 +49,6 @@ class CustomTextField extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                
                 child: TextFormField(
                   obscureText: obsureText,
                   validator: validate,
@@ -83,7 +83,7 @@ class CustomLoginContainer extends StatelessWidget {
     return Container(
       height: size.height / 13,
       width: size.width / 1.5,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: black,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),

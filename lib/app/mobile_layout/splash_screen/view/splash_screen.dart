@@ -1,9 +1,5 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/view/bottom_nav.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/login_page.dart';
 
 class SplashScreenMobile extends StatefulWidget {
@@ -32,7 +28,6 @@ class _SplashScreenMobileState extends State<SplashScreenMobile> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -42,7 +37,7 @@ class _SplashScreenMobileState extends State<SplashScreenMobile> {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       body: Stack(
         children: [
           AnimatedContainer(
@@ -50,7 +45,7 @@ class _SplashScreenMobileState extends State<SplashScreenMobile> {
             curve: Curves.fastLinearToSlowEaseIn,
             width: _a ? width : 0,
             height: height,
-            color: Color.fromARGB(255, 0, 78, 3),
+            color: const Color.fromARGB(255, 0, 78, 3),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +60,10 @@ class _SplashScreenMobileState extends State<SplashScreenMobile> {
                   ),
                 ),
               ),
-              Image.asset("assets/logo turf.png",height: 80,)
+              Image.asset(
+                "assets/logo turf.png",
+                height: 80,
+              )
             ],
           ),
         ],

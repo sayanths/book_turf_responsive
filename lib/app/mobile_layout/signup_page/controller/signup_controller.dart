@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/api_service/signup_api.dart';

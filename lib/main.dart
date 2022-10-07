@@ -14,12 +14,12 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Turf booking',
       home: ResponsiveLayout(
-        mobileBody: const SplashScreenMobile(),
-        desktopBody: const LoginScreenDesktop(),
+        mobileBody: SplashScreenMobile(),
+        desktopBody: LoginScreenDesktop(),
       ),
     );
   }

@@ -71,7 +71,7 @@ class _BookNowState extends State<BookNow> {
                             firstDate: DateTime.now(),
                             lastDate: DateTime.now());
                       },
-                      child: Text("Pick Date"),
+                      child: const Text("Pick Date"),
                     )
                   ],
                 );
@@ -151,14 +151,14 @@ class _BookNowState extends State<BookNow> {
   }
 
   void handlePaymentSucess() {
-    print("Payment Sucess");
+    Get.snackbar('payement Sucessfull', '');
   }
 
   handlePaymentError() {
-    print("Payment Failed");
+    Get.snackbar("Payment Failed", '');
   }
 
   handleExternalWallet() {
-    print("external  wallet");
+    Get.snackbar('external  wallet', '');
   }
 }

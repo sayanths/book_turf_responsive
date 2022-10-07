@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/view/bottom_nav.dart';
-import 'package:turf_book_second_project/app/mobile_layout/home_page/view/home_page.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/api_service/otp_service.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/model/otp_model.dart';
 

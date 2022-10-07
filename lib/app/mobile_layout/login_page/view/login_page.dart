@@ -83,7 +83,7 @@ class LoginPageMobile extends StatelessWidget {
                               loginController.onLoginPresed();
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: const Color.fromARGB(255, 0, 20, 238),
+                              backgroundColor: const Color.fromARGB(255, 0, 20, 238),
                               shape: const StadiumBorder(),
                             ),
                             child: const Text("Log in"),
