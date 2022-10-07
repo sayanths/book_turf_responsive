@@ -24,24 +24,21 @@ class LoginControllerMobile extends GetxController {
     LoginResponse? response = await Api().loginUser(model);
 
     if (response != null) {
-     
-     // log(response.token.toString());
+      // log(response.token.toString());
       if (response.status!) {
-        Get.offAll(() => BottomNavigationMobile());
+        Get.offAll(() => const BottomNavigationMobile());
       } else {
         print(response.message.toString());
       }
     } else {
       return Get.snackbar('Not found!!', 'The user not found',
-          colorText: white, duration: Duration(seconds: 2));
+          colorText: white, duration: const Duration(seconds: 2));
     }
   }
-
-
 
   onLoginPresed() {
     if (loginKey.currentState!.validate()) {
       return loginApi();
-    } 
+    }
   }
 }

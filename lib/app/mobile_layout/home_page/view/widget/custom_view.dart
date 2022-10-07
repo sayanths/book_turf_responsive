@@ -57,7 +57,7 @@ class CustomSnackImageShower extends StatelessWidget {
                     child: Stack(
                       children: [
                         Container(
-                          height: 40,
+                          height: 50,
                           width: size.width / 2.2,
                           decoration: const BoxDecoration(
                             color: white,

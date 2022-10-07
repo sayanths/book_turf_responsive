@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
 
 class CustomAppBar extends StatelessWidget {
+  final String star;
   final String mainTitle;
   final Color color;
   final String rating;
-  const CustomAppBar({super.key, required this.mainTitle, required this.color, required this.rating});
+  const CustomAppBar(
+      {super.key,
+      required this.mainTitle,
+      required this.color,
+      required this.rating, required this.star});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,7 @@ class CustomAppBar extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              const Text("⭐"),
+               Text(star),
               Text(rating),
             ],
           ),

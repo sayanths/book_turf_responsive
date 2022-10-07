@@ -62,6 +62,17 @@ class _BookNowState extends State<BookNow> {
                     ),
                     height30,
                     const FullScreenTitle(title: "Select day", size: 25),
+                    height10,
+                    ElevatedButton(
+                      onPressed: () {
+                        showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime.now());
+                      },
+                      child: Text("Pick Date"),
+                    )
                   ],
                 );
               },

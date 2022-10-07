@@ -46,7 +46,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                 color: widget.data.turfInfo!.turfIsAvailale!
                     ? const Color.fromARGB(255, 3, 199, 10)
                     : Colors.red,
-                rating: widget.data.turfInfo!.turfRating.toString(),
+                rating: widget.data.turfInfo!.turfRating.toString(), star: "⭐",
               ),
               height10,
               height10,
