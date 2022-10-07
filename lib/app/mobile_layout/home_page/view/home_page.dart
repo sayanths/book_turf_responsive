@@ -6,6 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/search.dart';
+import 'package:turf_book_second_project/app/mobile_layout/location/view/location.dart';
 import 'package:turf_book_second_project/app/mobile_layout/view_all/view/view_all.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
@@ -20,34 +21,16 @@ class HomePageMobile extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 219, 219, 219),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 219, 219, 219),
-        toolbarHeight: 50,
-      ),
+      backgroundColor: white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
+              height30,
               Search(size: size),
               height10,
               height10,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  children: [
-                    const Iconify(
-                      Carbon.location_current,
-                      color: black,
-                    ),
-                    Text(
-                      "Kannur,Kerala,India",
-                      style: Lato(cl: black),
-                    ),
-                  ],
-                ),
-              ),
+              CurrentLocation(),
               height10,
               height10,
               Padding(
@@ -56,7 +39,7 @@ class HomePageMobile extends StatelessWidget {
                   children: [
                     Text(
                       "Near",
-                      style: Lato(cl: black, sz: 30, fw: FontWeight.bold),
+                      style: Lato(cl: black, sz: 28, fw: FontWeight.bold),
                     ),
                     const Spacer(),
                     InkWell(
@@ -66,7 +49,7 @@ class HomePageMobile extends StatelessWidget {
                       },
                       child: Text(
                         "view All",
-                        style: gfontsubtitlefont(cl: black),
+                        style: gfontsubtitlefont(cl: grey),
                       ),
                     ),
                   ],
@@ -128,3 +111,4 @@ class HomePageMobile extends StatelessWidget {
     );
   }
 }
+

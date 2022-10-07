@@ -46,6 +46,8 @@ dependencies:
   url_launcher: ^6.1.6
   carousel_slider: ^4.1.1
   flutter_rounded_date_picker: ^3.0.2
+  geolocator: ^9.0.2
+  geocoding: ^2.0.5
  
 
   
