@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/carbon.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/search.dart';
+import 'package:turf_book_second_project/app/mobile_layout/view_all/view/view_all.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
+import 'package:turf_book_second_project/app/utiles/simmer.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
 class HomePageMobile extends StatelessWidget {
@@ -19,65 +18,61 @@ class HomePageMobile extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 219, 219, 219),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 219, 219, 219),
-        toolbarHeight: 50,
-      ),
-      // drawer: const Drawer(),
+      backgroundColor: white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
+              height30,
               Search(size: size),
               height10,
               height10,
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(
-                  children: [
-                    const Iconify(
-                      Carbon.location_current,
-                      color: black,
-                    ),
-                    Text(
-                      "Kannur,Kerala,India",
-                      style: Lato(cl: black),
-                    ),
+                  children: const [
+                    Icon(Icons.location_pin),
+                    Text("calicut,kerala,India")
                   ],
                 ),
               ),
               height10,
               height10,
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
                   children: [
                     Text(
                       "Near",
-                      style: Lato(cl: black, sz: 30, fw: FontWeight.bold),
+                      style: Lato(cl: black, sz: 28, fw: FontWeight.bold),
                     ),
                     const Spacer(),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => const ViewAll(),
+                            transition: Transition.cupertino);
+                      },
                       child: Text(
                         "view All",
-                        style: gfontsubtitlefont(cl: black),
+                        style: gfontsubtitlefont(cl: grey),
                       ),
                     ),
-                    
                   ],
                 ),
               ),
               GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
                 return homeCntrl.vendorTurfList.isEmpty
-                    ? Shimmer.fromColors(
-                        baseColor: grey,
-                        highlightColor: red,
-                        child: Container())
+                    ? SimmerCustomWidget(
+                        hight: size.height / 3.6,
+                        width: size.width / 2.2,
+                        shapeBorder: ShapeDecoration(
+                          color: Colors.grey[400]!,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                      )
                     : LimitedBox(
-                        maxHeight: size.height/3,
+                        maxHeight: size.height / 3,
                         child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
                             shrinkWrap: true,
@@ -91,27 +86,35 @@ class HomePageMobile extends StatelessWidget {
                       );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text("Top Rated",style: Lato(cl: black, sz: 25, fw: FontWeight.bold),)),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Top Rated",
+                      style: Lato(cl: black, sz: 25, fw: FontWeight.bold),
+                    )),
               ),
               GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
-                return homeCntrl.vendorTurfList.isEmpty
-                    ? Shimmer.fromColors(
-                        baseColor: grey,
-                        highlightColor: red,
-                        child: Container())
+                return homeCntrl.topRatedList.isEmpty
+                    ? SimmerCustomWidget(
+                        hight: size.height / 3.6,
+                        width: size.width / 2.2,
+                        shapeBorder: ShapeDecoration(
+                          color: Colors.grey[400]!,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                      )
                     : LimitedBox(
-                        maxHeight: size.height/3,
+                        maxHeight: size.height / 3,
                         child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
                             shrinkWrap: true,
                             padding: const EdgeInsets.all(5),
                             scrollDirection: Axis.horizontal,
-                            itemCount: homeController.vendorTurfList.length,
+                            itemCount: homeController.topRatedList.length,
                             itemBuilder: (context, index) {
-                              final data = homeController.vendorTurfList[index];
+                              final data = homeController.topRatedList[index];
                               return CustomSnackImageShower(data: data);
                             }),
                       );

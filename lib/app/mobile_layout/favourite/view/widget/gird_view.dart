@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 
-
 class ViewAllGridView extends StatelessWidget {
   const ViewAllGridView({
     Key? key,
@@ -18,7 +17,7 @@ class ViewAllGridView extends StatelessWidget {
           width: size.width / 2.2,
           decoration: BoxDecoration(
             color: Colors.white10,
-            image: DecorationImage(
+            image: const DecorationImage(
               image: NetworkImage(
                 "https://etimg.etb2bimg.com/photo/76543014.cms",
               ),
@@ -32,10 +31,8 @@ class ViewAllGridView extends StatelessWidget {
                 left: 120,
                 top: -9,
                 child: IconButton(
-                  onPressed: () {
-                    
-                  },
-                  icon: Icon(
+                  onPressed: () {},
+                  icon: const Icon(
                     Icons.favorite,
                     color: red,
                     size: 30.0,
@@ -49,7 +46,7 @@ class ViewAllGridView extends StatelessWidget {
                     Container(
                       height: 40,
                       width: size.width / 2.2,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: white,
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(15),
@@ -58,8 +55,8 @@ class ViewAllGridView extends StatelessWidget {
                       child: Center(
                         child: Text(
                           "Benz",
-                         style: gfontsubtitlefont(
-                                cl: black, sz: 20, fw: FontWeight.bold),
+                          style: gfontsubtitlefont(
+                              cl: black, sz: 20, fw: FontWeight.bold),
                         ),
                       ),
                     ),

@@ -1,181 +1,175 @@
 import 'package:flutter/material.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/widgets.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/bx.dart';
+import 'package:iconify_flutter/icons/emojione_monotone.dart';
+import 'package:iconify_flutter/icons/ic.dart';
+import 'package:iconify_flutter/icons/iconoir.dart';
+import 'package:iconify_flutter/icons/map.dart';
+import 'package:iconify_flutter/icons/ri.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/view/widgets/custom_back_button.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/amenities.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/bottom_nav.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/custom_appbar.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/ground_suits.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FullScreenMobile extends StatefulWidget {
   final Datum data;
   const FullScreenMobile({super.key, required this.data});
-
   @override
   State<FullScreenMobile> createState() => _FullScreenMobileState();
 }
 
 class _FullScreenMobileState extends State<FullScreenMobile> {
-  late TextEditingController _amountController;
-  late Razorpay _razorpay;
-  @override
-  void initState() {
-    super.initState();
-    _amountController = TextEditingController();
-    _razorpay = Razorpay();
-    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSucess);
-    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentError);
-    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWallet);
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: white,
-          iconTheme: const IconThemeData(color: black),
-        ),
-        backgroundColor: white,
-        body: Column(
-          children: [
-            FullScreenTitle(title: widget.data.turfName.toString()),
-            Hero(
-              // transitionOnUserGestures: true,
-              tag: 'image1',
-              child: Image.network(
-                  widget.data.turfImages!.turfImages3.toString(),
-                  height: size.height / 4,
-                  width: size.width / 1.1,
-                  fit: BoxFit.cover),
-            ),
-            height30,
-            const FullScreenTitle(title: "Amenities"),
-           
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                TimingWidget(
-                  price: '800',
-                  title: 'Morning',
-                ),
-                TimingWidget(
-                  price: '1200',
-                  title: 'AfterNoon',
-                ),
-                TimingWidget(
-                  price: '1500',
-                  title: 'Evening',
-                ),
-              ],
-            ),
-          ],
-        ),
-        bottomNavigationBar: Container(
-          height: size.height / 10,
-          width: size.width,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 2, 171, 8),
-                Color.fromARGB(255, 0, 96, 3),
-                Color.fromARGB(255, 2, 171, 8),
-              ],
-            ),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
+        body: SingleChildScrollView(
           child: Column(
             children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Align(
+                    alignment: Alignment.topLeft, child: CustomBackButton()),
+              ),
+              CustomAppBar(
+                mainTitle: widget.data.turfName.toString(),
+                color: widget.data.turfInfo!.turfIsAvailale!
+                    ? const Color.fromARGB(255, 3, 199, 10)
+                    : Colors.red,
+                rating: widget.data.turfInfo!.turfRating.toString(),
+                star: "⭐",
+              ),
               height10,
               height10,
-              InkWell(
-                onTap: () {
-                  var options = {
-                    "key": "rzp_test_g9wjrkJkmYw27N",
-                    // "amount": num.parse(_amountController.text) * 100,
-                    "name": "new project",
-                    "description": "payment for our work",
-                    "prefill": {
-                      "contact": "7055451245",
-                      "email": "mveli620@gmail.com"
-                    },
-                    "external": {
-                      "wallets": ["paytm"]
-                    }
-                  };
-                  try {
-                    _razorpay.open(options);
-                  } catch (e) {
-                    print(e.toString());
+              Image.network(
+                widget.data.turfImages!.turfImages3.toString(),
+                height: size.height / 4,
+                width: size.width / 1.1,
+                fit: BoxFit.cover,
+              ),
+              height10,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    widget.data.turfMuncipality.toString(),
+                    style: gfontsubtitlefont(cl: grey),
+                  ),
+                  Text(widget.data.turfPlace.toString(),
+                      style: gfontsubtitlefont(cl: grey)),
+                ],
+              ),
+              height30,
+              const FullScreenTitle(title: "Amenities", size: 20),
+              height10,
+              Wrap(
+                children: [
+                  widget.data.turfAmenities!.turfWashroom!
+                      ? AmenitiesWidget(
+                          size: size,
+                          iconify: const Iconify(Map.toilet),
+                          title: "Washroom")
+                      : sizedboxCoustom,
+                  widget.data.turfAmenities!.turfCafeteria!
+                      ? AmenitiesWidget(
+                          size: size,
+                          iconify: const Iconify(Ic.baseline_local_cafe),
+                          title: "Cafe")
+                      : sizedboxCoustom,
+                  widget.data.turfAmenities!.turfGallery!
+                      ? AmenitiesWidget(
+                          size: size,
+                          iconify: const Iconify(Ic.round_stadium),
+                          title: "Gallery")
+                      : sizedboxCoustom,
+                  widget.data.turfAmenities!.turfParking!
+                      ? AmenitiesWidget(
+                          size: size,
+                          iconify: const Iconify(Ri.parking_fill),
+                          title: "Parking")
+                      : sizedboxCoustom,
+                  widget.data.turfAmenities!.turfWater!
+                      ? AmenitiesWidget(
+                          size: size,
+                          iconify: const Iconify(Ri.water_flash_fill),
+                          title: "Water")
+                      : sizedboxCoustom,
+                  widget.data.turfAmenities!.turfDressing!
+                      ? AmenitiesWidget(
+                          size: size,
+                          iconify: const Iconify(Ri.shirt_fill),
+                          title: "Dressing")
+                      : sizedboxCoustom,
+                ],
+              ),
+              height10,
+              height10,
+              const FullScreenTitle(
+                title: "Ground Suits for ",
+                size: 20,
+              ),
+              height30,
+              Wrap(
+                children: [
+                  GroundSuitWidget(
+                    child: widget.data.turfCatogery!.turfCricket!
+                        ? const GroundSuitsWidget(
+                            icon: Iconify(EmojioneMonotone.cricket),
+                          )
+                        : sizedboxCoustom,
+                  ),
+                  GroundSuitWidget(
+                    child: widget.data.turfCatogery!.turfFootball!
+                        ? const GroundSuitsWidget(
+                            icon: Iconify(Bx.football),
+                          )
+                        : sizedboxCoustom,
+                  ),
+                  GroundSuitWidget(
+                    child: widget.data.turfCatogery!.turfBadminton!
+                        ? const GroundSuitsWidget(
+                            icon: Iconify(EmojioneMonotone.badminton),
+                          )
+                        : sizedboxCoustom,
+                  ),
+                  GroundSuitWidget(
+                    child: widget.data.turfCatogery!.turfYoga!
+                        ? const GroundSuitsWidget(
+                            icon: Iconify(Iconoir.yoga),
+                          )
+                        : sizedboxCoustom,
+                  ),
+                ],
+              ),
+              height30,
+              ElevatedButton.icon(
+                onPressed: (() async {
+                  final Uri url =
+                      Uri.parse(widget.data.turfInfo!.turfMap.toString());
+                  if (await launchUrl(url)) {
+                    await launchUrl(Uri());
                   }
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      height: size.height / 20,
-                      width: size.width / 1.9,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Book Now",
-                          style: gfontsubtitlefont(
-                            cl: white,
-                            fw: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                }),
+                icon: const Iconify(
+                  Map.map_pin,
+                  color: white,
                 ),
+                label: const Text("Show the Location"),
+                style: ElevatedButton.styleFrom(
+                    shape: const StadiumBorder(), backgroundColor: red),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  void handlePaymentSucess() {
-    print("Payment Sucess");
-  }
-
-  handlePaymentError() {
-    print("Payment Failed");
-  }
-
-  handleExternalWallet() {
-    print("external  wallet");
-  }
-}
-
-class FullScreenTitle extends StatelessWidget {
-  final String title;
-  const FullScreenTitle({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: gfontsubtitlefont(sz: 30),
-          ),
-        ],
+        bottomNavigationBar: CustomBottomNav(size: size, widget: widget),
       ),
     );
   }

@@ -111,11 +111,14 @@ class TimingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(title),
-        Text(price),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Column(
+        children: [
+          Text(title),
+          Text(price),
+        ],
+      ),
     );
   }
 }

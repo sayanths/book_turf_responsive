@@ -5,6 +5,7 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/service/get
 class HomePageControllerMobile extends GetxController {
   RxBool isFavourite = false.obs;
   List<Datum> vendorTurfList = [];
+  List<Datum> topRatedList = [];
 
   fetchDetails() async {
     VendorModel? response = await GetApiService().getTurfData();
@@ -12,6 +13,19 @@ class HomePageControllerMobile extends GetxController {
       if (response.status!) {
         vendorTurfList.clear();
         vendorTurfList.addAll(response.data);
+        topRatedData();
+      } else {
+        Get.snackbar('no network', '');
+      }
+    }
+    update();
+  }
+
+  topRatedData() {
+    for (var elements in vendorTurfList) {
+      if (elements.turfInfo!.turfRating! >= 4.0 &&
+          elements.turfInfo!.turfRating! <= 5.0) {
+        topRatedList.add(elements);
       }
     }
     update();

@@ -57,10 +57,10 @@ class CustomSnackImageShower extends StatelessWidget {
                     child: Stack(
                       children: [
                         Container(
-                          height: 40,
+                          height: 50,
                           width: size.width / 2.2,
                           decoration: const BoxDecoration(
-                            color: white,
+                            color: Color.fromARGB(255, 0, 87, 3),
                             borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(15),
                                 bottomRight: Radius.circular(15)),
@@ -69,7 +69,7 @@ class CustomSnackImageShower extends StatelessWidget {
                             child: Text(
                               data.turfName.toString(),
                               style: gfontsubtitlefont(
-                                  cl: black, sz: 20, fw: FontWeight.bold),
+                                  cl: white, sz: 20, fw: FontWeight.bold),
                             ),
                           ),
                         ),

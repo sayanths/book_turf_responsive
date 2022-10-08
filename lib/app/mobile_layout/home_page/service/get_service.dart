@@ -9,7 +9,8 @@ class GetApiService {
   final dio = Dio(BaseOptions(baseUrl: BaseUrl.url));
   Future<VendorModel?> getTurfData() async {
     try {
-      final response = await dio.get("http://10.0.2.2:3000/user/allTurf");
+      final response =
+          await dio.get("https://fauxspot.herokuapp.com/user/all-turf");
       if (response.statusCode == 200) {
         return VendorModel.fromJson(response.data);
       }
@@ -18,6 +19,6 @@ class GetApiService {
     } catch (e) {
       log(e.toString());
     }
- //   return null;
+    return null;
   }
 }

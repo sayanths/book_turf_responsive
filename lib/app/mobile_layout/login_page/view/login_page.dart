@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/controller/login_controller.dart';
@@ -65,7 +66,7 @@ class LoginPageMobile extends StatelessWidget {
                           height: size.height / 25,
                         ),
                         CustomTextField(
-                             width: size.width / 1.5,
+                          width: size.width / 1.5,
                           controller: loginController.passwordController,
                           obsureText: true,
                           keyboard: TextInputType.number,
@@ -77,18 +78,23 @@ class LoginPageMobile extends StatelessWidget {
                           height: size.height / 25,
                         ),
                         SizedBox(
-                          width: size.width / 2,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              loginController.onLoginPresed();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: const Color.fromARGB(255, 0, 20, 238),
-                              shape: const StadiumBorder(),
-                            ),
-                            child: const Text("Log in"),
-                          ),
-                        ),
+                            width: size.width / 1.5,
+                            child: Obx((() {
+                              return ElevatedButton(
+                                  onPressed: () {
+                                    loginController.loginApi();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 55, 0, 255),
+                                    shape: const StadiumBorder(),
+                                  ),
+                                  child:
+                                      loginController.isLoading.value == false
+                                          ? const Text("Create")
+                                          : const CupertinoActivityIndicator(
+                                              color: white));
+                            }))),
                         height10,
                         Row(
                           children: [

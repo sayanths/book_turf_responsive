@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
+import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
 class ProfileOrderList extends StatelessWidget {
   final Function function;
   final IconData icon;
   final String title;
-  ProfileOrderList({
+  const ProfileOrderList({
     Key? key,
     required this.function,
     required this.icon,
@@ -19,9 +20,7 @@ class ProfileOrderList extends StatelessWidget {
       child: Row(
         children: [
           Icon(icon),
-          SizedBox(
-            width: 10,
-          ),
+          height10,
           Text(
             title,
             style: gfontsubtitlefont(sz: 20, fw: FontWeight.w300),
@@ -37,8 +36,6 @@ class Clipcliper extends CustomClipper<Path> {
   Path getClip(Size size) {
     Path path = Path();
     path.lineTo(0, size.width);
-    // path.quadraticBezierTo(
-    //     size.width * 0.5, size.height * -100, size.width, size.height);
     path.lineTo(size.width, size.height);
     return path;
   }
