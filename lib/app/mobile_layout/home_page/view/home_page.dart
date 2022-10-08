@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/search.dart';
 import 'package:turf_book_second_project/app/mobile_layout/view_all/view/view_all.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
+import 'package:turf_book_second_project/app/utiles/simmer.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
 class HomePageMobile extends StatelessWidget {
@@ -54,10 +54,15 @@ class HomePageMobile extends StatelessWidget {
               ),
               GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
                 return homeCntrl.vendorTurfList.isEmpty
-                    ? Shimmer.fromColors(
-                        baseColor: grey,
-                        highlightColor: red,
-                        child: Container())
+                    ? SimmerCustomWidget(
+                        hight: size.height / 3.6,
+                        width: size.width / 2.2,
+                        shapeBorder: ShapeDecoration(
+                          color: Colors.grey[400]!,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                      )
                     : LimitedBox(
                         maxHeight: size.height / 3,
                         child: ListView.builder(
@@ -83,10 +88,15 @@ class HomePageMobile extends StatelessWidget {
               ),
               GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
                 return homeCntrl.topRatedList.isEmpty
-                    ? Shimmer.fromColors(
-                        baseColor: grey,
-                        highlightColor: red,
-                        child: Container())
+                    ? SimmerCustomWidget(
+                        hight: size.height / 3.6,
+                        width: size.width / 2.2,
+                        shapeBorder: ShapeDecoration(
+                          color: Colors.grey[400]!,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                        ),
+                      )
                     : LimitedBox(
                         maxHeight: size.height / 3,
                         child: ListView.builder(

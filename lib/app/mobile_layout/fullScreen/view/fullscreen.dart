@@ -31,22 +31,21 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          leading: const CustomBackButton(),
-          elevation: 0,
-          backgroundColor: white,
-          iconTheme: const IconThemeData(color: black),
-        ),
-        backgroundColor: white,
         body: SingleChildScrollView(
           child: Column(
             children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Align(
+                    alignment: Alignment.topLeft, child: CustomBackButton()),
+              ),
               CustomAppBar(
                 mainTitle: widget.data.turfName.toString(),
                 color: widget.data.turfInfo!.turfIsAvailale!
                     ? const Color.fromARGB(255, 3, 199, 10)
                     : Colors.red,
-                rating: widget.data.turfInfo!.turfRating.toString(), star: "⭐",
+                rating: widget.data.turfInfo!.turfRating.toString(),
+                star: "⭐",
               ),
               height10,
               height10,

@@ -14,34 +14,30 @@ class SignUpControllerMobile extends GetxController {
   RxBool isLoading = false.obs;
 
   singUp() async {
-    // isLoading.value = true;
-
     if (passwordController.text != conformPasswordController.text) {
       Get.snackbar('Error Occured', 'Some error happend please check again',
           colorText: white);
 
       return;
     }
-
+    isLoading.value = true;
+    update();
     final result = SignUpModel(
       email: emailController.text.toString(),
       password: passwordController.text.toString(),
     );
 
     SignUpResponse? response = await SignUpApi().signUpUser(result);
-   
-    if (response != null) {
-      if (response.status == true) {
-        Get.offAll(() => const OtpPage());
-      } else {
-        Get.snackbar('sdds', 'dsd');
-      }
-    }
-  }
 
-  onSignUpPressed() {
-    if (signUpKey.currentState!.validate()) {
-      singUp();
+    if (response != null) {
+      isLoading.value = false;
+      update();
+      if (response.status!) {
+        Get.offAll(() => const OtpPage());
+      }
+    } else {
+      return Get.snackbar('', 'Require all fields',
+          colorText: white, duration: const Duration(seconds: 2));
     }
   }
 

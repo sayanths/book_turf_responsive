@@ -11,9 +11,22 @@ class LoginScreenDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.green,
-      body: Column(
+      body: ListView(
         children: [
+          Container(
+            height: size.height / 17,
+            width: double.infinity,
+            color: white,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset("assets/logo turf.png"),
+                    const Spacer(),
+                  ]),
+            ),
+          ),
           Row(
             children: [
               Expanded(
@@ -124,17 +137,42 @@ class LoginScreenDesktop extends StatelessWidget {
                   decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
-                            "https://media.istockphoto.com/photos/unrecognizable-little-football-player-against-green-grass-studi-picture-id544809756?k=20&m=544809756&s=612x612&w=0&h=bnxFbTVFtYSsrEBdO5NnnUL2tZbAzUcv2xezEFJkX1M=",
+                            "https://images.unsplash.com/photo-1529900748604-07564a03e7a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
                           ),
                           fit: BoxFit.cover)),
                 ),
               ),
             ],
           ),
-          const Text("About Us"),
-          const Flexible(
+          Text(
+            "About Us",
+            textAlign: TextAlign.center,
+            style: gfontsubtitlefont(sz: 30),
+          ),
+          Flexible(
               child: Text(
-                  "We are providing the service for the people to book the turf online in their respective area and also .You all can be a truf admin and also you can post about your turf in this website"))
+            "We are providing the service for the people to book the turf online in their respective area and also .You all can be a truf admin and also you can post about your turf in this website",
+            textAlign: TextAlign.center,
+            style: gfontsubtitlefont(
+              cl: grey,
+            ),
+          )),
+          height30,
+          Container(
+            height: size.height / 3,
+            width: double.infinity,
+            color: red,
+          ),
+          SizedBox(
+            height: size.height / 3,
+            width: double.infinity,
+            // color: red,
+          ),
+          Container(
+            height: size.height / 3,
+            width: double.infinity,
+            color: yellow,
+          ),
         ],
       ),
     );

@@ -35,7 +35,7 @@ class SignUpPageMobile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CustomTextField(
-                           width: size.width / 1.5,
+                          width: size.width / 1.5,
                           obsureText: false,
                           controller: signUpController.emailController,
                           size: size,
@@ -43,7 +43,7 @@ class SignUpPageMobile extends StatelessWidget {
                           title: " Enter Email",
                           keyboard: TextInputType.emailAddress),
                       CustomTextField(
-                           width: size.width / 1.5,
+                          width: size.width / 1.5,
                           obsureText: true,
                           controller: signUpController.passwordController,
                           size: size,
@@ -51,7 +51,7 @@ class SignUpPageMobile extends StatelessWidget {
                           title: "  Enter password",
                           keyboard: TextInputType.visiblePassword),
                       CustomTextField(
-                           width: size.width / 1.5,
+                          width: size.width / 1.5,
                           obsureText: true,
                           controller:
                               signUpController.conformPasswordController,
@@ -59,23 +59,23 @@ class SignUpPageMobile extends StatelessWidget {
                           icon: Icons.password_outlined,
                           title: " conform password",
                           keyboard: TextInputType.name),
-                     Obx(() {
-                      return SizedBox(
+                      SizedBox(
                           width: size.width / 1.5,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              signUpController.singUp();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(255, 55, 0, 255),
-                              shape: const StadiumBorder(),
-                            ),
-                            child: signUpController.isLoading.value
-                                ? const CupertinoActivityIndicator()
-                                : const Text("Create"),
-                          ),
-                        );
-                     },)
+                          child: Obx((() {
+                            return ElevatedButton(
+                                onPressed: () {
+                                  signUpController.singUp();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 55, 0, 255),
+                                  shape: const StadiumBorder(),
+                                ),
+                                child: signUpController.isLoading.value==false
+                                    ? const Text("Create")
+                                    : const CupertinoActivityIndicator(
+                                        color: white));
+                          }))),
                     ],
                   ),
                 ),

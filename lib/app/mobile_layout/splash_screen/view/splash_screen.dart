@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/login_page.dart';
+import 'package:turf_book_second_project/app/mobile_layout/splash_screen/controller/controller.dart';
 
 class SplashScreenMobile extends StatefulWidget {
   const SplashScreenMobile({Key? key}) : super(key: key);
@@ -33,6 +35,7 @@ class _SplashScreenMobileState extends State<SplashScreenMobile> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SplashScreenController());
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 

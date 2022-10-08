@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/view/bottom_nav.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/api_service/otp_service.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/model/otp_model.dart';
@@ -24,7 +25,9 @@ class OptController extends GetxController {
 
     if (response != null) {
       OtpResponse(message: "sucess");
+      
       if (response.status!) {
+      await saveUserData();
         Get.offAll(() => const BottomNavigationMobile());
       }
     }
@@ -37,5 +40,10 @@ class OptController extends GetxController {
     otp2.dispose();
     otp3.dispose();
     otp4.dispose();
+  }
+
+  saveUserData() async {
+    final obj = await SharedPreferences.getInstance();
+    obj.setBool('userLoged', true);
   }
 }

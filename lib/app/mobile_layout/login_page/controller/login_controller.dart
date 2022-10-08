@@ -10,21 +10,21 @@ class LoginControllerMobile extends GetxController {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
+  RxBool isLoading = false.obs;
   loginApi() async {
-    //isLoadig = true;
-    update();
     late final email = emailController.text;
     late final password = passwordController.text;
     final model = LoginModel(
       email: email,
       password: password,
     );
+    isLoading.value = true;
+    update();
 
     LoginResponse? response = await Api().loginUser(model);
 
     if (response != null) {
-      // log(response.token.toString());
+      isLoading.value = false;
       if (response.status!) {
         Get.offAll(() => const BottomNavigationMobile());
       } else {
