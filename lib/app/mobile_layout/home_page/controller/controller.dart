@@ -23,7 +23,7 @@ class HomePageControllerMobile extends GetxController {
 
   topRatedData() {
     for (var elements in vendorTurfList) {
-      if (elements.turfInfo!.turfRating! <= 4.0 ||
+      if (elements.turfInfo!.turfRating! >= 4.0 &&
           elements.turfInfo!.turfRating! <= 5.0) {
         topRatedList.add(elements);
       }

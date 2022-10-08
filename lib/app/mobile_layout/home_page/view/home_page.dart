@@ -27,11 +27,19 @@ class HomePageMobile extends StatelessWidget {
               Search(size: size),
               height10,
               height10,
-              // CurrentLocation(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
+                  children: const [
+                    Icon(Icons.location_pin),
+                    Text("calicut,kerala,India")
+                  ],
+                ),
+              ),
               height10,
               height10,
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
                   children: [
                     Text(
@@ -78,7 +86,7 @@ class HomePageMobile extends StatelessWidget {
                       );
               }),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(

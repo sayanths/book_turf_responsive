@@ -58,7 +58,7 @@ class AllCategory extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          data.turfName.toString(),
+                         data.turfName.toString(),
                           style: gfontsubtitlefont(
                               cl: black, sz: 20, fw: FontWeight.bold),
                           textAlign: TextAlign.center,

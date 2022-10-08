@@ -30,24 +30,14 @@ class ViewAllMobileController extends GetxController {
   List<Widget> choiceListWidget = [
     GetBuilder<ViewAllMobileController>(
       builder: (controller) {
-        return ListView.builder(
-          itemCount: controller.allThings.length,
-          itemBuilder: (context, index) {
-            final data = controller.allThings[index];
-            return AllCategory(data: data);
-          },
-        );
+        final data = controller.allThings[0];
+        return AllCategory(data: data);
       },
     ),
-     GetBuilder<ViewAllMobileController>(
+    GetBuilder<ViewAllMobileController>(
       builder: (controller) {
-        return ListView.builder(
-          itemCount: controller.cricket.length,
-          itemBuilder: (context, index) {
-            final data = controller.cricket[index];
-            return CricketCategory(data: data);
-          },
-        );
+        final data = controller.cricket[0];
+        return CricketCategory(data: data);
       },
     ),
   ];
@@ -72,8 +62,6 @@ class ViewAllMobileController extends GetxController {
     }
     update();
   }
-
-
 
   @override
   void onInit() {

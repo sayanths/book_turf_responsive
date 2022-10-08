@@ -11,6 +11,7 @@ class ViewAll extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size =MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -44,7 +45,7 @@ class ViewAll extends StatelessWidget {
             height10,
             const ChoiceChipWidget(),
             LimitedBox(
-              maxHeight: 250,
+              maxHeight:size.height ,
               child: GetBuilder<ViewAllMobileController>(builder: (obj) {
                 return GridView.builder(
                     padding: const EdgeInsets.all(10),
