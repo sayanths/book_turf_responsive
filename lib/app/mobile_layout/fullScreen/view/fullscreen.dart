@@ -75,54 +75,38 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                   widget.data.turfAmenities!.turfWashroom!
                       ? AmenitiesWidget(
                           size: size,
-                          iconify: const Iconify(
-                            Map.toilet,
-                          ),
-                          title: "Washroom",
-                        )
+                          iconify: const Iconify(Map.toilet),
+                          title: "Washroom")
                       : sizedboxCoustom,
                   widget.data.turfAmenities!.turfCafeteria!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(Ic.baseline_local_cafe),
-                          title: "Cafe",
-                        )
+                          title: "Cafe")
                       : sizedboxCoustom,
                   widget.data.turfAmenities!.turfGallery!
                       ? AmenitiesWidget(
                           size: size,
-                          iconify: const Iconify(
-                            Ic.round_stadium,
-                          ),
-                          title: "Gallery",
-                        )
+                          iconify: const Iconify(Ic.round_stadium),
+                          title: "Gallery")
                       : sizedboxCoustom,
                   widget.data.turfAmenities!.turfParking!
                       ? AmenitiesWidget(
                           size: size,
-                          iconify: const Iconify(
-                            Ri.parking_fill,
-                          ),
-                          title: "Parking",
-                        )
+                          iconify: const Iconify(Ri.parking_fill),
+                          title: "Parking")
                       : sizedboxCoustom,
                   widget.data.turfAmenities!.turfWater!
                       ? AmenitiesWidget(
                           size: size,
-                          iconify: const Iconify(
-                            Ri.water_flash_fill,
-                          ),
-                          title: "Water",
-                        )
+                          iconify: const Iconify(Ri.water_flash_fill),
+                          title: "Water")
                       : sizedboxCoustom,
                   widget.data.turfAmenities!.turfDressing!
                       ? AmenitiesWidget(
                           size: size,
-                          iconify: const Iconify(
-                            Ri.shirt_fill,
-                          ),
-                          title: "Dressing",
-                        )
+                          iconify: const Iconify(Ri.shirt_fill),
+                          title: "Dressing")
                       : sizedboxCoustom,
                 ],
               ),
@@ -138,36 +122,28 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                   GroundSuitWidget(
                     child: widget.data.turfCatogery!.turfCricket!
                         ? const GroundSuitsWidget(
-                            icon: Iconify(
-                              EmojioneMonotone.cricket,
-                            ),
+                            icon: Iconify(EmojioneMonotone.cricket),
                           )
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
                     child: widget.data.turfCatogery!.turfFootball!
                         ? const GroundSuitsWidget(
-                            icon: Iconify(
-                              Bx.football,
-                            ),
+                            icon: Iconify(Bx.football),
                           )
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
                     child: widget.data.turfCatogery!.turfBadminton!
                         ? const GroundSuitsWidget(
-                            icon: Iconify(
-                              EmojioneMonotone.badminton,
-                            ),
+                            icon: Iconify(EmojioneMonotone.badminton),
                           )
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
                     child: widget.data.turfCatogery!.turfYoga!
                         ? const GroundSuitsWidget(
-                            icon: Iconify(
-                              Iconoir.yoga,
-                            ),
+                            icon: Iconify(Iconoir.yoga),
                           )
                         : sizedboxCoustom,
                   ),
