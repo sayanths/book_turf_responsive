@@ -37,6 +37,7 @@ class OtpPage extends StatelessWidget {
               ),
               height30,
               Form(
+                key: optControllerPage.otpKey,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -52,7 +53,6 @@ class OtpPage extends StatelessWidget {
                     OtpTypingContainer(
                       controller: optControllerPage.otp4,
                     ),
-                   
                   ],
                 ),
               ),

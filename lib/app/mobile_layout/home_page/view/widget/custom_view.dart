@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/fullscreen.dart';
-
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
@@ -37,7 +36,6 @@ class CustomSnackImageShower extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(15),
               ),
-              /** */
               child: Stack(
                 children: [
                   Positioned(
@@ -45,10 +43,14 @@ class CustomSnackImageShower extends StatelessWidget {
                     top: -9,
                     child: IconButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        Icons.favorite,
-                        color: red,
-                        size: 30.0,
+                      icon: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+                        child: Icon(
+                          Icons.favorite,
+                          color: red,
+                          size: 30.0,
+                        ),
                       ),
                     ),
                   ),

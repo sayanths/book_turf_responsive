@@ -42,4 +42,11 @@ class LoginControllerMobile extends GetxController {
       return loginApi();
     }
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
 }
