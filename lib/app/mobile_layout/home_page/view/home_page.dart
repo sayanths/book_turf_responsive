@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/search.dart';
+import 'package:turf_book_second_project/app/mobile_layout/location/view/location.dart';
 import 'package:turf_book_second_project/app/mobile_layout/view_all/view/view_all.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
@@ -27,6 +28,7 @@ class HomePageMobile extends StatelessWidget {
               Search(size: size),
               height10,
               height10,
+             // Home(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Row(

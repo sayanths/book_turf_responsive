@@ -1,8 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class BookController extends GetxController {
   int selected = 0;
+  late Razorpay _razorpay;
+  @override
+  void onInit() {
+    super.onInit();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSucess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+  }
+
+  void _handlePaymentSucess() {
+    Get.snackbar('payement Sucessfull', '');
+  }
+
+  _handlePaymentError() {
+    Get.snackbar("Payment Failed", '');
+  }
+
+  _handleExternalWallet() {
+    Get.snackbar('external  wallet', '');
+  }
 
   Widget customRadio(String mainTile, String text, int index) {
     return Column(
@@ -46,5 +68,21 @@ class BookController extends GetxController {
     );
   }
 
-  
+  option() {
+    var options = {
+      "key": "rzp_test_g9wjrkJkmYw27N",
+      // "amount": num.parse(_amountController.text) * 100,
+      "name": "new project",
+      "description": "payment for our work",
+      "prefill": {"contact": "7055451245", "email": "mveli620@gmail.com"},
+      "external": {
+        "wallets": ["paytm"]
+      }
+    };
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

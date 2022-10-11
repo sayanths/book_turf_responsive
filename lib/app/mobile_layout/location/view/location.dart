@@ -1,58 +1,86 @@
-// import 'dart:ffi';
+import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
-// import 'package:flutter/material.dart';
-// import 'package:geolocator/geolocator.dart';
-// import 'package:get/get.dart';
-// import 'package:iconify_flutter/iconify_flutter.dart';
-// import 'package:iconify_flutter/icons/carbon.dart';
-// import 'package:turf_book_second_project/app/utiles/colors.dart';
-// import 'package:turf_book_second_project/app/utiles/fonts.dart';
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
 
-// class CurrentLocation extends StatefulWidget {
-//   const CurrentLocation({
-//     Key? key,
-//   }) : super(key: key);
+class _HomeState extends State<Home> {
+  var long = "longitude";
+  var lat = "latitude";
+  void getlocation() async {
+    LocationPermission per = await Geolocator.checkPermission();
+    if (per == LocationPermission.denied ||
+        per == LocationPermission.deniedForever) {
+      print("permission denied");
+      LocationPermission per1 = await Geolocator.requestPermission();
+    } else {
+      Position currentLoc = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.best);
+      setState(() {
+        long = currentLoc.longitude.toString();
+        lat = currentLoc.latitude.toString();
+      });
+    }
+  }
 
-//   @override
-//   State<CurrentLocation> createState() => _CurrentLocationState();
-// }
-
-// class _CurrentLocationState extends State<CurrentLocation> {
-//   String currentAddress = 'calicut,Kerala,India'; //address name will return
-//   late Position currentPosition; //return the latitude and longitude
-
-//   Future<Position> determinePosition() async {
-//     Bool serviceEnabled;
-//     LocationPermission permission;
-//     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-//     if (!serviceEnabled) {
-//       Get.snackbar('internet', 'keep your location on');
-//     }
-//     permission = await Geolocator.checkPermission();
-//     if (permission == LocationPermission.denied) {
-//       permission = await Geolocator.requestPermission();
-//        if (permission == LocationPermission.denied) {
-//       Get.snackbar('Denied', 'Location permission is denied');
-//     }
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 10),
-//       child: Row(
-//         children: [
-//           const Iconify(
-//             Carbon.location_current,
-//             color: black,
-//           ),
-//           Text(
-//             currentAddress,
-//             style: Lato(cl: black),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.indigo[900],
+        title: Row(
+          children: [
+            Text(
+              "WEB",
+              style: TextStyle(
+                fontSize: 30,
+              ),
+            ),
+            Text(
+              "FUN",
+              style: TextStyle(
+                color: Colors.yellow,
+                fontSize: 30,
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "logitude : " + long,
+              style: TextStyle(
+                color: Colors.indigo[900],
+                fontSize: 30,
+              ),
+            ),
+            Text(
+              "latitude : " + lat,
+              style: TextStyle(
+                color: Colors.indigo[900],
+                fontSize: 30,
+              ),
+            ),
+            MaterialButton(
+              onPressed: getlocation,
+              color: Colors.indigo[900],
+              child: Text(
+                "Get Location",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 40,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

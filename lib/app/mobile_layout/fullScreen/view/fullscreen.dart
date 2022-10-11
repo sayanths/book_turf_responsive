@@ -122,29 +122,23 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                   GroundSuitWidget(
                     child: widget.data.turfCatogery!.turfCricket!
                         ? const GroundSuitsWidget(
-                            icon: Iconify(EmojioneMonotone.cricket),
-                          )
+                            icon: Iconify(EmojioneMonotone.cricket))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
                     child: widget.data.turfCatogery!.turfFootball!
-                        ? const GroundSuitsWidget(
-                            icon: Iconify(Bx.football),
-                          )
+                        ? const GroundSuitsWidget(icon: Iconify(Bx.football))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
                     child: widget.data.turfCatogery!.turfBadminton!
                         ? const GroundSuitsWidget(
-                            icon: Iconify(EmojioneMonotone.badminton),
-                          )
+                            icon: Iconify(EmojioneMonotone.badminton))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
                     child: widget.data.turfCatogery!.turfYoga!
-                        ? const GroundSuitsWidget(
-                            icon: Iconify(Iconoir.yoga),
-                          )
+                        ? const GroundSuitsWidget(icon: Iconify(Iconoir.yoga))
                         : sizedboxCoustom,
                   ),
                 ],

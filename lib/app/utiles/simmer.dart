@@ -17,11 +17,12 @@ class SimmerCustomWidget extends StatelessWidget {
     return Shimmer.fromColors(
       baseColor: Colors.grey.withOpacity(.3),
       highlightColor: Colors.grey.withOpacity(.1),
-      period: Duration(seconds: 2),
+      period: const Duration(seconds: 2),
       child: Container(
-          width: width,
-          height: hight,
-          decoration:shapeBorder,),
+        width: width,
+        height: hight,
+        decoration: shapeBorder,
+      ),
     );
   }
 }
