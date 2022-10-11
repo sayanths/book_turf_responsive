@@ -55,7 +55,30 @@ class BookNow extends StatelessWidget {
                     //   },
                     //   child: const Text("Pick Date"),
                     // )
-                    
+                    Wrap(
+                      children: List.generate(4, (index) {
+                        Color color =
+                            index % 2 == 0 ? Colors.orange : Colors.green;
+                        return GestureDetector(
+                          onTap: () {
+                            
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(width: 1, color: grey),
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            child: Text(
+                              "10:00 AM",
+                              style: TextStyle(color: color),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
                   ],
                 );
               },
