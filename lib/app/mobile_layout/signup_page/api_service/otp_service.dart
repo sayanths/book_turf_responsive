@@ -2,13 +2,14 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/model/otp_model.dart';
+import 'package:turf_book_second_project/app/utiles/base_url.dart';
 
 
 class OtpVerifyApi {
   Future<OtpResponse?> verifyApi(OtpModel model) async {
     try {
       Response? response =
-          await Dio().post("http://10.0.2.2:3000/account/verify-email-otp", data: model.toJson());
+          await Dio().post(BaseUrl.otp, data: model.toJson());
 
       if (response.statusCode == 200) {
         return OtpResponse.fromJson(response.data);

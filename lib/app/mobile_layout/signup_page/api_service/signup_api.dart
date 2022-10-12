@@ -2,12 +2,13 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/model/sign_up_model.dart';
+import 'package:turf_book_second_project/app/utiles/base_url.dart';
 
 class SignUpApi {
   Future<SignUpResponse?> signUpUser(SignUpModel model) async {
     try {
       Response? response = await Dio().post(
-          "http://10.0.2.2:3000/account/signup-email",
+          BaseUrl.signUp,
           data: model.toJson());
 
       if (response.statusCode == 200) {
