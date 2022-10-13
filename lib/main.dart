@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Turf booking',
       home: ResponsiveLayout(
-        mobileBody: SplashScreenMobile(),
+        mobileBody: BottomNavigationMobile(),
         desktopBody: LoginScreenDesktop(),
       ),
     );
