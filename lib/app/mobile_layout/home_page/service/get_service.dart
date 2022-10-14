@@ -7,7 +7,6 @@ import 'package:turf_book_second_project/app/mobile_layout/intersecptor/view/int
 import 'package:turf_book_second_project/app/utiles/base_url.dart';
 
 class GetApiService {
-  // final dio = Dio(BaseOptions(baseUrl: BaseUrl.url));
   Future<VendorModel?> getTurfData() async {
     try {
       Dio dio = await HelperIntercepter().getApiClient();

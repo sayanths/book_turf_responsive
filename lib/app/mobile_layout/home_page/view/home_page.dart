@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/view/search.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
 
 import 'package:turf_book_second_project/app/mobile_layout/location/service/location_service.dart';
@@ -22,11 +23,16 @@ class HomePageMobile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 0, 76, 3),
-        title: const CupertinoSearchTextField(
-            prefixIcon: Icon(
-          Icons.search,
-          color: white,
-        )),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.to(() => const SearchView());
+              },
+              icon: const Icon(
+                Icons.search,
+                color: white,
+              ))
+        ],
       ),
       backgroundColor: white,
       body: SafeArea(
@@ -71,7 +77,7 @@ class HomePageMobile extends StatelessWidget {
                       },
                       child: Text(
                         "view All",
-                        style: gfontsubtitlefont(cl: grey),
+                        style: gfontsubtitlefont(cl: black),
                       ),
                     ),
                   ],

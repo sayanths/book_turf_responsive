@@ -7,7 +7,7 @@ import 'package:turf_book_second_project/app/mobile_layout/login_page/service/lo
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class LoginControllerMobile extends GetxController {
-  final loginKey = GlobalKey<FormState>();
+  GlobalKey loginKey = GlobalKey<FormState>();
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -39,10 +39,16 @@ class LoginControllerMobile extends GetxController {
     }
   }
 
-  onLoginPresed() {
-    if (loginKey.currentState!.validate()) {
-      return loginApi();
-    }
+  // onLoginPresed() {
+  //   if (loginKey.currentState!.validate()) {
+  //     return loginApi();
+  //   }
+  // }
+
+  @override
+  void onInit() {
+    super.onInit();
+    loginApi();
   }
 
   @override

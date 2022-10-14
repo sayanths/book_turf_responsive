@@ -7,7 +7,6 @@ import 'package:turf_book_second_project/app/mobile_layout/location/model/locati
 class GetUserLoction extends GetxController {
   dynamic userDetails;
   Location? location;
-  //Location? get location => _location;
   getUserLocation() async {
     print("sdsd");
     bool serviceEnabled;
@@ -18,7 +17,7 @@ class GetUserLoction extends GetxController {
     if (!serviceEnabled) {
       serviceEnabled = await location!.requestService();
 
-      // if (!serviceEnabled) {}
+       if (!serviceEnabled) {}
     }
     permissionGrantend = await location!.hasPermission();
     if (permissionGrantend == PermissionStatus.denied) {
@@ -35,7 +34,7 @@ class GetUserLoction extends GetxController {
       log("response  lat: $latitude");
       log("response  lng: $longitude");
       var response = await Dio().get(
-          "https://api.mapbox.com/geocoding/v5/mapbox.places/$longitude,$latitude.json?limit=1&types=place%2Cpostcode%2Clocality&access_token=pk.eyJ1Ijoic2F5YW50aGEiLCJhIjoiY2w5NzZ4a21sMTU2MTQxb3oydm9lNWp0ZiJ9.asxLqLDt_Q4jZbk9EInntQ");
+          "https://api.mapbox.com/geocoding/v5/mapbox.places/$longitude,$latitude.json?limit=1&types=place%2Cpostcode%2Clocality&access_token=pk.eyJ1IjoibXVzaHRoYWsiLCJhIjoiY2w5NXBzN3NwMDBpdTN1bXZqc2hkODF4MSJ9.TotadAOyJLd_fvnvLEI5tw");
       log(
         "response : ${response.data}",
       );

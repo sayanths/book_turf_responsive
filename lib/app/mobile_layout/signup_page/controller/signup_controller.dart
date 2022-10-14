@@ -6,8 +6,7 @@ import 'package:turf_book_second_project/app/mobile_layout/signup_page/view/otp_
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class SignUpControllerMobile extends GetxController {
-  final signUpKey = GlobalKey<FormState>();
-
+  GlobalKey signUpKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final conformPasswordController = TextEditingController();
