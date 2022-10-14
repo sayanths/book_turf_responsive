@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
-import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/search.dart';
+
 import 'package:turf_book_second_project/app/mobile_layout/location/service/location_service.dart';
 import 'package:turf_book_second_project/app/mobile_layout/view_all/view/view_all.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
@@ -17,33 +18,42 @@ class HomePageMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeController = Get.put(HomePageControllerMobile());
     final locationController = Get.put(GetUserLoction());
-
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 0, 76, 3),
+        title: const CupertinoSearchTextField(
+            prefixIcon: Icon(
+          Icons.search,
+          color: white,
+        )),
+      ),
       backgroundColor: white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              height30,
-              Search(size: size),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton.icon(
-                    onPressed: () {
-                      locationController.getUserLocation();
-                    },
-                    icon: const Icon(
-                      Icons.location_pin,
-                      color: black,
-                    ),
-                    label: locationController.userDetails == null
-                        ? const Text(
-                            'Get your location',
-                            style: TextStyle(color: black),
-                          )
-                        : Text(locationController.userDetails.toString())),
+              Container(
+                height: size.height / 20,
+                width: size.width,
+                color: const Color.fromARGB(255, 226, 244, 227),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton.icon(
+                      onPressed: () {
+                        locationController.getUserLocation();
+                      },
+                      icon: const Icon(
+                        Icons.location_pin,
+                        color: black,
+                      ),
+                      label: locationController.userDetails == null
+                          ? const Text(
+                              'Get your location',
+                              style: TextStyle(color: black),
+                            )
+                          : Text(locationController.userDetails.toString())),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -112,31 +122,45 @@ class HomePageMobile extends StatelessWidget {
                       style: Lato(cl: black, sz: 25, fw: FontWeight.bold),
                     )),
               ),
-              GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
-                return homeCntrl.topRatedList.isEmpty
-                    ? SimmerCustomWidget(
-                        hight: size.height / 3.6,
-                        width: size.width / 2.2,
-                        shapeBorder: ShapeDecoration(
-                          color: Colors.grey[400]!,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
-                        ),
-                      )
-                    : LimitedBox(
-                        maxHeight: size.height / 3,
-                        child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.all(5),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: homeController.topRatedList.length,
-                            itemBuilder: (context, index) {
-                              final data = homeController.topRatedList[index];
-                              return CustomSnackImageShower(data: data);
-                            }),
-                      );
-              }),
+              height10,
+              Container(
+                height: size.height / 3,
+                width: size.width,
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 217, 217, 217),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20))),
+                child:
+                    GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
+                  return homeCntrl.topRatedList.isEmpty
+                      ? SimmerCustomWidget(
+                          hight: size.height / 3.6,
+                          width: size.width / 2.2,
+                          shapeBorder: ShapeDecoration(
+                            color: Colors.grey[400]!,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5)),
+                          ),
+                        )
+                      : LimitedBox(
+                          maxHeight: size.height / 3,
+                          child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              padding: const EdgeInsets.all(5),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: homeController.topRatedList.length,
+                              itemBuilder: (context, index) {
+                                final data = homeController.topRatedList[index];
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CustomSnackImageShower(data: data),
+                                );
+                              }),
+                        );
+                }),
+              ),
             ],
           ),
         ),
