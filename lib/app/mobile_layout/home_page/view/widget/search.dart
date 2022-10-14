@@ -15,7 +15,7 @@ class Search extends StatelessWidget {
       height: size.height / 18,
       width: size.width / 1.1,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 44, 40, 40),
+        color: const Color.fromARGB(255, 196, 196, 196),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
@@ -23,11 +23,11 @@ class Search extends StatelessWidget {
         child: TextFormField(
           decoration: const InputDecoration(
               border: InputBorder.none,
-              hintText: 'search',
-              hintStyle: TextStyle(color: grey),
+              hintText: 'search..',
+              hintStyle: TextStyle(color: black),
               suffixIcon: Icon(
                 Icons.search,
-                color: grey,
+                color: black,
               )),
         ),
       ),

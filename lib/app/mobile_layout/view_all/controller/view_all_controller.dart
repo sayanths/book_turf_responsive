@@ -50,7 +50,7 @@ class ViewAllMobileController extends GetxController {
     ),
     GetBuilder<ViewAllMobileController>(
       builder: (controller) {
-        final data = controller.yoga[0];
+        final data = controller.yoga[1];
         return YogaCategory(data: data);
       },
     ),
@@ -63,8 +63,7 @@ class ViewAllMobileController extends GetxController {
         allThings.clear();
         allThings.addAll(response.data);
         forCricket();
-        forFootBall();
-        
+        forFootBall();       
         forBadminton();
         forYoga();
       }
