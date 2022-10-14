@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/search.dart';
-import 'package:turf_book_second_project/app/mobile_layout/location/view/location.dart';
+import 'package:turf_book_second_project/app/mobile_layout/location/service/location_service.dart';
 import 'package:turf_book_second_project/app/mobile_layout/view_all/view/view_all.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
@@ -16,6 +16,8 @@ class HomePageMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeController = Get.put(HomePageControllerMobile());
+    final locationController = Get.put(GetUserLoction());
+
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -26,20 +28,23 @@ class HomePageMobile extends StatelessWidget {
             children: [
               height30,
               Search(size: size),
-              height10,
-              height10,
-             // Home(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Row(
-                  children: const [
-                    Icon(Icons.location_pin),
-                    Text("calicut,kerala,India")
-                  ],
-                ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                    onPressed: () {
+                      locationController.getUserLocation();
+                    },
+                    icon: const Icon(
+                      Icons.location_pin,
+                      color: black,
+                    ),
+                    label: locationController.userDetails == null
+                        ? const Text(
+                            'Get your location',
+                            style: TextStyle(color: black),
+                          )
+                        : Text(locationController.userDetails.toString())),
               ),
-              height10,
-              height10,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
@@ -83,7 +88,18 @@ class HomePageMobile extends StatelessWidget {
                             itemCount: homeController.vendorTurfList.length,
                             itemBuilder: (context, index) {
                               final data = homeController.vendorTurfList[index];
-                              return CustomSnackImageShower(data: data);
+                              return homeCntrl.vendorTurfList.isEmpty
+                                  ? SimmerCustomWidget(
+                                      hight: size.height / 3.6,
+                                      width: size.width / 2.2,
+                                      shapeBorder: ShapeDecoration(
+                                        color: Colors.grey[400]!,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5)),
+                                      ),
+                                    )
+                                  : CustomSnackImageShower(data: data);
                             }),
                       );
               }),

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/view/bottom_nav.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/model/login_model.dart';
@@ -26,6 +27,7 @@ class LoginControllerMobile extends GetxController {
     if (response != null) {
       isLoading.value = false;
       if (response.status!) {
+        getToken(response);
         Get.offAll(() => const BottomNavigationMobile());
       } else {
         // ignore: avoid_print
@@ -48,5 +50,12 @@ class LoginControllerMobile extends GetxController {
     super.dispose();
     emailController.dispose();
     passwordController.dispose();
+  }
+
+  FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+  getToken(LoginResponse value) async {
+    await secureStorage.write(key: 'token', value: value.token);
+    await secureStorage.write(key: 'refreshToken', value: value.refreshToken);
+    await secureStorage.write(key: 'loginTrue', value: 'true');
   }
 }

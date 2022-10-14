@@ -4,13 +4,15 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:turf_book_second_project/app/mobile_layout/intersecptor/view/intersecptor.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/model/login_model.dart';
 import 'package:turf_book_second_project/app/utiles/base_url.dart';
 
 class Api {
-  final dio = Dio(BaseOptions(baseUrl: BaseUrl.url));
+  // final dio = Dio(BaseOptions(baseUrl: BaseUrl.url));
 
   Future<LoginResponse?> loginUser(LoginModel model) async {
+    Dio dio = await HelperIntercepter().getApiClient();
     try {
       // await check internet is offline or online
       final response = await dio.post(BaseUrl.login, data: model.toJson());

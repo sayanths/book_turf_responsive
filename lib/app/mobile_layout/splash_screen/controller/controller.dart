@@ -20,5 +20,6 @@ class SplashScreenController extends GetxController {
           ? Get.offAll(() => const BottomNavigationMobile())
           : Get.offAll(() => const LoginPageMobile());
     });
+    update();
   }
 }

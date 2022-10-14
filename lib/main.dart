@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:turf_book_second_project/app/desktop_layout/login_desktop/view/login_desktop.dart';
 import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/view/bottom_nav.dart';
+import 'package:turf_book_second_project/app/mobile_layout/login_page/view/login_page.dart';
+import 'package:turf_book_second_project/app/mobile_layout/splash_screen/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/splash_screen/view/splash_screen.dart';
 import 'package:turf_book_second_project/app/responsive/layout.dart';
 
