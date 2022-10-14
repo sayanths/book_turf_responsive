@@ -23,14 +23,16 @@ class LoginResponse {
   bool? status;
   String? message;
   String? token;
+  String? refreshToken;
 
-  LoginResponse({this.status, this.message, this.token});
+  LoginResponse({this.status, this.message, this.token, this.refreshToken});
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
       status: json["status"],
       message: json["message"],
       token: json["token"],
+      refreshToken: json['refreshToken'],
     );
   }
 }

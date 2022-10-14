@@ -4,4 +4,9 @@ class BaseUrl {
   static const String signUp = '$url/account/signup-email';
   static const String otp = '$url/account/verify-email-otp';
   static const String fetchData = '$url/user/all-turf';
+    static const String newToken = '$url/account/refresh-token';
+
+  
+
+
 }

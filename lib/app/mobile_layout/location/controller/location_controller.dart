@@ -1,35 +1,59 @@
-import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
+// import 'dart:async';
 
-class LocationController extends GetxController {
-  Future<Position> determinePosition() async {
-    
-    bool serviceEnabled;
-    LocationPermission permission;
 
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
-    }
-    permission = await Geolocator.checkPermission();
+// import 'package:geolocator/geolocator.dart';
+// import 'package:get/get.dart';
 
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
+// class LocationController extends GetxController {
+//   var latitude = 'Getting latitude'.obs;
+//   var longitude = 'Getting longitude'.obs;
+//   var address = 'Getting Address..'.obs;
+//   late StreamSubscription<Position> streamSubscription;
 
-    return await Geolocator.getCurrentPosition();
-  }
+//   getLocation() async {
+//     bool serviceEnabled;
+//     LocationPermission permission;
+//     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+//     if (!serviceEnabled) {
+//       await Geolocator.openLocationSettings();
+//       return Future.error('Location service disabled');
+//     }
+//     permission = await Geolocator.checkPermission();
+//     if (permission == LocationPermission.denied) {
+//       return Future.error('Location service denied');
+//     }
+//     if (permission == LocationPermission.deniedForever) {
+//       return Future.error('LOcation permission ,denined permentantly');
+//     }
 
-  @override
-  void onInit() {
-    super.onInit();
-    determinePosition();
-  }
-}
+//     //with this we can retrive the location continously
+//     streamSubscription =
+//         Geolocator.getPositionStream().listen((Position position) {
+//       latitude.value = 'latitude :${position.latitude}';
+//       longitude.value = 'longitude :${position.longitude}';
+//       getaddressFromLang(position);
+//     });
+//     update();
+//   }
+
+//   Future<void> getaddressFromLang(Position position) async {
+//     List<Placemark> placeMark =
+//         await placemarkFromCoordinates(position.latitude, position.longitude);
+//     Placemark place = placeMark[0];
+//     address.value = 'Address ${place.locality}, ${place.street}';
+//   }
+
+//   @override
+//   void onInit() async {
+//     super.onInit();
+//     getLocation();
+//   }
+
+//   @override
+//   void onClose() {
+//     super.onClose();
+//     streamSubscription.cancel();
+//   }
+
+
+// }
