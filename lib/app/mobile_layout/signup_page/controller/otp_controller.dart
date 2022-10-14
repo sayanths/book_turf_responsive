@@ -10,7 +10,7 @@ class OptController extends GetxController {
   final otp2 = TextEditingController();
   final otp3 = TextEditingController();
   final otp4 = TextEditingController();
-  final otpKey = GlobalKey<FormState>();
+  GlobalKey otpKey = GlobalKey<FormState>();
   bool isloading = false;
   otpData() async {
     final otp = {otp1.text + otp2.text + otp3.text + otp4.text};

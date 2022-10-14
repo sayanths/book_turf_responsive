@@ -1,0 +1,100 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/fullscreen.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
+import 'package:turf_book_second_project/app/utiles/colors.dart';
+import 'package:turf_book_second_project/app/utiles/widgets.dart';
+
+class SearchView extends StatelessWidget {
+  static String id = "search_view";
+  const SearchView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<Datum> results = Get.put(HomePageControllerMobile()).vendorTurfList;
+    return SafeArea(
+      child: Scaffold(body: GetBuilder<HomePageControllerMobile>(
+        builder: (controller) {
+          final dataList = controller.vendorTurfList;
+          runFilter(String enteredKeyword) {
+            if (enteredKeyword.isEmpty) {
+              results = dataList;
+            } else {
+              results = dataList
+                  .where((element) => element.turfName!
+                      .toUpperCase()
+                      .contains(enteredKeyword.toUpperCase()))
+                  .toList();
+            }
+          }
+
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            child: Column(
+              children: [
+                Container(
+                  height: 60,
+                  width: double.infinity,
+                  color: const Color.fromARGB(255, 0, 63, 2),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back,
+                          color: white,
+                        ),
+                      ),
+                      Expanded(
+                        child: CupertinoSearchTextField(
+                            onChanged: (value) {
+                              runFilter(value);
+                            },
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: white,
+                            )),
+                      ),
+                    ],
+                  ),
+                ),
+                height10,
+                height10,
+                Expanded(
+                  child: results.isEmpty
+                      ? const Center(
+                          child: Text("Search for turf"),
+                        )
+                      : ListView.builder(
+                          itemCount: dataList.length,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            final searchTurf = results[index];
+                            return InkWell(
+                              onTap: () {
+                                Get.to(
+                                    () => FullScreenMobile(data: searchTurf));
+                              },
+                              child: ListTile(
+                                title: Text(searchTurf.turfName!),
+                                subtitle: Text(searchTurf.turfPlace!),
+                                leading: Image.network(
+                                    searchTurf.turfImages!.turfImages1!,height: 40,),
+                                    //trailing: Text(data),
+                              ),
+                            );
+                          },
+                        ),
+                )
+              ],
+            ),
+          );
+        },
+      )),
+    );
+  }
+}
