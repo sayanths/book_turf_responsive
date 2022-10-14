@@ -4,6 +4,8 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/model/produ
 import 'package:turf_book_second_project/app/mobile_layout/home_page/service/get_service.dart';
 import 'package:turf_book_second_project/app/mobile_layout/view_all/view/widget/all_category.dart';
 import 'package:turf_book_second_project/app/mobile_layout/view_all/view/widget/circket.dart';
+import 'package:turf_book_second_project/app/mobile_layout/view_all/view/widget/football_category.dart';
+import 'package:turf_book_second_project/app/mobile_layout/view_all/view/widget/yoga.dart';
 
 class ViewAllMobileController extends GetxController {
   List<Datum> cricket = [];
@@ -30,7 +32,7 @@ class ViewAllMobileController extends GetxController {
   List<Widget> choiceListWidget = [
     GetBuilder<ViewAllMobileController>(
       builder: (controller) {
-        final data = controller.allThings[0];
+        final data = controller.allThings[2];
         return AllCategory(data: data);
       },
     ),
@@ -38,6 +40,18 @@ class ViewAllMobileController extends GetxController {
       builder: (controller) {
         final data = controller.cricket[0];
         return CricketCategory(data: data);
+      },
+    ),
+    GetBuilder<ViewAllMobileController>(
+      builder: (controller) {
+        final data = controller.football[0];
+        return FootBallCategory(data: data);
+      },
+    ),
+    GetBuilder<ViewAllMobileController>(
+      builder: (controller) {
+        final data = controller.yoga[0];
+        return YogaCategory(data: data);
       },
     ),
   ];
@@ -49,6 +63,10 @@ class ViewAllMobileController extends GetxController {
         allThings.clear();
         allThings.addAll(response.data);
         forCricket();
+        forFootBall();
+        
+        forBadminton();
+        forYoga();
       }
     }
     update();
@@ -57,7 +75,35 @@ class ViewAllMobileController extends GetxController {
   forCricket() {
     for (var element in allThings) {
       if (element.turfCatogery!.turfCricket == true) {
+        cricket.clear();
         cricket.add(element);
+      }
+    }
+    update();
+  }
+
+  forFootBall() {
+    for (var element in allThings) {
+      if (element.turfCatogery!.turfFootball == true) {
+        football.add(element);
+      }
+    }
+    update();
+  }
+
+  forBadminton() {
+    for (var element in allThings) {
+      if (element.turfCatogery!.turfBadminton == true) {
+        batminton.add(element);
+      }
+    }
+    update();
+  }
+
+  forYoga() {
+    for (var element in allThings) {
+      if (element.turfCatogery!.turfYoga == true) {
+        yoga.add(element);
       }
     }
     update();

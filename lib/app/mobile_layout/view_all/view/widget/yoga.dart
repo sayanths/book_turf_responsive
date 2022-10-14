@@ -3,9 +3,9 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/model/produ
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 
-class FootBallCategory extends StatelessWidget {
+class YogaCategory extends StatelessWidget {
   final Datum data;
-  const FootBallCategory({
+  const YogaCategory({
     Key? key,
     required this.data,
   }) : super(key: key);
@@ -20,7 +20,7 @@ class FootBallCategory extends StatelessWidget {
           width: size.width / 2,
           decoration: BoxDecoration(
             color: Colors.white10,
-            image:  DecorationImage(
+            image: DecorationImage(
               image: NetworkImage(
                 data.turfImages!.turfImages1.toString(),
               ),
