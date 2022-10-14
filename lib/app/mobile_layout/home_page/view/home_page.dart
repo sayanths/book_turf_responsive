@@ -26,9 +26,9 @@ class HomePageMobile extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Get.to(() => SearchView());
+                Get.to(() => const SearchView());
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.search,
                 color: white,
               ))

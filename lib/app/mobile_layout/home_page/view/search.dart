@@ -49,15 +49,20 @@ class SearchView extends StatelessWidget {
                           color: white,
                         ),
                       ),
-                      Expanded(
-                        child: CupertinoSearchTextField(
-                            onChanged: (value) {
-                              runFilter(value);
-                            },
-                            prefixIcon: const Icon(
-                              Icons.search,
-                              color: white,
-                            )),
+                      Form(
+                        key: controller.searchKey,
+                        child: Expanded(
+                          child: CupertinoSearchTextField(
+                              style: const TextStyle(color: white),
+                              controller: controller.searchController,
+                              onChanged: (value) {
+                                runFilter(value);
+                              },
+                              prefixIcon: const Icon(
+                                Icons.search,
+                                color: white,
+                              )),
+                        ),
                       ),
                     ],
                   ),
@@ -70,7 +75,7 @@ class SearchView extends StatelessWidget {
                           child: Text("Search for turf"),
                         )
                       : ListView.builder(
-                          itemCount: dataList.length,
+                          itemCount: results.length,
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
                             final searchTurf = results[index];
@@ -83,8 +88,26 @@ class SearchView extends StatelessWidget {
                                 title: Text(searchTurf.turfName!),
                                 subtitle: Text(searchTurf.turfPlace!),
                                 leading: Image.network(
-                                    searchTurf.turfImages!.turfImages1!,height: 40,),
-                                    //trailing: Text(data),
+                                  searchTurf.turfImages!.turfImages1!,
+                                  height: 40,
+                                ),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      height: 10,
+                                      width: 10,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            searchTurf.turfInfo!.turfIsAvailale!
+                                                ? const Color.fromARGB(
+                                                    255, 3, 199, 10)
+                                                : Colors.red,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           },

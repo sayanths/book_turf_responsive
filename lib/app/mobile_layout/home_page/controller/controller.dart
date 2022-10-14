@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/service/get_service.dart';
@@ -6,6 +7,8 @@ class HomePageControllerMobile extends GetxController {
   RxBool isFavourite = false.obs;
   List<Datum> vendorTurfList = [];
   List<Datum> topRatedList = [];
+  TextEditingController searchController = TextEditingController();
+  GlobalKey searchKey = GlobalKey<FormState>();
 
   fetchDetails() async {
     VendorModel? response = await GetApiService().getTurfData();
