@@ -15,6 +15,7 @@ import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widge
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
+import 'package:turf_book_second_project/app/utiles/simmer.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -49,12 +50,22 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
               ),
               height10,
               height10,
-              Image.network(
-                widget.data.turfImages!.turfImages3.toString(),
-                height: size.height / 4,
-                width: size.width / 1.1,
-                fit: BoxFit.cover,
-              ),
+              widget.data.turfImages != null
+                  ? Image.network(
+                      widget.data.turfImages!.turfImages3.toString(),
+                      height: size.height / 4,
+                      width: size.width / 1.1,
+                      fit: BoxFit.cover,
+                    )
+                  : SimmerCustomWidget(
+                      hight: size.height / 4,
+                      width: size.width / 1.1,
+                      shapeBorder: ShapeDecoration(
+                        color: Colors.grey[400]!,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5)),
+                      ),
+                    ),
               height10,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
