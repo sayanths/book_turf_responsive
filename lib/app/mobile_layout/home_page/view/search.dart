@@ -7,22 +7,29 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/model/produ
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
-class SearchView extends StatelessWidget {
+class SearchView extends StatefulWidget {
   static String id = "search_view";
   const SearchView({Key? key}) : super(key: key);
 
   @override
+  State<SearchView> createState() => _SearchViewState();
+}
+
+class _SearchViewState extends State<SearchView> {
+  @override
   Widget build(BuildContext context) {
     List<Datum> results = Get.put(HomePageControllerMobile()).vendorTurfList;
+    List<Datum> filteredData = [];
+    List<Datum> foundUsers = [];
     return SafeArea(
       child: Scaffold(body: GetBuilder<HomePageControllerMobile>(
         builder: (controller) {
           final dataList = controller.vendorTurfList;
           runFilter(String enteredKeyword) {
             if (enteredKeyword.isEmpty) {
-              results = dataList;
+              filteredData = dataList;
             } else {
-              results = dataList
+              filteredData = dataList
                   .where((element) => element.turfName!
                       .toUpperCase()
                       .contains(enteredKeyword.toUpperCase()))
@@ -30,6 +37,9 @@ class SearchView extends StatelessWidget {
             }
           }
 
+          setState(() {
+            foundUsers = results;
+          });
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             child: Column(
@@ -70,7 +80,7 @@ class SearchView extends StatelessWidget {
                 height10,
                 height10,
                 Expanded(
-                  child: results.isEmpty
+                  child: foundUsers.isEmpty
                       ? const Center(
                           child: Text("Search for turf"),
                         )

@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/search.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
-
 import 'package:turf_book_second_project/app/mobile_layout/location/service/location_service.dart';
 import 'package:turf_book_second_project/app/mobile_layout/view_all/view/view_all.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/simmer.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
+
 
 class HomePageMobile extends StatelessWidget {
   const HomePageMobile({Key? key}) : super(key: key);
@@ -83,7 +82,8 @@ class HomePageMobile extends StatelessWidget {
                   ],
                 ),
               ),
-              GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
+              GetBuilder<HomePageControllerMobile>(
+                builder: (homeCntrl) {
                 return homeCntrl.vendorTurfList.isEmpty
                     ? SimmerCustomWidget(
                         hight: size.height / 3.6,
