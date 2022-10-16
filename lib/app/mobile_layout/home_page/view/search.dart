@@ -7,23 +7,18 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/model/produ
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
-class SearchView extends StatefulWidget {
-  static String id = "search_view";
+class SearchView extends StatelessWidget {
+  
   const SearchView({Key? key}) : super(key: key);
 
   @override
-  State<SearchView> createState() => _SearchViewState();
-}
-
-class _SearchViewState extends State<SearchView> {
-  @override
   Widget build(BuildContext context) {
     List<Datum> results = Get.put(HomePageControllerMobile()).vendorTurfList;
-    List<Datum> filteredData = [];
-    List<Datum> foundUsers = [];
+   List<Datum> filteredData = [];
     return SafeArea(
       child: Scaffold(body: GetBuilder<HomePageControllerMobile>(
         builder: (controller) {
+         
           final dataList = controller.vendorTurfList;
           runFilter(String enteredKeyword) {
             if (enteredKeyword.isEmpty) {
@@ -37,9 +32,6 @@ class _SearchViewState extends State<SearchView> {
             }
           }
 
-          setState(() {
-            foundUsers = results;
-          });
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             child: Column(
@@ -80,7 +72,7 @@ class _SearchViewState extends State<SearchView> {
                 height10,
                 height10,
                 Expanded(
-                  child: foundUsers.isEmpty
+                  child: results.isEmpty
                       ? const Center(
                           child: Text("Search for turf"),
                         )
