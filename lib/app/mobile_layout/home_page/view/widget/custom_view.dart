@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/fullscreen.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
@@ -14,6 +15,7 @@ class CustomSnackImageShower extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final add = Get.put(HomePageControllerMobile());
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -42,7 +44,9 @@ class CustomSnackImageShower extends StatelessWidget {
                     left: 120,
                     top: -9,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        add.addToFavorite(data);
+                      },
                       icon: const Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: 5, vertical: 15),
