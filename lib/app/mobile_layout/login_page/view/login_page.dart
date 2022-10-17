@@ -54,6 +54,12 @@ class LoginPageMobile extends StatelessWidget {
                             )),
                         height10,
                         CustomTextField(
+                          validate: (value) {
+                            if (value!.isEmpty) {
+                              Get.snackbar('ds', 'sdsds');
+                            }
+                            return null;
+                          },
                           width: size.width / 1.5,
                           controller: loginController.emailController,
                           obsureText: false,
@@ -66,6 +72,12 @@ class LoginPageMobile extends StatelessWidget {
                           height: size.height / 25,
                         ),
                         CustomTextField(
+                          validate: (value) {
+                            if (value!.isEmpty) {
+                              Get.snackbar('ds', 'sdsds');
+                            }
+                            return null;
+                          },
                           width: size.width / 1.5,
                           controller: loginController.passwordController,
                           obsureText: true,
@@ -74,7 +86,7 @@ class LoginPageMobile extends StatelessWidget {
                           icon: Icons.password,
                           title: '  enter password',
                         ),
-                       height30,
+                        height30,
                         SizedBox(
                             width: size.width / 1.5,
                             child: Obx((() {

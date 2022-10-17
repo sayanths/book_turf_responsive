@@ -7,6 +7,8 @@ class HomePageControllerMobile extends GetxController {
   RxBool isFavourite = false.obs;
   List<Datum> vendorTurfList = [];
   List<Datum> topRatedList = [];
+  List<Datum> filteredData = [];
+  List<Datum> searchResult = [];
   TextEditingController searchController = TextEditingController();
   GlobalKey searchKey = GlobalKey<FormState>();
 
@@ -37,6 +39,27 @@ class HomePageControllerMobile extends GetxController {
   @override
   void onInit() {
     fetchDetails();
+    filteredData = vendorTurfList;
     super.onInit();
+  }
+
+  runFilter(String enteredKeyword) {
+    if (enteredKeyword.isEmpty) {
+      searchResult = vendorTurfList;
+    } else {
+      searchResult = vendorTurfList
+          .where((element) => element.turfName!
+              .toUpperCase()
+              .contains(enteredKeyword.toUpperCase()))
+          .toList();
+    }
+    filteredData = searchResult;
+    update();
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 }
