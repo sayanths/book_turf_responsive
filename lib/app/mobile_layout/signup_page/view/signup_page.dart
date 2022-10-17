@@ -26,7 +26,7 @@ class SignUpPageMobile extends StatelessWidget {
               const CustomBackArrowWithTitle(
                 title: 'Create an Account',
               ),
-              height50,
+              height30,
               LoginGlassContainer(
                 size: size,
                 child: Form(
@@ -43,6 +43,7 @@ class SignUpPageMobile extends StatelessWidget {
                           title: " Enter Email",
                           keyboard: TextInputType.emailAddress),
                       CustomTextField(
+                        
                           width: size.width / 1.5,
                           obsureText: true,
                           controller: signUpController.passwordController,
