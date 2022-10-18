@@ -11,7 +11,7 @@ class GetUserLoction extends GetxController {
     print("sdsd");
     bool serviceEnabled;
     PermissionStatus permissionGrantend;
-
+      
     serviceEnabled = await location!.serviceEnabled();
 
     if (!serviceEnabled) {

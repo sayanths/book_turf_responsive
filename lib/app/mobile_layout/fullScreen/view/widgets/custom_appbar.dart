@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -10,12 +11,18 @@ class CustomAppBar extends StatelessWidget {
       {super.key,
       required this.mainTitle,
       required this.color,
-      required this.rating, required this.star});
+      required this.rating,
+      required this.star});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
+        IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back)),
         FullScreenTitle(
           title: mainTitle,
           size: 30,
@@ -36,7 +43,7 @@ class CustomAppBar extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-               Text(star),
+              Text(star),
               Text(rating),
             ],
           ),
