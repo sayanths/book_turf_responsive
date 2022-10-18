@@ -32,27 +32,31 @@ class SignUpPageMobile extends StatelessWidget {
                 child: Form(
                   key: signUpController.signUpKey,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      height50,
+                      height30,
                       CustomTextField(
-                          width: size.width / 1.5,
+                          width: size.width / 1.3,
                           obsureText: false,
                           controller: signUpController.emailController,
                           size: size,
                           icon: Icons.email,
                           title: " Enter Email",
                           keyboard: TextInputType.emailAddress),
+                      height10,
+                      height10,
                       CustomTextField(
-                        
-                          width: size.width / 1.5,
+                          width: size.width / 1.3,
                           obsureText: true,
                           controller: signUpController.passwordController,
                           size: size,
                           icon: Icons.password,
                           title: "  Enter password",
                           keyboard: TextInputType.visiblePassword),
+                      height10,
+                      height10,
                       CustomTextField(
-                          width: size.width / 1.5,
+                          width: size.width / 1.3,
                           obsureText: true,
                           controller:
                               signUpController.conformPasswordController,
@@ -60,6 +64,8 @@ class SignUpPageMobile extends StatelessWidget {
                           icon: Icons.password_outlined,
                           title: " conform password",
                           keyboard: TextInputType.name),
+                      height10,
+                      height10,
                       SizedBox(
                           width: size.width / 1.5,
                           child: Obx((() {
@@ -72,7 +78,7 @@ class SignUpPageMobile extends StatelessWidget {
                                       const Color.fromARGB(255, 55, 0, 255),
                                   shape: const StadiumBorder(),
                                 ),
-                                child: signUpController.isLoading.value==false
+                                child: signUpController.isLoading.value == false
                                     ? const Text("Create")
                                     : const CupertinoActivityIndicator(
                                         color: white));
