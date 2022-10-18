@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/view/widgets/custom_app_bar.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/view/widgets/custom_back_button.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/custom_appbar.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
@@ -24,14 +25,13 @@ class BookNow extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const Align(
-                alignment: Alignment.topLeft, child: CustomBackButton()),
-            height30,
+            height20,
+            const CustomAppBar(
+                mainTitle: "Select Price", color: white, rating: '', star: ''),
             GetBuilder<BookController>(
               builder: (controller) {
                 return Column(
                   children: [
-                    const FullScreenTitle(title: "Select Price", size: 25),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -91,8 +91,8 @@ class BookNow extends StatelessWidget {
                                 context: context,
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime.now(),
-                                lastDate:
-                                    DateTime.now().add(Duration(days: 365)));
+                                lastDate: DateTime.now()
+                                    .add(const Duration(days: 365)));
                           },
                           icon: const Icon(
                             Icons.date_range_sharp,

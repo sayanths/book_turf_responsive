@@ -36,17 +36,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                        onPressed: () {
-                          Get.offAll(() => const HomePageMobile());
-                        },
-                        icon: const Icon(Icons.arrow_back_ios_new))),
-              ),
+             height20,
               CustomAppBar(
                 mainTitle: widget.data.turfName.toString(),
                 color: widget.data.turfInfo!.turfIsAvailale!

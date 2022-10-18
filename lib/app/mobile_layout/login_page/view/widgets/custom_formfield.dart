@@ -36,7 +36,7 @@ class CustomTextField extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 7,
+            flex: 6,
             child: Container(
               height: size.height / 13,
               decoration: const BoxDecoration(
@@ -80,6 +80,7 @@ class CustomLoginContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+     
       height: size.height / 13,
       decoration: const BoxDecoration(
         color: black,
