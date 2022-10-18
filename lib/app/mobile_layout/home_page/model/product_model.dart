@@ -2,8 +2,10 @@ class VendorModel {
   VendorModel({
     required this.status,
     required this.data,
+    this.turfUserId,
   });
 
+  String? turfUserId;
   bool? status;
   List<Datum> data;
 
@@ -15,6 +17,7 @@ class VendorModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "turf_user_id": turfUserId,
         "status": status,
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
@@ -237,5 +240,3 @@ class TurfType {
         "turf_sixes": turfSixes,
       };
 }
-
-

@@ -1,3 +1,4 @@
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
@@ -42,9 +43,64 @@ class BookNow extends StatelessWidget {
                             data.turfTime!.timeEvening.toString(), 3),
                       ],
                     ),
+                    // DropdownButton<HomePageControllerMobile>(
+                    //   hint: Text("select time"),
+                    //   items: const [
+                    //   //  DropdownMenuItem(child:Text("sdsd")),
+                    //     //  DropdownMenuItem(child:Text("sdsd"))
+                    //     //   DropdownMenuItem(child:Text("sdsd"))
+                    //   ],
+                    //   onChanged: (value) {},
+                    // ),
                     height30,
                     const FullScreenTitle(title: "Select day", size: 25),
                     height10,
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: SizedBox(
+                            child: DatePicker(DateTime.now(),
+                                initialSelectedDate: DateTime.now(),
+                                selectionColor:
+                                    const Color.fromARGB(255, 11, 94, 2),
+                                selectedTextColor: Colors.white,
+                                onDateChange: (date) {
+                              // bottomSheetWidget();
+                            }),
+                          ),
+                        ),
+                        Expanded(
+                            child: IconButton(
+                          onPressed: () {
+                            showDatePicker(
+                                // builder: (context, child) {
+                                //   return Theme(
+                                //     data: Theme.of(context).copyWith(
+                                //         colorScheme: ColorScheme.light(
+                                //       primary:
+                                //           Colors.amberAccent, // <-- SEE HERE
+                                //       onPrimary:
+                                //           Color(0xffF02E65), // <-- SEE HERE
+                                //       onSurface: Color.fromARGB(
+                                //           255, 66, 125, 145), // <-- SEE HERE
+                                //     )),
+                                //     child: SizedBox(),
+                                //   );
+                                // },
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate:
+                                    DateTime.now().add(Duration(days: 365)));
+                          },
+                          icon: const Icon(
+                            Icons.date_range_sharp,
+                            color: Color.fromARGB(255, 0, 87, 158),
+                          ),
+                        )),
+                      ],
+                    ),
                     // ElevatedButton(
                     //   onPressed: () {
                     //     showDatePicker(
@@ -60,9 +116,7 @@ class BookNow extends StatelessWidget {
                         Color color =
                             index % 2 == 0 ? Colors.orange : Colors.green;
                         return GestureDetector(
-                          onTap: () {
-                            
-                          },
+                          onTap: () {},
                           child: Container(
                             margin: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 10),

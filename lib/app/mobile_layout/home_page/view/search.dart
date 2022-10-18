@@ -3,35 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/fullscreen.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/controller.dart';
-import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
-class SearchView extends StatelessWidget {
-  
+class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);
 
   @override
+  State<SearchView> createState() => _SearchViewState();
+}
+
+class _SearchViewState extends State<SearchView> {
+  @override
   Widget build(BuildContext context) {
-    List<Datum> results = Get.put(HomePageControllerMobile()).vendorTurfList;
-   List<Datum> filteredData = [];
     return SafeArea(
       child: Scaffold(body: GetBuilder<HomePageControllerMobile>(
         builder: (controller) {
-         
-          final dataList = controller.vendorTurfList;
-          runFilter(String enteredKeyword) {
-            if (enteredKeyword.isEmpty) {
-              filteredData = dataList;
-            } else {
-              filteredData = dataList
-                  .where((element) => element.turfName!
-                      .toUpperCase()
-                      .contains(enteredKeyword.toUpperCase()))
-                  .toList();
-            }
-          }
-
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             child: Column(
@@ -58,7 +45,7 @@ class SearchView extends StatelessWidget {
                               style: const TextStyle(color: white),
                               controller: controller.searchController,
                               onChanged: (value) {
-                                runFilter(value);
+                                controller.runFilter(value);
                               },
                               prefixIcon: const Icon(
                                 Icons.search,
@@ -72,15 +59,15 @@ class SearchView extends StatelessWidget {
                 height10,
                 height10,
                 Expanded(
-                  child: results.isEmpty
+                  child: controller.searchResult.isEmpty
                       ? const Center(
                           child: Text("Search for turf"),
                         )
                       : ListView.builder(
-                          itemCount: results.length,
+                          itemCount: controller.filteredData.length,
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (context, index) {
-                            final searchTurf = results[index];
+                            final searchTurf = controller.filteredData[index];
                             return InkWell(
                               onTap: () {
                                 Get.to(

@@ -25,6 +25,7 @@ class OptController extends GetxController {
     OtpResponse? response = await OtpVerifyApi().verifyApi(result);
 
     if (response != null) {
+      
       OtpResponse(message: "sucess");
       
       if (response.status!) {

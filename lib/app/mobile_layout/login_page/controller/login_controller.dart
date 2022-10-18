@@ -28,22 +28,18 @@ class LoginControllerMobile extends GetxController {
       isLoading.value = false;
       if (response.status!) {
         getToken(response);
+        Get.snackbar('Sucessfull', 'Sucessfully logged in',
+            colorText: white, duration: const Duration(seconds: 2));
         Get.offAll(() => const BottomNavigationMobile());
       } else {
-        // ignore: avoid_print
-        print(response.message.toString());
+        Get.snackbar('login failed!!', response.message.toString(),
+            colorText: white, duration: const Duration(seconds: 2));
       }
     } else {
       return Get.snackbar('Not found!!', 'The user not found',
           colorText: white, duration: const Duration(seconds: 2));
     }
   }
-
-  // onLoginPresed() {
-  //   if (loginKey.currentState!.validate()) {
-  //     return loginApi();
-  //   }
-  // }
 
   @override
   void onInit() {

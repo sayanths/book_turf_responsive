@@ -17,13 +17,13 @@ class LoginPageMobile extends StatelessWidget {
     final loginController = Get.put(LoginControllerMobile());
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 69, 2),
-      body: SingleChildScrollView(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
             children: [
               SizedBox(
-                height: size.height / 10,
+                height: size.height / 30,
               ),
               Text(
                 "Welcome",
@@ -54,6 +54,12 @@ class LoginPageMobile extends StatelessWidget {
                             )),
                         height10,
                         CustomTextField(
+                          validate: (value) {
+                            if (value!.isEmpty) {
+                              Get.snackbar('ds', 'sdsds');
+                            }
+                            return null;
+                          },
                           width: size.width / 1.5,
                           controller: loginController.emailController,
                           obsureText: false,
@@ -66,6 +72,12 @@ class LoginPageMobile extends StatelessWidget {
                           height: size.height / 25,
                         ),
                         CustomTextField(
+                          validate: (value) {
+                            if (value!.isEmpty) {
+                              Get.snackbar('ds', 'sdsds');
+                            }
+                            return null;
+                          },
                           width: size.width / 1.5,
                           controller: loginController.passwordController,
                           obsureText: true,
@@ -74,9 +86,7 @@ class LoginPageMobile extends StatelessWidget {
                           icon: Icons.password,
                           title: '  enter password',
                         ),
-                        SizedBox(
-                          height: size.height / 25,
-                        ),
+                        height30,
                         SizedBox(
                             width: size.width / 1.5,
                             child: Obx((() {
@@ -89,11 +99,10 @@ class LoginPageMobile extends StatelessWidget {
                                         const Color.fromARGB(255, 55, 0, 255),
                                     shape: const StadiumBorder(),
                                   ),
-                                  child:
-                                      loginController.isLoading.value == false
-                                          ? const Text("Create")
-                                          : const CupertinoActivityIndicator(
-                                              color: white));
+                                  child: loginController.isLoading.value
+                                      ? const Text("Create")
+                                      : const CupertinoActivityIndicator(
+                                          color: white));
                             }))),
                         height10,
                         Row(
