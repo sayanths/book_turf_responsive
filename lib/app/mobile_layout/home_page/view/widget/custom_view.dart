@@ -16,7 +16,6 @@ class CustomSnackImageShower extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final add = Get.put(HomePageControllerMobile());
     final fav = Get.put(FavouriteController());
     Size size = MediaQuery.of(context).size;
     return Padding(

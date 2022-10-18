@@ -1,8 +1,11 @@
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class BookController extends GetxController {
+  //DatePickerController datePickerController = DatePickerController();
   int selected = 0;
   late Razorpay _razorpay;
   @override
@@ -84,5 +87,24 @@ class BookController extends GetxController {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  datePicking() {
+    DatePicker(DateTime.now(),
+        initialSelectedDate: DateTime.now(),
+        selectionColor: const Color.fromARGB(255, 11, 94, 2),
+        selectedTextColor: Colors.white, onDateChange: (date) {
+     // bottomSheetWidget();
+      update();
+    });
+  }
+
+  bottomSheetWidget() {
+    BottomSheet(
+      onClosing: () {},
+      builder: (context) {
+        return const SizedBox();
+      },
+    );
   }
 }

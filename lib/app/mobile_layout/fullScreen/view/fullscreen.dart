@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/bx.dart';
 import 'package:iconify_flutter/icons/emojione_monotone.dart';
@@ -6,13 +7,13 @@ import 'package:iconify_flutter/icons/ic.dart';
 import 'package:iconify_flutter/icons/iconoir.dart';
 import 'package:iconify_flutter/icons/map.dart';
 import 'package:iconify_flutter/icons/ri.dart';
-import 'package:turf_book_second_project/app/mobile_layout/book_now/view/widgets/custom_back_button.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/amenities.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/bottom_nav.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/custom_appbar.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/ground_suits.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/view/home_page.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/simmer.dart';
@@ -35,10 +36,16 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Align(
-                    alignment: Alignment.topLeft, child: CustomBackButton()),
+                    alignment: Alignment.topLeft,
+                    child: IconButton(
+                        onPressed: () {
+                          Get.offAll(() => const HomePageMobile());
+                        },
+                        icon: const Icon(Icons.arrow_back_ios_new))),
               ),
               CustomAppBar(
                 mainTitle: widget.data.turfName.toString(),

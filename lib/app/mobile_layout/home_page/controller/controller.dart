@@ -9,6 +9,7 @@ class HomePageControllerMobile extends GetxController {
   List<Datum> topRatedList = [];
   List<Datum> filteredData = [];
   List<Datum> searchResult = [];
+
   TextEditingController searchController = TextEditingController();
   GlobalKey searchKey = GlobalKey<FormState>();
 
@@ -59,7 +60,7 @@ class HomePageControllerMobile extends GetxController {
 
   @override
   void dispose() {
+    searchController.clear();
     super.dispose();
-    searchController.dispose();
   }
 }

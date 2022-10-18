@@ -27,16 +27,14 @@ class GetApiService {
 
 class HomeService {
   void addWishlist(VendorModel data) async {
-    log("++++++++++++++++++++++++++++++++++++++++++++++++++564564564654=");
+    
     log(data.toJson().toString());
     try {
       var response = await Dio().post(BaseUrl.addWishlist, data: data.toJson());
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
-        log("886456454564864848648646");
         log("done");
       }
     } catch (e) {
-      log("--------------------------------------------");
       log(e.toString());
     }
   }
