@@ -43,15 +43,18 @@ class BookNow extends StatelessWidget {
                             data.turfTime!.timeEvening.toString(), 3),
                       ],
                     ),
-                    // DropdownButton<HomePageControllerMobile>(
-                    //   hint: Text("select time"),
-                    //   items: const [
-                    //   //  DropdownMenuItem(child:Text("sdsd")),
-                    //     //  DropdownMenuItem(child:Text("sdsd"))
-                    //     //   DropdownMenuItem(child:Text("sdsd"))
-                    //   ],
-                    //   onChanged: (value) {},
-                    // ),
+                    DropdownButton<String>(
+                      value: controller.dropDownSelectedItem,
+                      items: controller.list.map((String value) {
+                        return DropdownMenuItem(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        controller.dropDownValueChange(value!);
+                      },
+                    ),
                     height30,
                     const FullScreenTitle(title: "Select day", size: 25),
                     height10,

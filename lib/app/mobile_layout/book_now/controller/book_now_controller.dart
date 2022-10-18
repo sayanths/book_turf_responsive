@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class BookController extends GetxController {
+  String dropDownSelectedItem = "Morning";
   //DatePickerController datePickerController = DatePickerController();
   int selected = 0;
   late Razorpay _razorpay;
@@ -94,7 +95,7 @@ class BookController extends GetxController {
         initialSelectedDate: DateTime.now(),
         selectionColor: const Color.fromARGB(255, 11, 94, 2),
         selectedTextColor: Colors.white, onDateChange: (date) {
-     // bottomSheetWidget();
+      // bottomSheetWidget();
       update();
     });
   }
@@ -106,5 +107,12 @@ class BookController extends GetxController {
         return const SizedBox();
       },
     );
+  }
+
+  List<String> list = <String>['Morning', 'afternoon', 'evening'];
+
+  dropDownValueChange(String value) {
+    dropDownSelectedItem = value;
+    update();
   }
 }
