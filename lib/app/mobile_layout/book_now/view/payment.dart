@@ -43,18 +43,28 @@ class BookNow extends StatelessWidget {
                             data.turfTime!.timeEvening.toString(), 3),
                       ],
                     ),
-                    // DropdownButton<HomePageControllerMobile>(
-                    //   hint: Text("select time"),
-                    //   items: const [
-                    //   //  DropdownMenuItem(child:Text("sdsd")),
-                    //     //  DropdownMenuItem(child:Text("sdsd"))
-                    //     //   DropdownMenuItem(child:Text("sdsd"))
-                    //   ],
-                    //   onChanged: (value) {},
-                    // ),
-                    height30,
-                    const FullScreenTitle(title: "Select day", size: 25),
                     height10,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: DropdownButton<String>(
+                          value: controller.dropDownSelectedItem,
+                          items: controller.list.map((String value) {
+                            return DropdownMenuItem(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            controller.dropDownValueChange(value!);
+                          },
+                        ),
+                      ),
+                    ),
+                    height20,
+                    const FullScreenTitle(title: "Select day", size: 25),
+                    height30,
                     Row(
                       children: [
                         Expanded(
@@ -65,34 +75,13 @@ class BookNow extends StatelessWidget {
                                 selectionColor:
                                     const Color.fromARGB(255, 11, 94, 2),
                                 selectedTextColor: Colors.white,
-                                onDateChange: (date) {
-                              // bottomSheetWidget();
-                            }),
+                                onDateChange: (date) {}),
                           ),
                         ),
                         Expanded(
                             child: IconButton(
                           onPressed: () {
-                            showDatePicker(
-                                // builder: (context, child) {
-                                //   return Theme(
-                                //     data: Theme.of(context).copyWith(
-                                //         colorScheme: ColorScheme.light(
-                                //       primary:
-                                //           Colors.amberAccent, // <-- SEE HERE
-                                //       onPrimary:
-                                //           Color(0xffF02E65), // <-- SEE HERE
-                                //       onSurface: Color.fromARGB(
-                                //           255, 66, 125, 145), // <-- SEE HERE
-                                //     )),
-                                //     child: SizedBox(),
-                                //   );
-                                // },
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime.now()
-                                    .add(const Duration(days: 365)));
+                            controller.customDatePicker(context);
                           },
                           icon: const Icon(
                             Icons.date_range_sharp,
@@ -101,16 +90,7 @@ class BookNow extends StatelessWidget {
                         )),
                       ],
                     ),
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //     showDatePicker(
-                    //         context: context,
-                    //         initialDate: DateTime.now(),
-                    //         firstDate: DateTime.now(),
-                    //         lastDate: DateTime.now());
-                    //   },
-                    //   child: const Text("Pick Date"),
-                    // )
+                    height20,
                     Wrap(
                       children: List.generate(4, (index) {
                         Color color =
@@ -124,7 +104,7 @@ class BookNow extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5),
                               border: Border.all(width: 1, color: grey),
                             ),
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(8),
                             child: Text(
                               "10:00 AM",
                               style: TextStyle(color: color),
@@ -148,7 +128,8 @@ class BookNow extends StatelessWidget {
             height10,
             InkWell(
               onTap: () {
-                bookContrlNow.option();
+                bookContrlNow.addBooking();
+                //  bookContrlNow.option();
               },
               child: CustomProceedPayBitton(size: size),
             ),

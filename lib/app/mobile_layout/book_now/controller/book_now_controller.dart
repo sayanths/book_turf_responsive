@@ -1,10 +1,13 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class BookController extends GetxController {
+  bool payment = false;
+  String dropDownSelectedItem = "Morning";
   //DatePickerController datePickerController = DatePickerController();
   int selected = 0;
   late Razorpay _razorpay;
@@ -94,7 +97,7 @@ class BookController extends GetxController {
         initialSelectedDate: DateTime.now(),
         selectionColor: const Color.fromARGB(255, 11, 94, 2),
         selectedTextColor: Colors.white, onDateChange: (date) {
-     // bottomSheetWidget();
+      // bottomSheetWidget();
       update();
     });
   }
@@ -106,5 +109,47 @@ class BookController extends GetxController {
         return const SizedBox();
       },
     );
+  }
+
+  List<String> list = <String>[
+    'Morning',
+    'afternoon',
+    'evening',
+  ];
+
+  dropDownValueChange(String value) {
+    dropDownSelectedItem = value;
+    update();
+  }
+
+  customDatePicker(BuildContext context) {
+    showDatePicker(
+        builder: (context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: const ColorScheme.light(
+                primary: Color.fromARGB(255, 0, 51, 2),
+              ),
+            ),
+            child: child!,
+          );
+        },
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(const Duration(days: 365)));
+  }
+
+  void addBooking() async {
+    Map<String, dynamic> data = {
+      "isBooked": true,
+      "user_id": "987488222444444",
+      "book_date": DateTime.now().toIso8601String()
+    };
+    var response =
+        await Dio().post("http://10.0.2.2:3000/turf/booking", data: data);
+    if (response.statusCode == 200) {
+      Get.snackbar('', 'Payemnt sucessfull');
+    }
   }
 }
