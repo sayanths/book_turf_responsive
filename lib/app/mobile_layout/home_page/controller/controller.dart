@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/service/get_service.dart';
@@ -9,8 +9,6 @@ class HomePageControllerMobile extends GetxController {
   List<Datum> topRatedList = [];
   List<Datum> filteredData = [];
   List<Datum> searchResult = [];
-
-
 
   TextEditingController searchController = TextEditingController();
   GlobalKey searchKey = GlobalKey<FormState>();
