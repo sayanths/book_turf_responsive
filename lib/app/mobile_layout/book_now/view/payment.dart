@@ -23,7 +23,7 @@ class BookNow extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
             height20,
             const CustomAppBar(
@@ -58,6 +58,7 @@ class BookNow extends StatelessWidget {
                           }).toList(),
                           onChanged: (value) {
                             controller.dropDownValueChange(value!);
+                            controller.dropDownValue = value;
                           },
                         ),
                       ),
@@ -91,28 +92,7 @@ class BookNow extends StatelessWidget {
                       ],
                     ),
                     height20,
-                    Wrap(
-                      children: List.generate(4, (index) {
-                        Color color =
-                            index % 2 == 0 ? Colors.orange : Colors.green;
-                        return GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(width: 1, color: grey),
-                            ),
-                            padding: const EdgeInsets.all(8),
-                            child: Text(
-                              "10:00 AM",
-                              style: TextStyle(color: color),
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
+                    Wrap(children: [controller.onDropDownValueChange()]),
                   ],
                 );
               },

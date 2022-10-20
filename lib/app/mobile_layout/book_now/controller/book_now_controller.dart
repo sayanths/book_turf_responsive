@@ -4,11 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/afternoon_time.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/evening_time.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/morning_timing.dart';
+import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class BookController extends GetxController {
   bool payment = false;
   String dropDownSelectedItem = "Morning";
-  //DatePickerController datePickerController = DatePickerController();
+  String? dropDownValue;
+
   int selected = 0;
   late Razorpay _razorpay;
   @override
@@ -150,6 +155,37 @@ class BookController extends GetxController {
         await Dio().post("http://10.0.2.2:3000/turf/booking", data: data);
     if (response.statusCode == 200) {
       Get.snackbar('', 'Payemnt sucessfull');
+    }
+  }
+
+  List<Widget> time = [
+    // timing('100', red),
+  ];
+
+  timing(String text, Color color) {
+    Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        border: Border.all(width: 1, color: grey),
+      ),
+      padding: const EdgeInsets.all(8),
+      child: Text(
+        text,
+        style: TextStyle(color: color),
+      ),
+    );
+  }
+
+  onDropDownValueChange() {
+    if (dropDownValue == 'Morning') {
+      return const MorningTiming();
+    } else if (dropDownValue == 'afternoon') {
+      return const AfterNoonTiming();
+    } else if (dropDownValue == 'evening') {
+      return const EveningTiming();
+    } else {
+      return const MorningTiming();
     }
   }
 }
