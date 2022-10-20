@@ -2,6 +2,7 @@ import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/payement_controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/view/widgets/custom_app_bar.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/view/widgets/custom_back_button.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/custom_appbar.dart';
@@ -20,6 +21,7 @@ class BookNow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookContrlNow = Get.put(BookController());
+    final paymentContrlNow = Get.put(PaymentController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -108,8 +110,8 @@ class BookNow extends StatelessWidget {
             height10,
             InkWell(
               onTap: () {
-                bookContrlNow.addBooking();
-                //  bookContrlNow.option();
+                paymentContrlNow.addBooking();
+                  paymentContrlNow.option();
               },
               child: CustomProceedPayBitton(size: size),
             ),
