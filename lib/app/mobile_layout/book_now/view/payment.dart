@@ -20,27 +20,24 @@ class BookNow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final paymentContrlNow = Get.put(PaymentController());
+   final bookContrlNow = Get.put(BookController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          children: [
-            height20,
-            const CustomAppBar(
-                mainTitle: "Select Price", color: white, rating: '', star: ''),
-            GetBuilder<BookController>(
-              builder: (controller) {
-                return Column(
+        body: SafeArea(
+      child: ListView(
+        children:  [
+          CustomAppBar(
+              mainTitle: 'Select Price', color: white, rating: '', star: ''),
+             Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        controller.customRadio("Morning",
+                        bookContrlNow.customRadio("Morning",
                             data.turfTime!.timeAfternoonStart.toString(), 1),
-                        controller.customRadio("Afternoon",
+                        bookContrlNow.customRadio("Afternoon",
                             data.turfTime!.timeAfternoonStart.toString(), 2),
-                        controller.customRadio("Evening",
+                        bookContrlNow.customRadio("Evening",
                             data.turfTime!.timeEveningStart.toString(), 3),
                       ],
                     ),
@@ -50,16 +47,16 @@ class BookNow extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: DropdownButton<String>(
-                          value: controller.dropDownSelectedItem,
-                          items: controller.list.map((String value) {
+                          value: bookContrlNow.dropDownSelectedItem,
+                          items: bookContrlNow.list.map((String value) {
                             return DropdownMenuItem(
                               value: value,
                               child: Text(value),
                             );
                           }).toList(),
                           onChanged: (value) {
-                            controller.dropDownValueChange(value!);
-                            controller.dropDownValue = value;
+                            bookContrlNow.dropDownValueChange(value!);
+                            bookContrlNow.dropDownValue = value;
                           },
                         ),
                       ),
@@ -83,7 +80,7 @@ class BookNow extends StatelessWidget {
                         Expanded(
                             child: IconButton(
                           onPressed: () {
-                            controller.customDatePicker(context);
+                           // controller.customDatePicker(context);
                           },
                           icon: const Icon(
                             Icons.date_range_sharp,
@@ -93,15 +90,14 @@ class BookNow extends StatelessWidget {
                       ],
                     ),
                     height20,
-                    Wrap(children: [controller.onDropDownValueChange()]),
+                  Wrap(children: [bookContrlNow.onDropDownValueChange()]),
                   ],
-                );
-              },
-            )
-          ],
-        ),
+                ),
+              
+        ],
       ),
-      bottomNavigationBar: CustomBottomBar(
+    ),
+       bottomNavigationBar: CustomBottomBar(
           size: size,
           child: GetBuilder<PaymentController>(
             builder: (controller) {
@@ -123,3 +119,5 @@ class BookNow extends StatelessWidget {
     );
   }
 }
+
+

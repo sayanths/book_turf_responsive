@@ -43,7 +43,7 @@ class CustomBottomNav extends StatelessWidget {
               Get.to(
                 transition: Transition.cupertino,
                 () => BookNow(
-                  data: widget.data,
+                 data: widget.data,
                 ),
               );
             },
