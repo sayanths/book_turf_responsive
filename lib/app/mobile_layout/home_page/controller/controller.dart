@@ -14,7 +14,7 @@ class HomePageControllerMobile extends GetxController {
   GlobalKey searchKey = GlobalKey<FormState>();
 
   fetchDetails() async {
-    VendorModel? response = await GetApiService().getTurfData();
+    TurfHomeModel? response = await GetApiService().getTurfData();
     if (response != null) {
       if (response.status!) {
         vendorTurfList.clear();
@@ -63,6 +63,4 @@ class HomePageControllerMobile extends GetxController {
     searchController.clear();
     super.dispose();
   }
-
- 
 }

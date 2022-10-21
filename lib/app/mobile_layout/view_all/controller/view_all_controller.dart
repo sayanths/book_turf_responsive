@@ -57,13 +57,13 @@ class ViewAllMobileController extends GetxController {
   ];
 
   fetchDetails() async {
-    VendorModel? response = await GetApiService().getTurfData();
+    TurfHomeModel? response = await GetApiService().getTurfData();
     if (response != null) {
       if (response.status!) {
         allThings.clear();
         allThings.addAll(response.data);
         forCricket();
-        forFootBall();       
+        forFootBall();
         forBadminton();
         forYoga();
       }
@@ -73,7 +73,7 @@ class ViewAllMobileController extends GetxController {
 
   forCricket() {
     for (var element in allThings) {
-      if (element.turfCatogery!.turfCricket == true) {
+      if (element.turfCategory!.turfCricket == true) {
         cricket.clear();
         cricket.add(element);
       }
@@ -83,7 +83,7 @@ class ViewAllMobileController extends GetxController {
 
   forFootBall() {
     for (var element in allThings) {
-      if (element.turfCatogery!.turfFootball == true) {
+      if (element.turfCategory!.turfFootball == true) {
         football.add(element);
       }
     }
@@ -92,7 +92,7 @@ class ViewAllMobileController extends GetxController {
 
   forBadminton() {
     for (var element in allThings) {
-      if (element.turfCatogery!.turfBadminton == true) {
+      if (element.turfCategory!.turfBadminton == true) {
         batminton.add(element);
       }
     }
@@ -101,7 +101,7 @@ class ViewAllMobileController extends GetxController {
 
   forYoga() {
     for (var element in allThings) {
-      if (element.turfCatogery!.turfYoga == true) {
+      if (element.turfCategory!.turfYoga == true) {
         yoga.add(element);
       }
     }

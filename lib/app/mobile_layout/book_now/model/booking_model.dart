@@ -1,5 +1,8 @@
 morningTurfBookingTiming() {}
 
+List timeBookedListMorning = [];
+List timeBookedListafterNoon = [];
+List timeBookedListevening = [];
 List morningtiming = [
   '6:00  -  7:00',
   '7:00  -  8:00',

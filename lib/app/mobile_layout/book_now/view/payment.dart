@@ -20,8 +20,7 @@ class BookNow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bookContrlNow = Get.put(BookController());
-    final paymentContrlNow = Get.put(PaymentController());
+    //final paymentContrlNow = Get.put(PaymentController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -38,11 +37,11 @@ class BookNow extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         controller.customRadio("Morning",
-                            data.turfTime!.timeMorning.toString(), 1),
+                            data.turfTime!.timeAfternoonStart.toString(), 1),
                         controller.customRadio("Afternoon",
-                            data.turfTime!.timeAfternoon.toString(), 2),
+                            data.turfTime!.timeAfternoonStart.toString(), 2),
                         controller.customRadio("Evening",
-                            data.turfTime!.timeEvening.toString(), 3),
+                            data.turfTime!.timeEveningStart.toString(), 3),
                       ],
                     ),
                     height10,
@@ -103,21 +102,24 @@ class BookNow extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: CustomBottomBar(
-        size: size,
-        child: Column(
-          children: [
-            height10,
-            height10,
-            InkWell(
-              onTap: () {
-                paymentContrlNow.addBooking();
-                  paymentContrlNow.option();
-              },
-              child: CustomProceedPayBitton(size: size),
-            ),
-          ],
-        ),
-      ),
+          size: size,
+          child: GetBuilder<PaymentController>(
+            builder: (controller) {
+              return Column(
+                children: [
+                  height10,
+                  height10,
+                  InkWell(
+                    onTap: () {
+                      controller.addBooking();
+                      controller.option();
+                    },
+                    child: CustomProceedPayBitton(size: size),
+                  ),
+                ],
+              );
+            },
+          )),
     );
   }
 }

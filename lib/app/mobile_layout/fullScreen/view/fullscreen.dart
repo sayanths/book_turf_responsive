@@ -39,7 +39,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
              height20,
               CustomAppBar(
                 mainTitle: widget.data.turfName.toString(),
-                color: widget.data.turfInfo!.turfIsAvailale!
+                color: widget.data.turfInfo!.turfIsAvailable!
                     ? const Color.fromARGB(255, 3, 199, 10)
                     : Colors.red,
                 rating: widget.data.turfInfo!.turfRating.toString(),
@@ -68,7 +68,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    widget.data.turfMuncipality.toString(),
+                    widget.data.turfMunicipality.toString(),
                     style: gfontsubtitlefont(cl: grey),
                   ),
                   Text(widget.data.turfPlace.toString(),
@@ -128,24 +128,24 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
               Wrap(
                 children: [
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfCricket!
+                    child: widget.data.turfCategory!.turfCricket!
                         ? const GroundSuitsWidget(
                             icon: Iconify(EmojioneMonotone.cricket))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfFootball!
+                    child: widget.data.turfCategory!.turfFootball!
                         ? const GroundSuitsWidget(icon: Iconify(Bx.football))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfBadminton!
+                    child: widget.data.turfCategory!.turfBadminton!
                         ? const GroundSuitsWidget(
                             icon: Iconify(EmojioneMonotone.badminton))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfYoga!
+                    child: widget.data.turfCategory!.turfYoga!
                         ? const GroundSuitsWidget(icon: Iconify(Iconoir.yoga))
                         : sizedboxCoustom,
                   ),

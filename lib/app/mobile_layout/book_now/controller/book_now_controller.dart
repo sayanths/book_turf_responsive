@@ -1,5 +1,4 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/afternoon_time.dart';
@@ -8,12 +7,10 @@ import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/w
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class BookController extends GetxController {
-
   String dropDownSelectedItem = "Morning";
   String? dropDownValue;
-
-  int selected = 0;
  
+  int selected = 0;
 
   Widget customRadio(String mainTile, String text, int index) {
     return Column(
@@ -56,8 +53,6 @@ class BookController extends GetxController {
       ],
     );
   }
-
- 
 
   datePicking() {
     DatePicker(DateTime.now(),
@@ -107,8 +102,6 @@ class BookController extends GetxController {
         lastDate: DateTime.now().add(const Duration(days: 365)));
   }
 
-  
-
   List<Widget> time = [
     // timing('100', red),
   ];
@@ -130,14 +123,13 @@ class BookController extends GetxController {
 
   onDropDownValueChange() {
     if (dropDownValue == 'Morning') {
-      return  MorningTiming();
+      return const MorningTiming();
     } else if (dropDownValue == 'afternoon') {
       return const AfterNoonTiming();
     } else if (dropDownValue == 'evening') {
       return const EveningTiming();
     } else {
-      return  MorningTiming();
+      return const MorningTiming();
     }
   }
 }
-

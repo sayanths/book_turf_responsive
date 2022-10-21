@@ -4,8 +4,8 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/service/get
 
 class FavouriteController extends GetxController {
   void addToFavorite(Datum data) async {
-    VendorModel response = VendorModel(
-      turfUserId: "63469bcad9ce0474dd70083c",
+    TurfHomeModel response = TurfHomeModel(
+     // turfUserId: "63469bcad9ce0474dd70083c",
       data: [
         Datum(
           id: data.id,
@@ -20,11 +20,11 @@ class FavouriteController extends GetxController {
             turfWashroom: data.turfAmenities!.turfWashroom,
             turfWater: data.turfAmenities!.turfWater,
           ),
-          turfCatogery: TurfCatogery(
-            turfBadminton: data.turfCatogery!.turfBadminton,
-            turfCricket: data.turfCatogery!.turfCricket,
-            turfFootball: data.turfCatogery!.turfFootball,
-            turfYoga: data.turfCatogery!.turfYoga,
+          turfCategory: TurfCategory(
+            turfBadminton: data.turfCategory!.turfBadminton,
+            turfCricket: data.turfCategory!.turfCricket,
+            turfFootball: data.turfCategory!.turfFootball,
+            turfYoga: data.turfCategory!.turfYoga,
           ),
           turfImages: TurfImages(
             turfImages1: data.turfImages!.turfImages1,
@@ -32,15 +32,15 @@ class FavouriteController extends GetxController {
             turfImages3: data.turfImages!.turfImages3,
           ),
           turfInfo: TurfInfo(
-            turfIsAvailale: data.turfInfo!.turfIsAvailale,
+            turfIsAvailable: data.turfInfo!.turfIsAvailable,
             turfMap: data.turfInfo!.turfMap,
             turfRating: data.turfInfo!.turfRating,
           ),
-          turfTime: TurfTime(
-            timeAfternoon: data.turfTime!.timeAfternoon,
-            timeEvening: data.turfTime!.timeEvening,
-            timeMorning: data.turfTime!.timeMorning,
-          ),
+          // turfTime: TurfTime(
+          //   timeAfternoon: data.turfTime!.timeAfternoon,
+          //   timeEvening: data.turfTime!.timeEvening,
+          //   timeMorning: data.turfTime!.timeMorning,
+          // ),
           turfType: TurfType(
             turfSevens: data.turfType!.turfSevens,
             turfSixes: data.turfType!.turfSixes,
