@@ -5,9 +5,7 @@ import 'package:location/location.dart';
 import 'package:turf_book_second_project/app/mobile_layout/location/model/location_model.dart';
 
 class GetUserLoction extends GetxController {
-  GetUserLoction() {
-    _location = Location();
-  }
+  
 
   dynamic userDetails;
   Location? _location;
@@ -51,5 +49,11 @@ class GetUserLoction extends GetxController {
     } catch (e) {
       log("response  error : $e");
     }
+  }
+
+  @override
+  void onInit() {
+   _location = Location();
+    super.onInit();
   }
 }

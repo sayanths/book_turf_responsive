@@ -10,7 +10,6 @@ import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/simmer.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
-
 class HomePageMobile extends StatelessWidget {
   const HomePageMobile({Key? key}) : super(key: key);
 
@@ -57,7 +56,10 @@ class HomePageMobile extends StatelessWidget {
                               'Get your location',
                               style: TextStyle(color: black),
                             )
-                          : Text(locationController.userDetails.toString())),
+                          : Text(
+                              locationController.userDetails.toString(),
+                              style: const TextStyle(color: black),
+                            )),
                 ),
               ),
               Padding(
@@ -82,8 +84,7 @@ class HomePageMobile extends StatelessWidget {
                   ],
                 ),
               ),
-              GetBuilder<HomePageControllerMobile>(
-                builder: (homeCntrl) {
+              GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
                 return homeCntrl.vendorTurfList.isEmpty
                     ? SimmerCustomWidget(
                         hight: size.height / 3.6,
