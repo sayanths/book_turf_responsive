@@ -18,16 +18,16 @@ class SignUpPageMobile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 69, 2),
-      body: SafeArea(
-        child: Container(
-          height: size.height,
-          width: size.width,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    "assets/bg2.jpg",
-                  ),
-                  fit: BoxFit.cover)),
+      body: Container(
+        height: size.height,
+        width: size.width,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  "assets/bg2.jpg",
+                ),
+                fit: BoxFit.cover)),
+        child: SafeArea(
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Center(
