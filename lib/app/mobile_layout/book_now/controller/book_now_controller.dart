@@ -6,10 +6,10 @@ import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/w
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class BookController extends GetxController {
+ 
   DateTime dateTime = DateTime.now();
   String dropDownSelectedItem = "Morning";
   String? dropDownValue;
-
   int selected = 0;
 
   Widget customRadio(String mainTile, String text, int index) {

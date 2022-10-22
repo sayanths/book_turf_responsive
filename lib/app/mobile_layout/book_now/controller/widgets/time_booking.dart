@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 
-class TimingBooking extends GetxController {
+class TimeBooking extends GetxController {
   final data = Datum();
-
+  List<String> selectedTime = [];
   final dat = Get.find<BookController>();
 
   List timeBookedListMorning = [];
@@ -35,4 +35,14 @@ class TimingBooking extends GetxController {
     '1:00  -  2:00',
     '2:00  -  3:00',
   ];
+
+  onSelectTiming(int index) {
+    if (selectedTime.contains(morningtiming[index].toString())) {
+      selectedTime.remove(morningtiming[index].toString());
+    } else {
+      selectedTime.add(morningtiming[index].toString());
+    }
+    update();
+  }
+  
 }

@@ -20,7 +20,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class FullScreenMobile extends StatefulWidget {
   final Datum data;
-  const FullScreenMobile({super.key, required this.data});
+  const FullScreenMobile({
+    super.key,
+    required this.data,
+  });
   @override
   State<FullScreenMobile> createState() => _FullScreenMobileState();
 }
@@ -34,7 +37,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-             height20,
+              height20,
               CustomAppBar(
                 mainTitle: widget.data.turfName.toString(),
                 color: widget.data.turfInfo!.turfIsAvailable!
@@ -169,7 +172,8 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
             ],
           ),
         ),
-        bottomNavigationBar: CustomBottomNav(size: size, widget: widget,data:widget.data),
+        bottomNavigationBar:
+            CustomBottomNav(size: size, widget: widget, data: widget.data),
       ),
     );
   }
