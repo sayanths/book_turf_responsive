@@ -54,18 +54,6 @@ class BookController extends GetxController {
     );
   }
 
-  // datePicking() {
-  //   DatePicker(DateTime.now(),
-  //       initialSelectedDate: dateTime,
-  //      // selectionColor: const Color.fromARGB(255, 11, 94, 2),
-  //       selectedTextColor: Colors.white, onDateChange: (date) {
-  //     dateTimeOnChange(date);
-  //     update();
-  //     // bottomSheetWidget();
-  //     update();
-  //   });
-  // }
-
   bottomSheetWidget() {
     BottomSheet(
       onClosing: () {},

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/bx.dart';
 import 'package:iconify_flutter/icons/emojione_monotone.dart';
@@ -13,7 +12,6 @@ import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widge
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/ground_suits.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
-import 'package:turf_book_second_project/app/mobile_layout/home_page/view/home_page.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/simmer.dart';
@@ -171,7 +169,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
             ],
           ),
         ),
-        bottomNavigationBar: CustomBottomNav(size: size, widget: widget),
+        bottomNavigationBar: CustomBottomNav(size: size, widget: widget,data:widget.data),
       ),
     );
   }
