@@ -18,6 +18,7 @@ class MorningTiming extends StatelessWidget {
           return InkWell(
             onTap: () {
               timeBooking.onSelectTiming(index);
+              print(timeBooking.datas.toString());
             },
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

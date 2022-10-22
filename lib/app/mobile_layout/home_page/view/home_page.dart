@@ -42,25 +42,28 @@ class HomePageMobile extends StatelessWidget {
                 width: size.width,
                 color: const Color.fromARGB(255, 226, 244, 227),
                 child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton.icon(
-                      onPressed: () {
-                        locationController.getUserLocation();
+                    alignment: Alignment.centerLeft,
+                    child: GetBuilder<GetUserLoction>(
+                      builder: (location) {
+                        return TextButton.icon(
+                            onPressed: () {
+                              location.getUserLocation();
+                            },
+                            icon: const Icon(
+                              Icons.location_pin,
+                              color: black,
+                            ),
+                            label: location.userDetails == null
+                                ? const Text(
+                                    'Get your location',
+                                    style: TextStyle(color: black),
+                                  )
+                                : Text(
+                                    location.userDetails.toString(),
+                                    style: const TextStyle(color: black),
+                                  ));
                       },
-                      icon: const Icon(
-                        Icons.location_pin,
-                        color: black,
-                      ),
-                      label: locationController.userDetails == null
-                          ? const Text(
-                              'Get your location',
-                              style: TextStyle(color: black),
-                            )
-                          : Text(
-                              locationController.userDetails.toString(),
-                              style: const TextStyle(color: black),
-                            )),
-                ),
+                    )),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),

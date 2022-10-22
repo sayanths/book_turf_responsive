@@ -10,30 +10,35 @@ class TimeBooking extends GetxController {
     super.onInit();
   }
 
-  final data = Datum();
-  List<String> selectedTime = [];
+  Datum? datas;
 
-  onTimePressed() {
-    int? moringTimeStarts = data.turfTime!.timeMorningStart;
-    int? moringTimeends = data.turfTime!.timeMorningStart;
-    int? afternoonTimeStarts = data.turfTime!.timeAfternoonStart;
-    int? afternoonTimeEnds = data.turfTime!.timeMorningStart;
-    int? eveningTimeStarts = data.turfTime!.timeEveningStart;
-    int? eveningTimeEnds = data.turfTime!.timeMorningStart;
-    timeBookedListMorning.clear();
-
-    for (int i = moringTimeStarts!; i <= moringTimeends!; i++) {
-      String timingItem = "$i : 00 - ${i + 1} :00";
-      log(timingItem.toString());
-      timeBookedListMorning.add(timingItem);
-      log(timeBookedListMorning.length.toString());
-    }
-    update();
-  }
-
-  var timeBookedListMorning = [];
   List timeBookedListafterNoon = [];
   List timeBookedListevening = [];
+  List<String> timeBookedListMorning = [];
+  onTimePressed() {
+    timeBookedListMorning.clear();
+    timeBookedListevening.clear();
+    timeBookedListafterNoon.clear();
+    if (datas != null) {
+      int? moringTimeStarts = datas!.turfTime!.timeMorningStart;
+      int? moringTimeends = datas!.turfTime!.timeMorningStart;
+      // int? afternoonTimeStarts = data!.turfTime!.timeAfternoonStart;
+      // int? afternoonTimeEnds = data!.turfTime!.timeMorningStart;
+      // int? eveningTimeStarts = data!.turfTime!.timeEveningStart;
+      // int? eveningTimeEnds = data!.turfTime!.timeMorningStart;
+      // timeBookedListMorning.clear();
+
+      for (int i = moringTimeStarts!; i <= moringTimeends!; i++) {
+        String timingItem = "$i : 00 - ${i + 1} :00";
+        log(timingItem.toString());
+        timeBookedListMorning.add(timingItem);
+        log(timeBookedListMorning.length.toString());
+        update();
+      }
+    } else {
+      print("null");
+    }
+  }
 
   List morningtiming = [
     '6:00  -  7:00',
@@ -62,10 +67,11 @@ class TimeBooking extends GetxController {
   ];
 
   onSelectTiming(int index) {
-    if (selectedTime.contains(morningtiming[index].toString())) {
-      selectedTime.remove(morningtiming[index].toString());
+    if (timeBookedListMorning
+        .contains(timeBookedListMorning[index].toString())) {
+      timeBookedListMorning.remove(timeBookedListMorning[index].toString());
     } else {
-      selectedTime.add(morningtiming[index].toString());
+      timeBookedListMorning.add(timeBookedListMorning[index].toString());
     }
     update();
   }

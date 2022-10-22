@@ -2,6 +2,7 @@ import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/time_booking.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/custom_appbar.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
@@ -18,7 +19,11 @@ class BookNow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookContrlNow = Get.put(BookController());
-    final size = MediaQuery.of(context).size;
+    final timeBooking = Get.put(TimeBooking());
+    timeBooking.datas = data;
+
+    // final size = MediaQuery.of(context).size;
+
     return Scaffold(
         body: SafeArea(
           child: ListView(
