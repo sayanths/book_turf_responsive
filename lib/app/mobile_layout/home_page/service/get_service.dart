@@ -7,17 +7,19 @@ import 'package:turf_book_second_project/app/mobile_layout/intersecptor/view/int
 import 'package:turf_book_second_project/app/utiles/base_url.dart';
 
 class GetApiService {
-  Future<VendorModel?> getTurfData() async {
+  Future<TurfHomeModel?> getTurfData() async {
     try {
       Dio dio = await HelperIntercepter().getApiClient();
       final response = await dio.get(BaseUrl.fetchData);
       if (response.statusCode == 200) {
-        log(response.data.toString());
-        return VendorModel.fromJson(response.data);
+        log("sucess");
+        return TurfHomeModel.fromJson(response.data);
       }
-    } on DioError catch (e) {
-      log(e.response!.data.toString());
-    } catch (e) {
+    }
+    //  on DioError catch (e) {
+    //   log("dio error");
+    // }
+    catch (e) {
       log(e.toString());
     }
 
@@ -26,7 +28,7 @@ class GetApiService {
 }
 
 class HomeService {
-  void addWishlist(VendorModel data) async {
+  void addWishlist(TurfHomeModel data) async {
     
     log(data.toJson().toString());
     try {

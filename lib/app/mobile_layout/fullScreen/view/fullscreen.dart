@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/bx.dart';
 import 'package:iconify_flutter/icons/emojione_monotone.dart';
@@ -13,7 +12,6 @@ import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widge
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/ground_suits.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
-import 'package:turf_book_second_project/app/mobile_layout/home_page/view/home_page.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/simmer.dart';
@@ -22,7 +20,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class FullScreenMobile extends StatefulWidget {
   final Datum data;
-  const FullScreenMobile({super.key, required this.data});
+  const FullScreenMobile({
+    super.key,
+    required this.data,
+  });
   @override
   State<FullScreenMobile> createState() => _FullScreenMobileState();
 }
@@ -36,10 +37,10 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-             height20,
+              height20,
               CustomAppBar(
                 mainTitle: widget.data.turfName.toString(),
-                color: widget.data.turfInfo!.turfIsAvailale!
+                color: widget.data.turfInfo!.turfIsAvailable!
                     ? const Color.fromARGB(255, 3, 199, 10)
                     : Colors.red,
                 rating: widget.data.turfInfo!.turfRating.toString(),
@@ -68,7 +69,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    widget.data.turfMuncipality.toString(),
+                    widget.data.turfMunicipality.toString(),
                     style: gfontsubtitlefont(cl: grey),
                   ),
                   Text(widget.data.turfPlace.toString(),
@@ -128,24 +129,24 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
               Wrap(
                 children: [
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfCricket!
+                    child: widget.data.turfCategory!.turfCricket!
                         ? const GroundSuitsWidget(
                             icon: Iconify(EmojioneMonotone.cricket))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfFootball!
+                    child: widget.data.turfCategory!.turfFootball!
                         ? const GroundSuitsWidget(icon: Iconify(Bx.football))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfBadminton!
+                    child: widget.data.turfCategory!.turfBadminton!
                         ? const GroundSuitsWidget(
                             icon: Iconify(EmojioneMonotone.badminton))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCatogery!.turfYoga!
+                    child: widget.data.turfCategory!.turfYoga!
                         ? const GroundSuitsWidget(icon: Iconify(Iconoir.yoga))
                         : sizedboxCoustom,
                   ),
@@ -171,7 +172,8 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
             ],
           ),
         ),
-        bottomNavigationBar: CustomBottomNav(size: size, widget: widget),
+        bottomNavigationBar:
+            CustomBottomNav(size: size, widget: widget, data: widget.data),
       ),
     );
   }

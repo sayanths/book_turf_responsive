@@ -75,7 +75,7 @@ class _SearchViewState extends State<SearchView> {
                               },
                               child: ListTile(
                                 title: Text(searchTurf.turfName!),
-                                subtitle: Text(searchTurf.turfPlace!),
+                                subtitle: Text(searchTurf.turfPlace!.toString()),
                                 leading: Image.network(
                                   searchTurf.turfImages!.turfImages1!,
                                   height: 40,
@@ -88,7 +88,7 @@ class _SearchViewState extends State<SearchView> {
                                       width: 10,
                                       decoration: BoxDecoration(
                                         color:
-                                            searchTurf.turfInfo!.turfIsAvailale!
+                                            searchTurf.turfInfo!.turfIsAvailable!
                                                 ? const Color.fromARGB(
                                                     255, 3, 199, 10)
                                                 : Colors.red,

@@ -32,7 +32,7 @@ class CustomProceedPayBitton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
-          height: size.height / 20,
+          height: size.height / 22,
           width: size.width / 1.9,
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 0, 0, 0),

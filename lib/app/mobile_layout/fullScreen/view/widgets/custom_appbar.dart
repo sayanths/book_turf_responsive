@@ -25,7 +25,7 @@ class CustomAppBar extends StatelessWidget {
             icon: const Icon(Icons.arrow_back)),
         FullScreenTitle(
           title: mainTitle,
-          size: 30,
+          size: 20,
         ),
         const Spacer(),
         Padding(
