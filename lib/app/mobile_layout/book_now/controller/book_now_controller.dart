@@ -1,4 +1,3 @@
-import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/afternoon_time.dart';
@@ -7,9 +6,10 @@ import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/w
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class BookController extends GetxController {
+  DateTime dateTime = DateTime.now();
   String dropDownSelectedItem = "Morning";
   String? dropDownValue;
- 
+
   int selected = 0;
 
   Widget customRadio(String mainTile, String text, int index) {
@@ -52,18 +52,19 @@ class BookController extends GetxController {
         ),
       ],
     );
-    
   }
 
-  datePicking() {
-    DatePicker(DateTime.now(),
-        initialSelectedDate: DateTime.now(),
-        selectionColor: const Color.fromARGB(255, 11, 94, 2),
-        selectedTextColor: Colors.white, onDateChange: (date) {
-      // bottomSheetWidget();
-      update();
-    });
-  }
+  // datePicking() {
+  //   DatePicker(DateTime.now(),
+  //       initialSelectedDate: dateTime,
+  //      // selectionColor: const Color.fromARGB(255, 11, 94, 2),
+  //       selectedTextColor: Colors.white, onDateChange: (date) {
+  //     dateTimeOnChange(date);
+  //     update();
+  //     // bottomSheetWidget();
+  //     update();
+  //   });
+  // }
 
   bottomSheetWidget() {
     BottomSheet(
@@ -85,8 +86,8 @@ class BookController extends GetxController {
     update();
   }
 
-  customDatePicker(BuildContext context) {
-    showDatePicker(
+  customDatePicker(BuildContext context) async {
+    final timeSelected = await showDatePicker(
         builder: (context, child) {
           return Theme(
             data: Theme.of(context).copyWith(
@@ -101,11 +102,11 @@ class BookController extends GetxController {
         initialDate: DateTime.now(),
         firstDate: DateTime.now(),
         lastDate: DateTime.now().add(const Duration(days: 365)));
+    if (timeSelected != null && timeSelected != dateTime) {
+      dateTime = timeSelected;
+      update();
+    }
   }
-
-  List<Widget> time = [
-    // timing('100', red),
-  ];
 
   timing(String text, Color color) {
     Container(
@@ -132,5 +133,10 @@ class BookController extends GetxController {
     } else {
       return const MorningTiming();
     }
+  }
+
+  dateTimeOnChange(DateTime datenow) {
+    dateTime = datenow;
+    update();
   }
 }

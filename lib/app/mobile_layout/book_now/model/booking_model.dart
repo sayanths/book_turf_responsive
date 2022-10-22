@@ -1,5 +1,3 @@
-morningTurfBookingTiming() {}
-
 List timeBookedListMorning = [];
 List timeBookedListafterNoon = [];
 List timeBookedListevening = [];
