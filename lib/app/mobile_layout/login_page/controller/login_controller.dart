@@ -42,6 +42,12 @@ class LoginControllerMobile extends GetxController {
   //   loginApi();
   // }
 
+  bool isObscure = true;
+  passwordHide() {
+    isObscure = !isObscure;
+    update();
+  }
+
   @override
   void dispose() {
     super.dispose();

@@ -49,14 +49,19 @@ class CustomTextField extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  
                   obscureText: obsureText,
                   validator: validate,
                   controller: controller,
                   keyboardType: keyboard,
+                  
                   decoration: InputDecoration(
+                   // suffixIcon: ,
                     hintText: title,
                     border: InputBorder.none,
+                    
                   ),
+                  
                 ),
               ),
             ),
@@ -80,7 +85,6 @@ class CustomLoginContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-     
       height: size.height / 13,
       decoration: const BoxDecoration(
         color: black,
