@@ -11,11 +11,9 @@ class TimeBooking extends GetxController {
     onTimePressed(dat);
   }
 
-  //Datum? datas = Datum();
-
   List timeBookedListafterNoon = [];
   List timeBookedListevening = [];
-  List<String> timeBookedListMorning = [];
+  List timeBookedListMorning = [];
   onTimePressed(Datum da) {
     timeBookedListMorning.clear();
     timeBookedListevening.clear();
@@ -31,10 +29,11 @@ class TimeBooking extends GetxController {
     for (int i = moringTimeStarts!; i <= moringTimeends!; i++) {
       String timingItem = "$i : 00 - ${i + 1} :00";
       timeBookedListMorning.add(timingItem);
+      log(timeBookedListMorning.toString());
       update();
     }
 
-    for (int i = afternoonTimeStarts!; i <= afternoonTimeEnds!; i++) {
+    for (int i = afternoonTimeStarts!; i < afternoonTimeEnds!; i++) {
       String timingItem = "$i : 00 - ${i + 1} :00";
       timeBookedListafterNoon.add(timingItem);
       update();
@@ -43,7 +42,7 @@ class TimeBooking extends GetxController {
     for (int i = eveningTimeStarts!; i <= eveningTimeEnds!; i++) {
       String timingItem = "$i : 00 - ${i + 1} :00";
       timeBookedListevening.add(timingItem);
-      log(timeBookedListevening.toString());
+
       update();
     }
   }

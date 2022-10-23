@@ -20,8 +20,13 @@ class OtpResponse {
   String? refreshToken;
   int? id;
 
-  OtpResponse(
-      {this.status, this.message, this.token, this.refreshToken, this.id});
+  OtpResponse({
+    this.status,
+    this.message,
+    this.token,
+    this.refreshToken,
+    this.id,
+  });
 
   factory OtpResponse.fromJson(Map<String, dynamic> json) {
     return OtpResponse(

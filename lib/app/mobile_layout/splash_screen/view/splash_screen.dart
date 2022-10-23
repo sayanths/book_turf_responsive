@@ -24,7 +24,7 @@ class _SplashScreenMobileState extends State<SplashScreenMobile> {
     });
     Timer(const Duration(milliseconds: 2000), () {
       Navigator.of(context)
-          .pushReplacement(SlideTransitionAnimation(const LoginPageMobile()));
+          .pushReplacement(SlideTransitionAnimation( LoginPageMobile()));
     });
   }
 

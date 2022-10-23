@@ -18,7 +18,7 @@ class SplashScreenController extends GetxController {
     Timer(const Duration(seconds: 2), () {
       data
           ? Get.offAll(() => const BottomNavigationMobile())
-          : Get.offAll(() => const LoginPageMobile());
+          : Get.offAll(() => LoginPageMobile());
     });
     update();
   }
