@@ -13,7 +13,7 @@ class CustomBottomNav extends StatelessWidget {
     Key? key,
     required this.size,
     required this.widget,
-    required this. data,
+    required this.data,
   }) : super(key: key);
 
   final Size size;
@@ -44,11 +44,11 @@ class CustomBottomNav extends StatelessWidget {
           InkWell(
             onTap: () {
               Get.to(
-                transition: Transition.cupertino,
-                () => BookNow(
-                  data: widget.data,
-                ),
-              );
+                  transition: Transition.cupertino,
+                  () => BookNow(
+                        data: widget.data,
+                      ),
+                  arguments: widget.data);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

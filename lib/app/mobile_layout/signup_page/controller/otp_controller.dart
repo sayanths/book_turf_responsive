@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,23 +15,27 @@ class OptController extends GetxController {
   GlobalKey otpKey = GlobalKey<FormState>();
   bool isloading = false;
   otpData() async {
+    log("dsd");
     final otp = {otp1.text + otp2.text + otp3.text + otp4.text};
     final otpJoin = otp.join();
-
+log("dsdss");
     final result = OtpModel(
       otp: otpJoin,
+      
     );
     isloading = true;
+    log("dsddssdss");
     update();
 
     OtpResponse? response = await OtpVerifyApi().verifyApi(result);
 
     if (response != null) {
-      
+      log("llllas");
       OtpResponse(message: "sucess");
-      
+
       if (response.status!) {
-      await saveUserData();
+        await saveUserData();
+        print("sds");
         Get.offAll(() => const BottomNavigationMobile());
       }
     }

@@ -6,22 +6,23 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/model/produ
 class TimeBooking extends GetxController {
   @override
   void onInit() {
-    onTimePressed();
     super.onInit();
+    final dat = Get.arguments as Datum;
+    onTimePressed(dat);
   }
 
-  Datum? datas;
+  //Datum? datas = Datum();
 
   List timeBookedListafterNoon = [];
   List timeBookedListevening = [];
   List<String> timeBookedListMorning = [];
-  onTimePressed() {
+  onTimePressed(Datum da) {
     timeBookedListMorning.clear();
     timeBookedListevening.clear();
     timeBookedListafterNoon.clear();
-    if (datas != null) {
-      int? moringTimeStarts = datas!.turfTime!.timeMorningStart;
-      int? moringTimeends = datas!.turfTime!.timeMorningStart;
+    if (da != null) {
+      int? moringTimeStarts = da.turfTime!.timeMorningStart;
+      int? moringTimeends = da.turfTime!.timeMorningStart;
       // int? afternoonTimeStarts = data!.turfTime!.timeAfternoonStart;
       // int? afternoonTimeEnds = data!.turfTime!.timeMorningStart;
       // int? eveningTimeStarts = data!.turfTime!.timeEveningStart;
@@ -34,6 +35,7 @@ class TimeBooking extends GetxController {
         timeBookedListMorning.add(timingItem);
         log(timeBookedListMorning.length.toString());
         update();
+        log(timeBookedListMorning.toString());
       }
     } else {
       print("null");

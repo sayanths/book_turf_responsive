@@ -19,11 +19,7 @@ class BookNow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookContrlNow = Get.put(BookController());
-    final timeBooking = Get.put(TimeBooking());
-    timeBooking.datas = data;
-
-    // final size = MediaQuery.of(context).size;
-
+   Get.put(TimeBooking());
     return Scaffold(
         body: SafeArea(
           child: ListView(
