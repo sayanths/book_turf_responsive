@@ -49,6 +49,7 @@ dependencies:
   flutter_secure_storage: ^6.0.0
   location: ^4.4.0
   date_picker_timeline: ^1.2.3
+  intl: ^0.17.0
 
 
  

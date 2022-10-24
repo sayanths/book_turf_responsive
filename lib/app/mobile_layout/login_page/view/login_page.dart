@@ -1,20 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/controller/login_controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/widgets/custom_formfield.dart';
+import 'package:turf_book_second_project/app/mobile_layout/login_page/view/widgets/custom_loading.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/view/signup_page.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
 class LoginPageMobile extends StatelessWidget {
-  const LoginPageMobile({Key? key}) : super(key: key);
+  final loginController = Get.put(LoginControllerMobile());
+  LoginPageMobile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final loginController = Get.put(LoginControllerMobile());
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 0, 69, 2),
       body: Container(
@@ -63,6 +64,18 @@ class LoginPageMobile extends StatelessWidget {
                               )),
                           height10,
                           CustomTextField(
+                            // validate: (email) {
+                            //   String pattern =
+                            //       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+                            //   RegExp regex = RegExp(pattern);
+                            //   if (email!.isEmpty) {
+                            //     return 'Please Enter email';
+                            //   } else if (!regex.hasMatch(email)) {
+                            //     return 'Enter valid email';
+                            //   } else {
+                            //     return null;
+                            //   }
+                            // },
                             width: size.width / 1.2,
                             controller: loginController.emailController,
                             obsureText: false,
@@ -73,6 +86,13 @@ class LoginPageMobile extends StatelessWidget {
                           ),
                           height20,
                           CustomTextField(
+                            // validate: (password) {
+                            //   if (password!.length < 8) {
+                            //     return '8 need';
+                            //   } else {
+                            //     return null;
+                            //   }
+                            // },
                             width: size.width / 1.2,
                             controller: loginController.passwordController,
                             obsureText: true,
@@ -81,25 +101,29 @@ class LoginPageMobile extends StatelessWidget {
                             icon: Icons.password,
                             title: '  Enter password',
                           ),
-                          height30,
+                          height20,
                           SizedBox(
                               width: size.width / 1.5,
                               child: Obx((() {
-                                return ElevatedButton(
-                                    onPressed: () {
-                                      loginController.loginApi();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          const Color.fromARGB(255, 55, 0, 255),
-                                      shape: const StadiumBorder(),
-                                    ),
-                                    child: loginController.isLoading.value
-                                        ? const Text("Create")
-                                        : const CupertinoActivityIndicator(
-                                            color: white));
+                                return loginController.isLoading.isFalse
+                                    ? ElevatedButton(
+                                        onPressed: () {
+                                          if (loginController
+                                              .loginKey.currentState!
+                                              .validate()) {
+                                            loginController.loginApi(context);
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color.fromARGB(
+                                              255, 55, 0, 255),
+                                          shape: const StadiumBorder(),
+                                        ),
+                                        child: const Text("Login"))
+                                    : const LimitedBox(
+                                        maxHeight: 60, child: MyCustomWidget());
                               }))),
-                          height10,
+                          height30,
                           Row(
                             children: [
                               Text(

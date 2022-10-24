@@ -6,73 +6,94 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/model/produ
 class TimeBooking extends GetxController {
   @override
   void onInit() {
-    onTimePressed();
     super.onInit();
+    final dat = Get.arguments as Datum;
+    onTimePressed(dat);
   }
-
-  Datum? datas;
 
   List timeBookedListafterNoon = [];
   List timeBookedListevening = [];
-  List<String> timeBookedListMorning = [];
-  onTimePressed() {
+  List timeBookedListMorning = [];
+  List selectedTime = [];
+  onTimePressed(Datum da) {
     timeBookedListMorning.clear();
     timeBookedListevening.clear();
     timeBookedListafterNoon.clear();
-    if (datas != null) {
-      int? moringTimeStarts = datas!.turfTime!.timeMorningStart;
-      int? moringTimeends = datas!.turfTime!.timeMorningStart;
-      // int? afternoonTimeStarts = data!.turfTime!.timeAfternoonStart;
-      // int? afternoonTimeEnds = data!.turfTime!.timeMorningStart;
-      // int? eveningTimeStarts = data!.turfTime!.timeEveningStart;
-      // int? eveningTimeEnds = data!.turfTime!.timeMorningStart;
-      // timeBookedListMorning.clear();
+    selectedTime.clear();
 
-      for (int i = moringTimeStarts!; i <= moringTimeends!; i++) {
-        String timingItem = "$i : 00 - ${i + 1} :00";
-        log(timingItem.toString());
-        timeBookedListMorning.add(timingItem);
-        log(timeBookedListMorning.length.toString());
-        update();
-      }
-    } else {
-      print("null");
+    int? moringTimeStarts = da.turfTime!.timeMorningStart;
+    int? moringTimeends = da.turfTime!.timeMorningEnd;
+    int? afternoonTimeStarts = da.turfTime!.timeAfternoonStart;
+    int? afternoonTimeEnds = da.turfTime!.timeAfternoonEnd;
+    int? eveningTimeStarts = da.turfTime!.timeEveningStart;
+    int? eveningTimeEnds = da.turfTime!.timeEveningEnd;
+
+    for (int i = moringTimeStarts!; i <= moringTimeends!; i++) {
+      String timingItem = "$i : 00 - ${i + 1} :00";
+      timeBookedListMorning.add(timingItem);
+      log(timeBookedListMorning.toString());
+      update();
+    }
+
+    for (int i = afternoonTimeStarts!; i < afternoonTimeEnds!; i++) {
+      String timingItem = "$i : 00 - ${i + 1} :00";
+      timeBookedListafterNoon.add(timingItem);
+      update();
+    }
+
+    for (int i = eveningTimeStarts!; i <= eveningTimeEnds!; i++) {
+      String timingItem = "$i : 00 - ${i + 1} :00";
+      timeBookedListevening.add(timingItem);
+      update();
     }
   }
 
-  List morningtiming = [
-    '6:00  -  7:00',
-    '7:00  -  8:00',
-    '8:00  -  9:00',
-    '9:00  -  10:00',
-    '10:00 -  11:00',
-    '11:00 -  12:00',
-  ];
-
-  List afterNoontiming = [
-    '1:00  -  2:00',
-    '2:00  -  3:00',
-    '3:00  -  4:00',
-    '4:00  -  6:00',
-  ];
-
-  List eveningtiming = [
-    '7:00  -  8:00',
-    '8:00  -  9:00',
-    '9:00  -  10:00',
-    '10:00 -  11:00',
-    '11:00 -  12:00',
-    '1:00  -  2:00',
-    '2:00  -  3:00',
-  ];
-
   onSelectTiming(int index) {
-    if (timeBookedListMorning
-        .contains(timeBookedListMorning[index].toString())) {
-      timeBookedListMorning.remove(timeBookedListMorning[index].toString());
+    if (selectedTime.contains(timeBookedListMorning[index].toString())) {
+      selectedTime.remove(timeBookedListMorning[index].toString());
     } else {
-      timeBookedListMorning.add(timeBookedListMorning[index].toString());
+      selectedTime.add(timeBookedListMorning[index].toString());
+      log(selectedTime.toString());
     }
     update();
   }
+
+  onSelectTimingAfterNoon(int index) {
+    if (selectedTime.contains(timeBookedListafterNoon[index].toString())) {
+      selectedTime.remove(timeBookedListafterNoon[index].toString());
+    } else {
+      selectedTime.add(timeBookedListafterNoon[index].toString());
+      log(selectedTime.toString());
+    }
+    update();
+  }
+
+  onSelectTimingEvening(int index) {
+    if (selectedTime.contains(timeBookedListevening[index].toString())) {
+      selectedTime.remove(timeBookedListevening[index].toString());
+    } else {
+      selectedTime.add(timeBookedListevening[index].toString());
+      log(selectedTime.toString());
+    }
+    update();
+  }
+
+  // onChek() {
+  //   for (var element in selectedTime) {
+  //     switch (element) {
+  //       case 1:
+  //         {
+  //           "5:00 -6:00";
+  //           "5";
+  //           break;
+  //         }
+  //       case 2:
+  //         {
+  //           "6:00 -7:00";
+  //           "7";
+  //           break;
+  //         }
+  //     }
+  //   }
+  // }
 }

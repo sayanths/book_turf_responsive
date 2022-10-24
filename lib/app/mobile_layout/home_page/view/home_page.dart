@@ -16,7 +16,7 @@ class HomePageMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeController = Get.put(HomePageControllerMobile());
-    final locationController = Get.put(GetUserLoction());
+    Get.put(GetUserLoction());
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(

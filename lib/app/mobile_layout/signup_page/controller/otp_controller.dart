@@ -15,21 +15,18 @@ class OptController extends GetxController {
   otpData() async {
     final otp = {otp1.text + otp2.text + otp3.text + otp4.text};
     final otpJoin = otp.join();
-
     final result = OtpModel(
       otp: otpJoin,
     );
-    isloading = true;
+    isloading = true;    
     update();
 
     OtpResponse? response = await OtpVerifyApi().verifyApi(result);
 
-    if (response != null) {
-      
+    if (response != null) {   
       OtpResponse(message: "sucess");
-      
       if (response.status!) {
-      await saveUserData();
+        await saveUserData();   
         Get.offAll(() => const BottomNavigationMobile());
       }
     }
