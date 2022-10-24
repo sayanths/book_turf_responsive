@@ -44,7 +44,6 @@ class TimeBooking extends GetxController {
     for (int i = eveningTimeStarts!; i <= eveningTimeEnds!; i++) {
       String timingItem = "$i : 00 - ${i + 1} :00";
       timeBookedListevening.add(timingItem);
-
       update();
     }
   }
@@ -54,6 +53,15 @@ class TimeBooking extends GetxController {
       selectedTime.remove(timeBookedListMorning[index].toString());
     } else {
       selectedTime.add(timeBookedListMorning[index].toString());
+      log(selectedTime.toString());
+    }
+    update();
+  }
+    onSelectTimingAfterNoon(int index) {
+    if (selectedTime.contains(timeBookedListafterNoon[index].toString())) {
+      selectedTime.remove(timeBookedListafterNoon[index].toString());
+    } else {
+      selectedTime.add(timeBookedListafterNoon[index].toString());
       log(selectedTime.toString());
     }
     update();
