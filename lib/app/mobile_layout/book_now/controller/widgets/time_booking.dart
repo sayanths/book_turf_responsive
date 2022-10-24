@@ -57,7 +57,8 @@ class TimeBooking extends GetxController {
     }
     update();
   }
-    onSelectTimingAfterNoon(int index) {
+
+  onSelectTimingAfterNoon(int index) {
     if (selectedTime.contains(timeBookedListafterNoon[index].toString())) {
       selectedTime.remove(timeBookedListafterNoon[index].toString());
     } else {
@@ -66,7 +67,8 @@ class TimeBooking extends GetxController {
     }
     update();
   }
-    onSelectTimingEvening(int index) {
+
+  onSelectTimingEvening(int index) {
     if (selectedTime.contains(timeBookedListevening[index].toString())) {
       selectedTime.remove(timeBookedListevening[index].toString());
     } else {
@@ -75,4 +77,23 @@ class TimeBooking extends GetxController {
     }
     update();
   }
+
+  // onChek() {
+  //   for (var element in selectedTime) {
+  //     switch (element) {
+  //       case 1:
+  //         {
+  //           "5:00 -6:00";
+  //           "5";
+  //           break;
+  //         }
+  //       case 2:
+  //         {
+  //           "6:00 -7:00";
+  //           "7";
+  //           break;
+  //         }
+  //     }
+  //   }
+  // }
 }

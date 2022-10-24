@@ -50,14 +50,14 @@ class BookController extends GetxController {
     );
   }
 
-  bottomSheetWidget() {
-    BottomSheet(
-      onClosing: () {},
-      builder: (context) {
-        return const SizedBox();
-      },
-    );
-  }
+  // bottomSheetWidget() {
+  //   BottomSheet(
+  //     onClosing: () {},
+  //     builder: (context) {
+  //       return const SizedBox();
+  //     },
+  //   );
+  // }
 
   List<String> list = <String>[
     'Morning',

@@ -21,12 +21,6 @@ class LoginControllerMobile extends GetxController {
       return;
     }
 
-    loginValidate(){
-      
-    }
-
-   
-
     final model = LoginModel(email: email, password: password);
 
     final response = await Api().loginUser(model);
@@ -61,14 +55,20 @@ class LoginControllerMobile extends GetxController {
     emailController.dispose();
     passwordController.dispose();
   }
-
+FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   Future<void> getToken(LoginResponse value) async {
-    FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+    
     await secureStorage.write(key: 'token', value: value.token);
     await secureStorage.write(key: 'refreshToken', value: value.refreshToken);
-    await secureStorage.write(key: 'loginTrue', value: 'true');
+    await secureStorage.write(key: 'login', value: 'true');
   }
+  // getToken() async {
+  //   return await storage.read(key: 'token');
+  // }
 
+  // getRefreshToken() async {
+  //   return await storage.read(key: 'refreshToken');
+  // }
   hideLoading() {
     isLoading.value = false;
   }
