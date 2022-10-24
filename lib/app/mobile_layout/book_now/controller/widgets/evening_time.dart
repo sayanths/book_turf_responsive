@@ -15,21 +15,33 @@ class EveningTiming extends StatelessWidget {
         direction: Axis.horizontal,
         children:
             List.generate(timeBooking.timeBookedListevening.length, (index) {
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(width: 1, color: grey),
-            ),
-            padding: const EdgeInsets.all(8),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                timeBooking.timeBookedListevening[index],
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.green),
-              ),
-            ),
+          return InkWell(
+            onTap: () {
+              timeBooking.onSelectTimingEvening(index);
+            },
+            child: GetBuilder<TimeBooking>(builder: (context) {
+              return Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                  color: timeBooking.selectedTime
+                          .contains(timeBooking.timeBookedListevening[index])
+                      ? black
+                      : white,
+                  borderRadius: BorderRadius.circular(5),
+                  border: Border.all(width: 1, color: grey),
+                ),
+                padding: const EdgeInsets.all(8),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    timeBooking.timeBookedListevening[index],
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.green),
+                  ),
+                ),
+              );
+            }),
           );
         }));
   }

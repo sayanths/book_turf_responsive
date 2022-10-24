@@ -66,4 +66,13 @@ class TimeBooking extends GetxController {
     }
     update();
   }
+    onSelectTimingEvening(int index) {
+    if (selectedTime.contains(timeBookedListevening[index].toString())) {
+      selectedTime.remove(timeBookedListevening[index].toString());
+    } else {
+      selectedTime.add(timeBookedListevening[index].toString());
+      log(selectedTime.toString());
+    }
+    update();
+  }
 }
