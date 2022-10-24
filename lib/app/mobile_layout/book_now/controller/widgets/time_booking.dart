@@ -14,10 +14,12 @@ class TimeBooking extends GetxController {
   List timeBookedListafterNoon = [];
   List timeBookedListevening = [];
   List timeBookedListMorning = [];
+  List selectedTime = [];
   onTimePressed(Datum da) {
     timeBookedListMorning.clear();
     timeBookedListevening.clear();
     timeBookedListafterNoon.clear();
+    selectedTime.clear();
 
     int? moringTimeStarts = da.turfTime!.timeMorningStart;
     int? moringTimeends = da.turfTime!.timeMorningEnd;
@@ -48,14 +50,12 @@ class TimeBooking extends GetxController {
   }
 
   onSelectTiming(int index) {
-    if (timeBookedListMorning
-        .contains(timeBookedListMorning[index].toString())) {
-      timeBookedListMorning.remove(timeBookedListMorning[index].toString());
+    if (selectedTime.contains(timeBookedListMorning[index].toString())) {
+      selectedTime.remove(timeBookedListMorning[index].toString());
     } else {
-      timeBookedListMorning.add(timeBookedListMorning[index].toString());
+      selectedTime.add(timeBookedListMorning[index].toString());
+      log(selectedTime.toString());
     }
     update();
   }
-
-  
 }
