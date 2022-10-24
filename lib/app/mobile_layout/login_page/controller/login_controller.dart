@@ -4,9 +4,10 @@ import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/view/bottom_nav.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/model/login_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/service/login_service.dart';
+import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class LoginControllerMobile extends GetxController {
-  GlobalKey loginKey = GlobalKey<FormState>();
+  final loginKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   RxBool isLoading = false.obs;
@@ -15,10 +16,16 @@ class LoginControllerMobile extends GetxController {
     late final email = emailController.text.trim();
     late final password = passwordController.text..trim();
     if (password.isEmpty || email.isEmpty) {
-      Get.snackbar('', 'All fields are Requires');
+      Get.snackbar('please fill', 'All fields are Requires', colorText: white);
       isLoading.value = false;
       return;
     }
+
+    loginValidate(){
+      
+    }
+
+   
 
     final model = LoginModel(email: email, password: password);
 

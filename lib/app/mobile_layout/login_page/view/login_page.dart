@@ -64,6 +64,18 @@ class LoginPageMobile extends StatelessWidget {
                               )),
                           height10,
                           CustomTextField(
+                            // validate: (email) {
+                            //   String pattern =
+                            //       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+                            //   RegExp regex = RegExp(pattern);
+                            //   if (email!.isEmpty) {
+                            //     return 'Please Enter email';
+                            //   } else if (!regex.hasMatch(email)) {
+                            //     return 'Enter valid email';
+                            //   } else {
+                            //     return null;
+                            //   }
+                            // },
                             width: size.width / 1.2,
                             controller: loginController.emailController,
                             obsureText: false,
@@ -74,6 +86,13 @@ class LoginPageMobile extends StatelessWidget {
                           ),
                           height20,
                           CustomTextField(
+                            // validate: (password) {
+                            //   if (password!.length < 8) {
+                            //     return '8 need';
+                            //   } else {
+                            //     return null;
+                            //   }
+                            // },
                             width: size.width / 1.2,
                             controller: loginController.passwordController,
                             obsureText: true,
@@ -89,7 +108,11 @@ class LoginPageMobile extends StatelessWidget {
                                 return loginController.isLoading.isFalse
                                     ? ElevatedButton(
                                         onPressed: () {
-                                          loginController.loginApi(context);
+                                          if (loginController
+                                              .loginKey.currentState!
+                                              .validate()) {
+                                            loginController.loginApi(context);
+                                          }
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: const Color.fromARGB(

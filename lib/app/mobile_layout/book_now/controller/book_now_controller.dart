@@ -40,11 +40,8 @@ class BookController extends GetxController {
               ),
               Text(
                 text,
-                style: TextStyle(
-                    color: (selected == index)
-                        ? const Color.fromARGB(255, 3, 201, 10)
-                        : const Color.fromARGB(255, 148, 147, 147),
-                    fontSize: 20),
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 3, 201, 10), fontSize: 20),
               ),
             ],
           ),
