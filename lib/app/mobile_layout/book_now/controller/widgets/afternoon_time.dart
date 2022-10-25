@@ -27,7 +27,7 @@ class AfterNoonTiming extends StatelessWidget {
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: obj.afterNoonBookedTiming
+                  color:obj.alreadyList.contains(obj.timeBookedListafterNoon[index]) ? Color.fromARGB(255, 216, 72, 62) : obj.afterNoonBookedTiming
                           .contains(obj.timeBookedListafterNoon[index])
                       ? black
                       : white,

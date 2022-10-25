@@ -1,21 +1,26 @@
 import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/model/booking_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/model/time_model.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/service/booking_service.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 
 class TimeBooking extends GetxController {
+  Datum? dataum;
   @override
   void onInit() {
     super.onInit();
-    final dat = Get.arguments as Datum;
-    onTimePressed(dat);
+    dataum = Get.arguments as Datum;
+    onTimePressed(dataum!);
+    getBookingDetails();
+    checkTime();
   }
 
   //final hour = DateTime.now().hour;
-   DateTime now = DateTime.now();
- //String hourFormat = DateFormat.Hm().format(now);
+  // DateTime now = DateTime.now();
+
+  String yearMonthDateFormat = DateFormat('yMd').format(DateTime.now());
 
 //after iteration will add the vaue to this list
   List timeBookedListafterNoon = [];
@@ -28,11 +33,16 @@ class TimeBooking extends GetxController {
   List nightBookedTiming = [];
 
   //already booked time lis
-  List morningAlreadyBooked = [];
-  List evenigAlreadyBooked = [];
-  List afterNoonAlreadyBooked = [];
+  // List morningAlreadyBooked = [];
+  // List evenigAlreadyBooked = [];
+  // List afterNoonAlreadyBooked = [];
 
-  ///----------------------////
+  ///--------booked Time from api--------------////
+  List<bookingData> bookedTimingList = [];
+
+  //alreadyList data
+
+  List<String> alreadyList = [];
 
   onTimePressed(Datum da) {
     timeBookedListMorning.clear();
@@ -90,7 +100,7 @@ class TimeBooking extends GetxController {
     update();
   }
 
-  onSelectTimingEvening(int index,String time) {
+  onSelectTimingEvening(int index, String time) {
     log(backTo24Hour(hour: time).toString());
     if (nightBookedTiming.contains(timeBookedListevening[index].toString())) {
       nightBookedTiming.remove(timeBookedListevening[index].toString());
@@ -102,10 +112,48 @@ class TimeBooking extends GetxController {
   }
 
   //converting the railway time to normal time
-  alreadyBooked() {
-    morningAlreadyBooked.clear();
-    afterNoonAlreadyBooked.clear();
-    evenigAlreadyBooked.clear();
-    // if (hourFormat > 12) {}
+  // alreadyBooked() {
+  //   morningAlreadyBooked.clear();
+  //   afterNoonAlreadyBooked.clear();
+  //   evenigAlreadyBooked.clear();
+  // }
+
+  //getting booking time from the api
+
+  getBookingDetails() async {
+    BookingModel? bookingResult =
+        await BookingService().getTurfData(dataum!.id.toString());
+    try {
+      if (bookingResult != null) {
+        if (bookingResult.status!) {
+          bookedTimingList.addAll(bookingResult.data);
+          log(bookedTimingList.toString());
+        }
+      }
+    } catch (e) {
+      Get.snackbar('', e.toString());
+    }
+    update();
+  }
+
+  // check
+
+  checkTime() {
+    alreadyList.clear();
+    int? deviceTime24 =
+        int.tryParse(DateFormat.Hm().format(DateTime.now()).split(':').first);
+    log(yearMonthDateFormat.toString());
+    log(deviceTime24.toString());
+    Future.forEach(bookedTimingList, (bookingData element) {
+      if (element.bookingDate == yearMonthDateFormat) {
+        for (int i = 0; i < element.timeSlot.length; i++) {
+          alreadyList.add(convertTo12hr(hour: "$i:00"));
+          log(alreadyList.toString());
+        }
+      }
+    });
+    for (int i = 0; i <= deviceTime24!; i++) {
+      alreadyList.add(convertTo12hr(hour: "$i:00"));
+    }
   }
 }

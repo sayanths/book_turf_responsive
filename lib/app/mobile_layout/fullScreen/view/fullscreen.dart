@@ -18,17 +18,13 @@ import 'package:turf_book_second_project/app/utiles/simmer.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FullScreenMobile extends StatefulWidget {
+class FullScreenMobile extends StatelessWidget {
   final Datum data;
   const FullScreenMobile({
     super.key,
     required this.data,
   });
-  @override
-  State<FullScreenMobile> createState() => _FullScreenMobileState();
-}
 
-class _FullScreenMobileState extends State<FullScreenMobile> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -39,18 +35,18 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
             children: [
               height20,
               CustomAppBar(
-                mainTitle: widget.data.turfName.toString(),
-                color: widget.data.turfInfo!.turfIsAvailable!
+                mainTitle: data.turfName.toString(),
+                color: data.turfInfo!.turfIsAvailable!
                     ? const Color.fromARGB(255, 3, 199, 10)
                     : Colors.red,
-                rating: widget.data.turfInfo!.turfRating.toString(),
+                rating: data.turfInfo!.turfRating.toString(),
                 star: "⭐",
               ),
               height10,
               height10,
-              widget.data.turfImages != null
+              data.turfImages != null
                   ? Image.network(
-                      widget.data.turfImages!.turfImages3.toString(),
+                      data.turfImages!.turfImages3.toString(),
                       height: size.height / 4,
                       width: size.width / 1.1,
                       fit: BoxFit.cover,
@@ -69,10 +65,10 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    widget.data.turfMunicipality.toString(),
+                    data.turfMunicipality.toString(),
                     style: gfontsubtitlefont(cl: grey),
                   ),
-                  Text(widget.data.turfPlace.toString(),
+                  Text(data.turfPlace.toString(),
                       style: gfontsubtitlefont(cl: grey)),
                 ],
               ),
@@ -81,37 +77,37 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
               height10,
               Wrap(
                 children: [
-                  widget.data.turfAmenities!.turfWashroom!
+                  data.turfAmenities!.turfWashroom!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(Map.toilet),
                           title: "Washroom")
                       : sizedboxCoustom,
-                  widget.data.turfAmenities!.turfCafeteria!
+                  data.turfAmenities!.turfCafeteria!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(Ic.baseline_local_cafe),
                           title: "Cafe")
                       : sizedboxCoustom,
-                  widget.data.turfAmenities!.turfGallery!
+                  data.turfAmenities!.turfGallery!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(Ic.round_stadium),
                           title: "Gallery")
                       : sizedboxCoustom,
-                  widget.data.turfAmenities!.turfParking!
+                  data.turfAmenities!.turfParking!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(Ri.parking_fill),
                           title: "Parking")
                       : sizedboxCoustom,
-                  widget.data.turfAmenities!.turfWater!
+                  data.turfAmenities!.turfWater!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(Ri.water_flash_fill),
                           title: "Water")
                       : sizedboxCoustom,
-                  widget.data.turfAmenities!.turfDressing!
+                  data.turfAmenities!.turfDressing!
                       ? AmenitiesWidget(
                           size: size,
                           iconify: const Iconify(Ri.shirt_fill),
@@ -129,24 +125,24 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
               Wrap(
                 children: [
                   GroundSuitWidget(
-                    child: widget.data.turfCategory!.turfCricket!
+                    child: data.turfCategory!.turfCricket!
                         ? const GroundSuitsWidget(
                             icon: Iconify(EmojioneMonotone.cricket))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCategory!.turfFootball!
+                    child: data.turfCategory!.turfFootball!
                         ? const GroundSuitsWidget(icon: Iconify(Bx.football))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCategory!.turfBadminton!
+                    child: data.turfCategory!.turfBadminton!
                         ? const GroundSuitsWidget(
                             icon: Iconify(EmojioneMonotone.badminton))
                         : sizedboxCoustom,
                   ),
                   GroundSuitWidget(
-                    child: widget.data.turfCategory!.turfYoga!
+                    child: data.turfCategory!.turfYoga!
                         ? const GroundSuitsWidget(icon: Iconify(Iconoir.yoga))
                         : sizedboxCoustom,
                   ),
@@ -155,8 +151,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
               height30,
               ElevatedButton.icon(
                 onPressed: (() async {
-                  final Uri url =
-                      Uri.parse(widget.data.turfInfo!.turfMap.toString());
+                  final Uri url = Uri.parse(data.turfInfo!.turfMap.toString());
                   if (await launchUrl(url)) {
                     await launchUrl(Uri());
                   }
@@ -172,8 +167,7 @@ class _FullScreenMobileState extends State<FullScreenMobile> {
             ],
           ),
         ),
-        bottomNavigationBar:
-            CustomBottomNav(size: size, widget: widget, data: widget.data),
+        bottomNavigationBar: CustomBottomNav(size: size, data: data),
       ),
     );
   }

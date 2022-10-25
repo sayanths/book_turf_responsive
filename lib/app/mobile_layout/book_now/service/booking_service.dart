@@ -1,14 +1,15 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/model/booking_model.dart';
 
-class GetApiService {
-  Future<BookingModel?> getTurfData() async {
+class BookingService {
+  Future<BookingModel?> getTurfData(String id) async {
+    log(id);
     try {
-      final response = await Dio().get(
-          "https://fauxspot.herokuapp.com/account/get-booking/6351344f7e688d3e90aa1bf9");
+      final response = await Dio()
+          .get("https://fauxspot.herokuapp.com/account/get-booking/$id");
       if (response.statusCode == 200) {
+        log(response.data.toString());
         return BookingModel.fromJson(response.data);
       }
     }
