@@ -1,6 +1,9 @@
 import 'dart:developer';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/model/booking_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/model/time_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/service/booking_service.dart';
@@ -17,9 +20,9 @@ class TimeBooking extends GetxController {
     checkTime();
   }
 
-  //final hour = DateTime.now().hour;
-  // DateTime now = DateTime.now();
+  final bookingControll = Get.put(BookController());
 
+  ///to get the device date of the device
   String yearMonthDateFormat = DateFormat('yMd').format(DateTime.now());
 
 //after iteration will add the vaue to this list
@@ -39,6 +42,10 @@ class TimeBooking extends GetxController {
 
   ///--------booked Time from api--------------////
   List<bookingData> bookedTimingList = [];
+
+  // to get the today date
+
+  DateTime todayDate = DateTime.now();
 
   //alreadyList data
 
@@ -111,15 +118,6 @@ class TimeBooking extends GetxController {
     update();
   }
 
-  //converting the railway time to normal time
-  // alreadyBooked() {
-  //   morningAlreadyBooked.clear();
-  //   afterNoonAlreadyBooked.clear();
-  //   evenigAlreadyBooked.clear();
-  // }
-
-  //getting booking time from the api
-
   getBookingDetails() async {
     BookingModel? bookingResult =
         await BookingService().getTurfData(dataum!.id.toString());
@@ -136,8 +134,7 @@ class TimeBooking extends GetxController {
     update();
   }
 
-  // check
-
+//based on the time check the time from the phone and the time coming from the api to check wheather the time slot is already booked or not
   checkTime() {
     alreadyList.clear();
     int? deviceTime24 =
@@ -156,4 +153,16 @@ class TimeBooking extends GetxController {
       alreadyList.add(convertTo12hr(hour: "$i:00"));
     }
   }
+
+  
+
+  // DateTime dateTime = DateTime.now();
+  // checkTimeBasedOnDate(BuildContext context) {
+  //   DateTime todayDate = DateTime.now();
+  //   Future.forEach(bookedTimingList, (bookingData element) {
+  //     element.bookingDate = todayDate.toString();
+  //   });
+  // }
+
+
 }

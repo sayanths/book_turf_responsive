@@ -20,12 +20,12 @@ class EveningTiming extends StatelessWidget {
               timeBooking.onSelectTimingEvening(
                   index, timeBooking.timeBookedListevening[index]);
             },
-            child: GetBuilder<TimeBooking>(builder: (context) {
+            child: GetBuilder<TimeBooking>(builder: (eveningObj) {
               return Container(
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: timeBooking.nightBookedTiming
+                  color:eveningObj.alreadyList.contains(eveningObj.timeBookedListevening[index]) ? red: eveningObj.nightBookedTiming
                           .contains(timeBooking.timeBookedListevening[index])
                       ? black
                       : white,

@@ -21,7 +21,7 @@ class BookNow extends StatelessWidget {
   Widget build(BuildContext context) {
     final bookContrlNow = Get.put(BookController());
     final payementNow = Get.put(PaymentController());
-   final bookTime = Get.put(TimeBooking());
+    final bookTime = Get.put(TimeBooking());
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -85,11 +85,10 @@ class BookNow extends StatelessWidget {
                             child: IconButton(
                           onPressed: () {
                             controller.customDatePicker(context);
+                           
                           },
-                          icon: const Icon(
-                            Icons.date_range_sharp,
-                            color: Color.fromARGB(255, 0, 87, 158)
-                          ),
+                          icon: const Icon(Icons.date_range_sharp,
+                              color: Color.fromARGB(255, 0, 87, 158)),
                         )),
                       ],
                     ),

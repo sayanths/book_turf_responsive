@@ -19,15 +19,18 @@ class MorningTiming extends StatelessWidget {
             onTap: () {
               timeBooking.onSelectTiming(index);
             },
-            child: GetBuilder<TimeBooking>(builder: (context) {
+            child: GetBuilder<TimeBooking>(builder: (morningList) {
               return Container(
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: timeBooking.morningBookedTiming
-                          .contains(timeBooking.timeBookedListMorning[index])
-                      ? black
-                      : white,
+                  color: morningList.alreadyList
+                          .contains(morningList.timeBookedListMorning[index])
+                      ? red
+                      : timeBooking.morningBookedTiming.contains(
+                              timeBooking.timeBookedListMorning[index])
+                          ? black
+                          : white,
                   borderRadius: BorderRadius.circular(5),
                   border: Border.all(width: 1, color: grey),
                 ),
