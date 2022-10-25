@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/time_booking.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/time_booking.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class MorningTiming extends StatelessWidget {
@@ -24,7 +24,7 @@ class MorningTiming extends StatelessWidget {
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: timeBooking.selectedTime
+                  color: timeBooking.morningBookedTiming
                           .contains(timeBooking.timeBookedListMorning[index])
                       ? black
                       : white,

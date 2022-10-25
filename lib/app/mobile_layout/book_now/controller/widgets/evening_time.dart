@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/time_booking.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/time_booking.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class EveningTiming extends StatelessWidget {
@@ -17,14 +17,15 @@ class EveningTiming extends StatelessWidget {
             List.generate(timeBooking.timeBookedListevening.length, (index) {
           return InkWell(
             onTap: () {
-              timeBooking.onSelectTimingEvening(index);
+              timeBooking.onSelectTimingEvening(
+                  index, timeBooking.timeBookedListevening[index]);
             },
             child: GetBuilder<TimeBooking>(builder: (context) {
               return Container(
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color: timeBooking.selectedTime
+                  color: timeBooking.nightBookedTiming
                           .contains(timeBooking.timeBookedListevening[index])
                       ? black
                       : white,

@@ -15,6 +15,8 @@ class ViewAllMobileController extends GetxController {
   List<Datum> allThings = [];
   bool newValue = false;
   int defaultChoicIndex = 0;
+  Datum? indexData;
+
   List<String> choiceList = [
     'All',
     'Cricket',
@@ -32,7 +34,7 @@ class ViewAllMobileController extends GetxController {
   List<Widget> choiceListWidget = [
     GetBuilder<ViewAllMobileController>(
       builder: (controller) {
-        final data = controller.allThings[2];
+        final data = controller.allThings[0];
         return AllCategory(data: data);
       },
     ),
