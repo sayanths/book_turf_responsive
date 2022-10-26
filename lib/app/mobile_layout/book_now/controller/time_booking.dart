@@ -1,6 +1,4 @@
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
@@ -34,11 +32,6 @@ class TimeBooking extends GetxController {
   List morningBookedTiming = [];
   List afterNoonBookedTiming = [];
   List nightBookedTiming = [];
-
-  //already booked time lis
-  // List morningAlreadyBooked = [];
-  // List evenigAlreadyBooked = [];
-  // List afterNoonAlreadyBooked = [];
 
   ///--------booked Time from api--------------////
   List<bookingData> bookedTimingList = [];
@@ -124,6 +117,7 @@ class TimeBooking extends GetxController {
     try {
       if (bookingResult != null) {
         if (bookingResult.status!) {
+          bookedTimingList.clear();
           bookedTimingList.addAll(bookingResult.data);
           log(bookedTimingList.toString());
         }
@@ -146,6 +140,7 @@ class TimeBooking extends GetxController {
         for (int i = 0; i < element.timeSlot.length; i++) {
           alreadyList.add(convertTo12hr(hour: "$i:00"));
           log(alreadyList.toString());
+          log(element.bookingDate.toString());
         }
       }
     });
@@ -154,15 +149,19 @@ class TimeBooking extends GetxController {
     }
   }
 
-  
+//nalatek okk book cheyan ulla slot open cheyth kodukan days inj anusarich
+  checkTimeBasedOnDate(DateTime dateTime) {
+    Future.forEach(bookedTimingList, (bookingData element) {
+      log(dateTime.toString());
 
-  // DateTime dateTime = DateTime.now();
-  // checkTimeBasedOnDate(BuildContext context) {
-  //   DateTime todayDate = DateTime.now();
-  //   Future.forEach(bookedTimingList, (bookingData element) {
-  //     element.bookingDate = todayDate.toString();
-  //   });
-  // }
-
-
+      if (DateTime.now() != dateTime) {
+        alreadyList.clear();
+        morningBookedTiming.clear();
+        afterNoonBookedTiming.clear();
+        nightBookedTiming.clear();
+      }
+      update();
+    });
+    update();
+  }
 }

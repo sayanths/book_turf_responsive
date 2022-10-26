@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/time_booking.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/afternoon_time.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/evening_time.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/morning_timing.dart';
@@ -75,13 +76,15 @@ class BookController extends GetxController {
           );
         },
         context: context,
-        initialDate: DateTime.now(),
+        initialDate: dateTime,
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(const Duration(days: 365)));
+        lastDate: DateTime.now().add(const Duration(days: 60)));
     if (timeSelected != null && timeSelected != dateTime) {
       dateTime = timeSelected;
+      Get.find<TimeBooking>().checkTimeBasedOnDate(dateTime);
       update();
     }
+    update();
   }
 
   timing(String text, Color color) {
