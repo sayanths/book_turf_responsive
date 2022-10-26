@@ -39,6 +39,8 @@ class ViewAll extends StatelessWidget {
                             mainAxisSpacing: 20),
                     itemCount: obj.allThings.length,
                     itemBuilder: (BuildContext ctx, index) {
+                      final data = obj.allThings[index];
+                      obj.indexData = data;
                       return obj.choiceListWidget[obj.defaultChoicIndex];
                     });
               }),

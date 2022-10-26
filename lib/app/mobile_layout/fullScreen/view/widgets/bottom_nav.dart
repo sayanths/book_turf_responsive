@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/view/payment.dart';
-import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/fullscreen.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
@@ -9,15 +8,10 @@ import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
 class CustomBottomNav extends StatelessWidget {
   final Datum data;
-  const CustomBottomNav({
-    Key? key,
-    required this.size,
-    required this.widget,
-    required this.data,
-  }) : super(key: key);
+  const CustomBottomNav({Key? key, required this.size, required this.data})
+      : super(key: key);
 
   final Size size;
-  final FullScreenMobile widget;
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +40,9 @@ class CustomBottomNav extends StatelessWidget {
               Get.to(
                   transition: Transition.cupertino,
                   () => BookNow(
-                        data: widget.data,
+                        data: data,
                       ),
-                  arguments: widget.data);
+                  arguments: data);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

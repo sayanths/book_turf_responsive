@@ -1,28 +1,54 @@
-// List timeBookedListMorning = [];
-// List timeBookedListafterNoon = [];
-// List timeBookedListevening = [];
-// List morningtiming = [
-//   '6:00  -  7:00',
-//   '7:00  -  8:00',
-//   '8:00  -  9:00',
-//   '9:00  -  10:00',
-//   '10:00 -  11:00',
-//   '11:00 -  12:00',
-// ];
+import 'dart:convert';
 
-List afterNoontiming = [
-  '1:00  -  2:00',
-  '2:00  -  3:00',
-  '3:00  -  4:00',
-  '4:00  -  6:00',
-];
+BookingModel bookingModelFromJson(String str) =>
+    BookingModel.fromJson(json.decode(str));
 
-List eveningtiming = [
-  '7:00  -  8:00',
-  '8:00  -  9:00',
-  '9:00  -  10:00',
-  '10:00 -  11:00',
-  '11:00 -  12:00',
-  '1:00  -  2:00',
-  '2:00  -  3:00',
-];
+String bookingModelToJson(BookingModel data) => json.encode(data.toJson());
+
+class BookingModel {
+  BookingModel({
+    this.status,
+    required this.data,
+  });
+
+  bool? status;
+  List<bookingData> data;
+
+  factory BookingModel.fromJson(Map<String, dynamic> json) => BookingModel(
+        status: json["status"],
+        data: List<bookingData>.from(json["data"].map((x) => bookingData.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+      };
+}
+
+class bookingData {
+  bookingData({
+    this.id,
+    this.bookingDate,
+    this.turfId,
+    required this.timeSlot,
+  });
+
+  String? id;
+  String? bookingDate;
+  String? turfId;
+  List<int> timeSlot;
+
+  factory bookingData.fromJson(Map<String, dynamic> json) => bookingData(
+        id: json["_id"],
+        bookingDate: json["booking_date"],
+        turfId: json["turf_id"],
+        timeSlot: List<int>.from(json["time_slot"].map((x) => x)),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "booking_date": bookingDate,
+        "turf_id": turfId,
+        "time_slot": List<dynamic>.from(timeSlot.map((x) => x)),
+      };
+}

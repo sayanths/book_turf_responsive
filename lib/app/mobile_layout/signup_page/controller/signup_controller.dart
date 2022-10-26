@@ -34,17 +34,14 @@ class SignUpControllerMobile extends GetxController {
       if (response.status!) {
         Get.offAll(() => const OtpPage());
       }
-    } else {
-      return Get.snackbar('', 'Require all fields',
-          colorText: white, duration: const Duration(seconds: 2));
-    }
-  }
+    } else {}
 
-  @override
-  void onClose() {
-    super.onClose();
-    emailController.dispose();
-    passwordController.dispose();
-    conformPasswordController.dispose();
+    @override
+    void onClose() {
+      super.onClose();
+      emailController.dispose();
+      passwordController.dispose();
+      conformPasswordController.dispose();
+    }
   }
 }

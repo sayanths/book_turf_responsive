@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/payement_controller.dart';
-import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/time_booking.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/time_booking.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/custom_appbar.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
@@ -21,7 +21,7 @@ class BookNow extends StatelessWidget {
   Widget build(BuildContext context) {
     final bookContrlNow = Get.put(BookController());
     final payementNow = Get.put(PaymentController());
-   final bookTime = Get.put(TimeBooking());
+    final bookTime = Get.put(TimeBooking());
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -85,11 +85,10 @@ class BookNow extends StatelessWidget {
                             child: IconButton(
                           onPressed: () {
                             controller.customDatePicker(context);
+                           
                           },
-                          icon: const Icon(
-                            Icons.date_range_sharp,
-                            color: Color.fromARGB(255, 0, 87, 158)
-                          ),
+                          icon: const Icon(Icons.date_range_sharp,
+                              color: Color.fromARGB(255, 0, 87, 158)),
                         )),
                       ],
                     ),

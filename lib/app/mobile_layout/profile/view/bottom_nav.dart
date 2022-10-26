@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:turf_book_second_project/app/mobile_layout/profile/controller/controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/profile/view/widgets/product_list.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
@@ -111,17 +113,19 @@ class ProfilePageMobile extends StatelessWidget {
                       ProfileOrderList(
                           function: () {}, icon: Icons.home, title: 'About us'),
                       height10,
-                      ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(Icons.logout),
-                        label: const Text(
-                          "Log out",
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          shape: const StadiumBorder(),
-                          backgroundColor: darkBlue,
-                        ),
-                      ),
+                      GetBuilder<ProfilePageController>(builder: (context) {
+                        return ElevatedButton.icon(
+                          onPressed: () {},
+                          icon: const Icon(Icons.logout),
+                          label: const Text(
+                            "Log out",
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                            backgroundColor: darkBlue,
+                          ),
+                        );
+                      }),
                     ],
                   ),
                 ),

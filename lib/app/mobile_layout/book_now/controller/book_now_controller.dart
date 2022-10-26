@@ -24,7 +24,8 @@ class BookController extends GetxController {
                 fontSize: 15),
           ),
         ),
-        OutlinedButton(
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(backgroundColor: white),
           onPressed: () {
             selected = index;
             update();
@@ -49,15 +50,6 @@ class BookController extends GetxController {
       ],
     );
   }
-
-  // bottomSheetWidget() {
-  //   BottomSheet(
-  //     onClosing: () {},
-  //     builder: (context) {
-  //       return const SizedBox();
-  //     },
-  //   );
-  // }
 
   List<String> list = <String>[
     'Morning',
