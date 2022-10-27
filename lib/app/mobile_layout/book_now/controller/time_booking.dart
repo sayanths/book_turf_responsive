@@ -149,19 +149,19 @@ class TimeBooking extends GetxController {
     }
   }
 
+  DateTime dateTime = DateTime.now();
+  int dayToday = DateTime.now().day;
 //nalatek okk book cheyan ulla slot open cheyth kodukan days inj anusarich
-  checkTimeBasedOnDate(DateTime dateTime) {
-    Future.forEach(bookedTimingList, (bookingData element) {
-      log(dateTime.toString());
-
-      if (DateTime.now() != dateTime) {
+  checkTimeBasedOnDate(DateTime date) {
+    if (date != dateTime) {
+      dateTime = date;
+      if (dayToday != date.day) {
         alreadyList.clear();
-        morningBookedTiming.clear();
-        afterNoonBookedTiming.clear();
-        nightBookedTiming.clear();
+        update();
+      } else {
+        checkTime();
+        update();
       }
-      update();
-    });
-    update();
+    }
   }
 }
