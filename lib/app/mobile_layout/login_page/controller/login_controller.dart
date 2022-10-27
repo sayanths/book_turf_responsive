@@ -14,7 +14,7 @@ class LoginControllerMobile extends GetxController {
   Future<void> loginApi(BuildContext ctx) async {
     isLoading.value = true;
     late final email = emailController.text.trim();
-    late final password = passwordController.text..trim();
+    late final password = passwordController.text.trim();
     if (password.isEmpty || email.isEmpty) {
       Get.snackbar('please fill', 'All fields are Requires', colorText: white);
       isLoading.value = false;
@@ -55,9 +55,9 @@ class LoginControllerMobile extends GetxController {
     emailController.dispose();
     passwordController.dispose();
   }
-FlutterSecureStorage secureStorage = const FlutterSecureStorage();
+
+  FlutterSecureStorage secureStorage = const FlutterSecureStorage();
   Future<void> getToken(LoginResponse value) async {
-    
     await secureStorage.write(key: 'token', value: value.token);
     await secureStorage.write(key: 'refreshToken', value: value.refreshToken);
     await secureStorage.write(key: 'login', value: 'true');

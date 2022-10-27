@@ -45,6 +45,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-lib/app/mobile_layout/server/error.dart
-lib/app/mobile_layout/intersecptor
 lib/app/mobile_layout/book_now
+lib/app/mobile_layout/intersecptor
