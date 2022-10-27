@@ -37,8 +37,8 @@ class TimeBooking extends GetxController {
   List<bookingData> bookedTimingList = [];
 
   // to get the today date
-
-  DateTime todayDate = DateTime.now();
+  DateTime dateTime = DateTime.now();
+  int dayToday = DateTime.now().day;
 
   //alreadyList data
 
@@ -149,14 +149,15 @@ class TimeBooking extends GetxController {
     }
   }
 
-  DateTime dateTime = DateTime.now();
-  int dayToday = DateTime.now().day;
 //nalatek okk book cheyan ulla slot open cheyth kodukan days inj anusarich
   checkTimeBasedOnDate(DateTime date) {
     if (date != dateTime) {
-      dateTime = date;
       if (dayToday != date.day) {
         alreadyList.clear();
+        morningBookedTiming.clear();
+        afterNoonBookedTiming.clear();
+        nightBookedTiming.clear();
+
         update();
       } else {
         checkTime();
