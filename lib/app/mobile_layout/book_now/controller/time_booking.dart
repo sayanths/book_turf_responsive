@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/model/booking_addpost_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/model/booking_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/model/time_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/service/booking_service.dart';
@@ -157,7 +158,6 @@ class TimeBooking extends GetxController {
         morningBookedTiming.clear();
         afterNoonBookedTiming.clear();
         nightBookedTiming.clear();
-
         update();
       } else {
         checkTime();
@@ -165,4 +165,8 @@ class TimeBooking extends GetxController {
       }
     }
   }
+
+  // Future<void> bookingAddedPost() async {
+  //   final result = BookingPostModel().
+  // }
 }
