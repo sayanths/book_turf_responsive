@@ -30,7 +30,7 @@ class PaymentController extends GetxController {
   option() {
     var options = {
       "key": "rzp_test_g9wjrkJkmYw27N",
-      // "amount": num.parse(_amountController.text) * 100,
+      "amount": 100 * 100,
       "name": "new project",
       "description": "payment for our work",
       "prefill": {"contact": "7055451245", "email": "mveli620@gmail.com"},
