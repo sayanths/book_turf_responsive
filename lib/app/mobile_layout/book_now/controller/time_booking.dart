@@ -16,9 +16,10 @@ class TimeBooking extends GetxController {
     onTimePressed(dataum!);
     getBookingDetails();
     checkTime();
+    
   }
 
-  bool isSelected = false;
+  bool isSelected = true;
 
   final bookingControll = Get.put(BookController());
 
@@ -121,7 +122,7 @@ class TimeBooking extends GetxController {
         if (bookingResult.status!) {
           bookedTimingList.clear();
           bookedTimingList.addAll(bookingResult.data);
-          log(bookedTimingList.toString());
+          //log(bookedTimingList.toString());
         }
       }
     } catch (e) {
@@ -141,8 +142,8 @@ class TimeBooking extends GetxController {
       if (element.bookingDate == yearMonthDateFormat) {
         for (int i = 0; i < element.timeSlot.length; i++) {
           alreadyList.add(convertTo12hr(hour: "$i:00"));
-          log(alreadyList.toString());
-          log(element.bookingDate.toString());
+          // log(alreadyList.toString());
+          // log(element.bookingDate.toString());
         }
       }
     });
@@ -167,17 +168,19 @@ class TimeBooking extends GetxController {
     }
   }
 
-  // bookingResponse() async {
-  //   Future<void> bookingAddedPost() async {
-  //     final result = await BookingPostService().loginUser(BookingPostModel());
-  //     if (result != null) {
-  //       if (result.status!) {
-  //         Get.to(() => payementNow.payment);
-  //       }
-  //     }
-  //   }
-  // }
+  List<int> theTimeCommingFromList = [];
 
-  // final payementNow = Get.put(PaymentController());
+  addingTheTimeCommingFromList(String time) {
+    if (bookedTimingList.contains(time)) {
+      Get.snackbar('ds', 'sdsds');
+
+    }else{
+      if(isSelected){
+if(backTo24Hour(hour: time)>=1 &&backTo24Hour(hour: time)<=12){
+
+}
+      }
+    }
+  }
 
 }

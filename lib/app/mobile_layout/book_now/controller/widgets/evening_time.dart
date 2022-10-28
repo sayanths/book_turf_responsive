@@ -17,18 +17,24 @@ class EveningTiming extends StatelessWidget {
             List.generate(timeBooking.timeBookedListevening.length, (index) {
           return InkWell(
             onTap: () {
-              timeBooking.onSelectTimingEvening(
-                  index, timeBooking.timeBookedListevening[index]);
+              timeBooking.alreadyList
+                      .contains(timeBooking.timeBookedListevening[index])
+                  ?Get.snackbar('Slot not available', "can't book ")
+                  : timeBooking.onSelectTimingEvening(
+                      index, timeBooking.timeBookedListevening[index]);
             },
             child: GetBuilder<TimeBooking>(builder: (eveningObj) {
               return Container(
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
-                  color:eveningObj.alreadyList.contains(eveningObj.timeBookedListevening[index]) ? red: eveningObj.nightBookedTiming
-                          .contains(timeBooking.timeBookedListevening[index])
-                      ? black
-                      : white,
+                  color: eveningObj.alreadyList
+                          .contains(eveningObj.timeBookedListevening[index])
+                      ? red
+                      : eveningObj.nightBookedTiming.contains(
+                              timeBooking.timeBookedListevening[index])
+                          ? black
+                          : white,
                   borderRadius: BorderRadius.circular(5),
                   border: Border.all(width: 1, color: grey),
                 ),

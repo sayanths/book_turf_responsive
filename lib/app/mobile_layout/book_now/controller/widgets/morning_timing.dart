@@ -19,7 +19,7 @@ class MorningTiming extends StatelessWidget {
             onTap: () {
               timeBooking.alreadyList
                       .contains(timeBooking.timeBookedListMorning[index])
-                  ? Get.snackbar('Already Booked', "can't book again",
+                  ? Get.snackbar('Slot not available', "can't book ",
                       colorText: black)
                   : timeBooking.onSelectTiming(index);
             },
