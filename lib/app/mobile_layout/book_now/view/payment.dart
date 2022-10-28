@@ -85,7 +85,6 @@ class BookNow extends StatelessWidget {
                             child: IconButton(
                           onPressed: () {
                             controller.customDatePicker(context);
-                           
                           },
                           icon: const Icon(Icons.date_range_sharp,
                               color: Color.fromARGB(255, 0, 87, 158)),
@@ -110,9 +109,7 @@ class BookNow extends StatelessWidget {
               child: SizedBox(
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-                    payementNow.option();
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                       shape: const StadiumBorder(),
                       backgroundColor: const Color.fromARGB(255, 2, 83, 4)),

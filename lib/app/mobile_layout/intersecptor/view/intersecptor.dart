@@ -59,7 +59,7 @@ class HelperIntercepter {
     return dio;
   }
 
-   addToSecureStorage(LoginResponse value) async {
+  addToSecureStorage(LoginResponse value) async {
     await secureStorage.write(
       key: "token",
       value: value.token,
@@ -69,10 +69,9 @@ class HelperIntercepter {
 
   Future<String> getToken() async {
     return await secureStorage.read(key: "token") ?? "";
-   }
+  }
 
   Future<String> getRefreshToken() async {
     return await secureStorage.read(key: "refreshToken") ?? "";
   }
 }
-
