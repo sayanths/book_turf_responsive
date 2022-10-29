@@ -64,18 +64,7 @@ class LoginPageMobile extends StatelessWidget {
                               )),
                           height10,
                           CustomTextField(
-                            // validate: (email) {
-                            //   String pattern =
-                            //       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-                            //   RegExp regex = RegExp(pattern);
-                            //   if (email!.isEmpty) {
-                            //     return 'Please Enter email';
-                            //   } else if (!regex.hasMatch(email)) {
-                            //     return 'Enter valid email';
-                            //   } else {
-                            //     return null;
-                            //   }
-                            // },
+                           
                             width: size.width / 1.2,
                             controller: loginController.emailController,
                             obsureText: false,

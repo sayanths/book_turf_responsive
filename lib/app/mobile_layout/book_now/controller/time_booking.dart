@@ -14,9 +14,8 @@ class TimeBooking extends GetxController {
     super.onInit();
     dataum = Get.arguments as Datum;
     onTimePressed(dataum!);
-    getBookingDetails();
+    getBookingDetailsFromApi();
     checkTime();
-    
   }
 
   bool isSelected = true;
@@ -114,7 +113,7 @@ class TimeBooking extends GetxController {
     update();
   }
 
-  getBookingDetails() async {
+  getBookingDetailsFromApi() async {
     BookingModel? bookingResult =
         await BookingService().getTurfData(dataum!.id.toString());
     try {
@@ -168,19 +167,6 @@ class TimeBooking extends GetxController {
     }
   }
 
-  List<int> theTimeCommingFromList = [];
 
-  addingTheTimeCommingFromList(String time) {
-    if (bookedTimingList.contains(time)) {
-      Get.snackbar('ds', 'sdsds');
-
-    }else{
-      if(isSelected){
-if(backTo24Hour(hour: time)>=1 &&backTo24Hour(hour: time)<=12){
-
-}
-      }
-    }
-  }
-
+ 
 }
