@@ -16,6 +16,7 @@ class TimeBooking extends GetxController {
     onTimePressed(dataum!);
     getBookingDetailsFromApi();
     checkTime();
+    
   }
 
   bool isSelected = true;
@@ -165,8 +166,16 @@ class TimeBooking extends GetxController {
         update();
       }
     }
+
+   
   }
-
-
- 
+  //  List apiTimeSlot = [];
+  //   forOnlyGetTheSlotListFrom() {
+  //     for (var element in bookedTimingList) {
+  //       for (int i = 0; i < element.timeSlot.length; i++) {
+  //         apiTimeSlot.add(element.timeSlot.first);
+  //         log("apiTimeSlot.toString()))");
+  //       }
+  //     }
+  //   }
 }
