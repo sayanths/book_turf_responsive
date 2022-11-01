@@ -16,7 +16,6 @@ class TimeBooking extends GetxController {
     onTimePressed(dataum!);
     getBookingDetailsFromApi();
     checkTime();
-    
   }
 
   bool isSelected = true;
@@ -142,8 +141,6 @@ class TimeBooking extends GetxController {
       if (element.bookingDate == yearMonthDateFormat) {
         for (int i = 0; i < element.timeSlot.length; i++) {
           alreadyList.add(convertTo12hr(hour: "$i:00"));
-          // log(alreadyList.toString());
-          // log(element.bookingDate.toString());
         }
       }
     });
@@ -166,16 +163,8 @@ class TimeBooking extends GetxController {
         update();
       }
     }
-
-   
   }
-  //  List apiTimeSlot = [];
-  //   forOnlyGetTheSlotListFrom() {
-  //     for (var element in bookedTimingList) {
-  //       for (int i = 0; i < element.timeSlot.length; i++) {
-  //         apiTimeSlot.add(element.timeSlot.first);
-  //         log("apiTimeSlot.toString()))");
-  //       }
-  //     }
-  //   }
+
+
+  
 }
