@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/view/bottom_nav.dart';
@@ -11,6 +12,17 @@ class LoginControllerMobile extends GetxController {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   RxBool isLoading = false.obs;
+
+//  name(String value){
+//     if (!RegExp(r'^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$')
+//                                       .hasMatch(value) ||
+//                                   value.length < 3) {
+//                                 return Get.snackbar(title, message);
+//                               } else {
+//                                 return null;
+//                               }
+//  }
+
   Future<void> loginApi(BuildContext ctx) async {
     isLoading.value = true;
     late final email = emailController.text.trim();

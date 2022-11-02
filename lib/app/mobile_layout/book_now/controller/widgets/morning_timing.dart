@@ -17,8 +17,11 @@ class MorningTiming extends StatelessWidget {
             List.generate(timeBooking.timeBookedListMorning.length, (index) {
           return InkWell(
             onTap: () {
-              timeBooking.onSelectTiming(index);
-              
+              timeBooking.alreadyList
+                      .contains(timeBooking.timeBookedListMorning[index])
+                  ? Get.snackbar('Slot not available', "can't book ",
+                      colorText: black)
+                  : timeBooking.onSelectTiming(index);
             },
             child: GetBuilder<TimeBooking>(builder: (morningList) {
               return Container(

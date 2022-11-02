@@ -14,11 +14,12 @@ class TimeBooking extends GetxController {
     super.onInit();
     dataum = Get.arguments as Datum;
     onTimePressed(dataum!);
-    getBookingDetails();
+    getBookingDetailsFromApi();
     checkTime();
+    onTimeSlot();
   }
 
-  bool isSelected = false;
+  bool isSelected = true;
 
   final bookingControll = Get.put(BookController());
 
@@ -113,15 +114,29 @@ class TimeBooking extends GetxController {
     update();
   }
 
-  getBookingDetails() async {
+  var bookedSlotList = [];
+  getBookingDetailsFromApi() async {
+    bookedSlotList.clear();
     BookingModel? bookingResult =
         await BookingService().getTurfData(dataum!.id.toString());
     try {
+      log("try");
       if (bookingResult != null) {
         if (bookingResult.status!) {
           bookedTimingList.clear();
+          log("sd");
           bookedTimingList.addAll(bookingResult.data);
-          log(bookedTimingList.toString());
+          log(bookedTimingList.length.toString());
+
+          for (var element in bookedTimingList) {
+            if (element.timeSlot.isNotEmpty) {
+              bookedSlotList.add(element.timeSlot);
+              
+            }
+            
+          }
+          log('timeBookedSlots ${bookedSlotList.toString()}');
+         
         }
       }
     } catch (e) {
@@ -141,8 +156,6 @@ class TimeBooking extends GetxController {
       if (element.bookingDate == yearMonthDateFormat) {
         for (int i = 0; i < element.timeSlot.length; i++) {
           alreadyList.add(convertTo12hr(hour: "$i:00"));
-          log(alreadyList.toString());
-          log(element.bookingDate.toString());
         }
       }
     });
@@ -167,17 +180,19 @@ class TimeBooking extends GetxController {
     }
   }
 
-  // bookingResponse() async {
-  //   Future<void> bookingAddedPost() async {
-  //     final result = await BookingPostService().loginUser(BookingPostModel());
-  //     if (result != null) {
-  //       if (result.status!) {
-  //         Get.to(() => payementNow.payment);
-  //       }
-  //     }
-  //   }
-  // }
+  List<bookingData> times = [];
+  onTimeSlot() {
+    times.clear();
+    log(bookedTimingList.length.toString());
 
-  // final payementNow = Get.put(PaymentController());
-
+    for (var element in bookedTimingList) {
+      // if (element.timeSlot.isNotEmpty) {
+      //   times.add(element);
+      // }
+      List timeSlot = [];
+      timeSlot.add(element.timeSlot.first);
+      log(timeSlot.length.toString());
+      log("sds");
+    }
+  }
 }
