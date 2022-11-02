@@ -165,7 +165,7 @@ class HomePageMobile extends StatelessWidget {
                                 final data = homeController.topRatedList[index];
                                 return Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: CustomSnackImageShower(data: data),
+                                  child: CustomSnackImageShower(data: data,),
                                 );
                               }),
                         );

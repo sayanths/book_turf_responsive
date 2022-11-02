@@ -131,12 +131,9 @@ class TimeBooking extends GetxController {
           for (var element in bookedTimingList) {
             if (element.timeSlot.isNotEmpty) {
               bookedSlotList.add(element.timeSlot);
-              
             }
-            
           }
           log('timeBookedSlots ${bookedSlotList.toString()}');
-         
         }
       }
     } catch (e) {
