@@ -23,7 +23,7 @@ class CustomSnackImageShower extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              Get.to(() => FullScreenMobile(data: data));
+              Get.to(() => FullScreenMobile(data: data),arguments: data);
             },
             child: Container(
               height: size.height / 3.6,

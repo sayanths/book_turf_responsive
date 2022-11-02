@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/time_booking.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view_model/view_model_controller.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class EveningTiming extends StatelessWidget {
@@ -10,7 +10,7 @@ class EveningTiming extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final timeBooking = Get.put(TimeBooking());
+    final timeBooking = Get.put(ViewFullScreen());
     return Wrap(
         direction: Axis.horizontal,
         children:
@@ -19,11 +19,11 @@ class EveningTiming extends StatelessWidget {
             onTap: () {
               timeBooking.alreadyList
                       .contains(timeBooking.timeBookedListevening[index])
-                  ?Get.snackbar('Slot not available', "can't book ")
+                  ? Get.snackbar('Slot not available', "can't book ")
                   : timeBooking.onSelectTimingEvening(
                       index, timeBooking.timeBookedListevening[index]);
             },
-            child: GetBuilder<TimeBooking>(builder: (eveningObj) {
+            child: GetBuilder<ViewFullScreen>(builder: (eveningObj) {
               return Container(
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

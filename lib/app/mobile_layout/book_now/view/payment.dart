@@ -6,6 +6,7 @@ import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/p
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/time_booking.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/custom_appbar.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view_model/view_model_controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
@@ -19,7 +20,7 @@ class BookNow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bookContrlNow = Get.put(BookController());
+    final bookContrlNow = Get.put(ViewFullScreen());
     final payementNow = Get.put(PaymentController());
     final bookTime = Get.put(TimeBooking());
     return Scaffold(
@@ -28,7 +29,7 @@ class BookNow extends StatelessWidget {
           children: [
             const CustomAppBar(
                 mainTitle: 'Select Price', color: white, rating: '', star: ''),
-            GetBuilder<BookController>(
+            GetBuilder<ViewFullScreen>(
               builder: (controller) {
                 return Column(
                   children: [

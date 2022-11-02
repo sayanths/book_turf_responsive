@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/time_booking.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view_model/view_model_controller.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class MorningTiming extends StatelessWidget {
@@ -10,7 +11,7 @@ class MorningTiming extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final timeBooking = Get.put(TimeBooking());
+    final timeBooking = Get.put(ViewFullScreen());
     return Wrap(
         direction: Axis.horizontal,
         children:
@@ -23,7 +24,7 @@ class MorningTiming extends StatelessWidget {
                       colorText: black)
                   : timeBooking.onSelectTiming(index);
             },
-            child: GetBuilder<TimeBooking>(builder: (morningList) {
+            child: GetBuilder<ViewFullScreen>(builder: (morningList) {
               return Container(
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
