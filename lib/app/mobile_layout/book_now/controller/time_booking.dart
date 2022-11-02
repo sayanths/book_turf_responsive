@@ -16,6 +16,7 @@ class TimeBooking extends GetxController {
     onTimePressed(dataum!);
     getBookingDetailsFromApi();
     checkTime();
+    onTimeSlot();
   }
 
   bool isSelected = true;
@@ -113,15 +114,29 @@ class TimeBooking extends GetxController {
     update();
   }
 
+  var bookedSlotList = [];
   getBookingDetailsFromApi() async {
+    bookedSlotList.clear();
     BookingModel? bookingResult =
         await BookingService().getTurfData(dataum!.id.toString());
     try {
+      log("try");
       if (bookingResult != null) {
         if (bookingResult.status!) {
           bookedTimingList.clear();
+          log("sd");
           bookedTimingList.addAll(bookingResult.data);
-          //log(bookedTimingList.toString());
+          log(bookedTimingList.length.toString());
+
+          for (var element in bookedTimingList) {
+            if (element.timeSlot.isNotEmpty) {
+              bookedSlotList.add(element.timeSlot);
+              
+            }
+            
+          }
+          log('timeBookedSlots ${bookedSlotList.toString()}');
+         
         }
       }
     } catch (e) {
@@ -165,6 +180,19 @@ class TimeBooking extends GetxController {
     }
   }
 
+  List<bookingData> times = [];
+  onTimeSlot() {
+    times.clear();
+    log(bookedTimingList.length.toString());
 
-  
+    for (var element in bookedTimingList) {
+      // if (element.timeSlot.isNotEmpty) {
+      //   times.add(element);
+      // }
+      List timeSlot = [];
+      timeSlot.add(element.timeSlot.first);
+      log(timeSlot.length.toString());
+      log("sds");
+    }
+  }
 }

@@ -6,14 +6,9 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
-class SearchView extends StatefulWidget {
+class SearchView extends StatelessWidget {
   const SearchView({Key? key}) : super(key: key);
 
-  @override
-  State<SearchView> createState() => _SearchViewState();
-}
-
-class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
