@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:turf_book_second_project/app/mobile_layout/book_now/model/booking_addpost_model.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view_model/view_model_controller.dart';
 
 class PaymentController extends GetxController {
   bool payment = false;
@@ -10,27 +14,29 @@ class PaymentController extends GetxController {
   void onInit() {
     super.onInit();
     _razorpay = Razorpay();
-    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSucess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
 
-  void _handlePaymentSucess() {
-    Get.snackbar('payement Sucessfull', '');
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    addBooking();
   }
 
-  _handlePaymentError() {
+  _handlePaymentError(PaymentFailureResponse response) {
     Get.snackbar("Payment Failed", '');
   }
 
-  _handleExternalWallet() {
+  _handleExternalWallet(ExternalWalletResponse response) {
     Get.snackbar('external  wallet', '');
   }
 
-  option() {
+  late BookingPostModel data;
+  option(BookingPostModel data) {
+    this.data = data;
     var options = {
       "key": "rzp_test_g9wjrkJkmYw27N",
-      "amount": 100 * 100,
+      "amount": Get.put(ViewFullScreen()).totalAmount * 100,
       "name": "new project",
       "description": "payment for our work",
       "prefill": {"contact": "7055451245", "email": "mveli620@gmail.com"},
@@ -45,17 +51,17 @@ class PaymentController extends GetxController {
     }
   }
 
-
   void addBooking() async {
-    Map<String, dynamic> data = {
-      "isBooked": true,
-      "user_id": "987488222444444",
-      "book_date": DateTime.now().toIso8601String()
-    };
-    var response =
-        await Dio().post("http://10.0.2.2:3000/turf/booking", data: data);
-    if (response.statusCode == 200) {
-      Get.snackbar('', 'Payemnt sucessfull');
+    try {
+      var response = await Dio().post(
+          "https://fauxspot.herokuapp.com/account/add-booking",
+          data: data.toJson());
+      if (response.statusCode == 200) {
+        log(response.data.toString());
+        Get.snackbar('', 'Payemnt sucessfull');
+      }
+    } catch (e) {
+      Get.snackbar('', e.toString());
     }
   }
 }
