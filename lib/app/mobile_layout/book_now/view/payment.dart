@@ -1,7 +1,8 @@
+import 'dart:developer';
+
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/book_now_controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/payement_controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/time_booking.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/custom_appbar.dart';
@@ -13,16 +14,15 @@ import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
 class BookNow extends StatelessWidget {
   final Datum data;
-  const BookNow({
+  BookNow({
     super.key,
     required this.data,
   });
-
+  final bookContrlNow = Get.find<ViewFullScreen>();
+  final payementNow = Get.put(PaymentController());
+  final bookTime = Get.put(TimeBooking());
   @override
   Widget build(BuildContext context) {
-    final bookContrlNow = Get.put(ViewFullScreen());
-    final payementNow = Get.put(PaymentController());
-    final bookTime = Get.put(TimeBooking());
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -33,37 +33,6 @@ class BookNow extends StatelessWidget {
               builder: (controller) {
                 return Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        bookContrlNow.customRadio("Morning",
-                            data.turfPrice!.morningPrice.toString(), 1),
-                        bookContrlNow.customRadio("Afternoon",
-                            data.turfPrice!.afternoonPrice.toString(), 2),
-                        bookContrlNow.customRadio("Evening",
-                            data.turfPrice!.eveningPrice.toString(), 3),
-                      ],
-                    ),
-                    height10,
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: DropdownButton<String>(
-                          value: controller.dropDownSelectedItem,
-                          items: controller.list.map((String value) {
-                            return DropdownMenuItem(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            controller.dropDownValueChange(value!);
-                            controller.dropDownValue = value;
-                          },
-                        ),
-                      ),
-                    ),
                     height20,
                     const FullScreenTitle(title: "Select day", size: 25),
                     height30,
@@ -93,7 +62,166 @@ class BookNow extends StatelessWidget {
                       ],
                     ),
                     height20,
-                    Wrap(children: [controller.onDropDownValueChange()]),
+                    Column(
+                      children: [
+                        bookContrlNow.customRadio("Morning",
+                            data.turfPrice!.morningPrice.toString(), 1),
+                        GetBuilder<ViewFullScreen>(builder: (bookContrlNow) {
+                          return Wrap(
+                            children: List.generate(
+                                bookContrlNow.morningSlotes.length, (index) {
+                              final item = bookContrlNow.morningSlotes[index];
+                              return InkWell(
+                                onTap: () {
+                                  if (item.canBook) {
+                                    item.isSelected == false
+                                        ? bookContrlNow
+                                            .selectSingleItemMorning(index)
+                                        : bookContrlNow
+                                            .unselectSingleItemMorning(index: index,item: item);
+                                  } else {
+                                    Get.snackbar(
+                                        "can't select", 'Slot not available',
+                                        duration:
+                                            const Duration(milliseconds: 1700));
+                                  }
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  decoration: BoxDecoration(
+                                    color: item.isSelected == true
+                                        ? const Color.fromARGB(255, 0, 0, 0)
+                                        : Colors.white,
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(width: 1, color: grey),
+                                  ),
+                                  padding: const EdgeInsets.all(8),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: item.canBook
+                                        ? Text(
+                                            item.showTime.toString(),
+                                            style: const TextStyle(
+                                                color: Colors.green),
+                                          )
+                                        : Text(
+                                            item.showTime.toString(),
+                                            style: const TextStyle(
+                                                color: Colors.red),
+                                          ),
+                                  ),
+                                ),
+                              );
+                            }),
+                          );
+                        }),
+                        bookContrlNow.customRadio("Afternoon",
+                            data.turfPrice!.afternoonPrice.toString(), 1),
+                        GetBuilder<ViewFullScreen>(builder: (bookContrlNow) {
+                          return Wrap(
+                            children: List.generate(
+                                bookContrlNow.noonSlotes.length, (index) {
+                              final item = bookContrlNow.noonSlotes[index];
+                              return InkWell(
+                                onTap: () {
+                                  if (item.canBook) {
+                                    item.isSelected  == false
+                                        ? bookContrlNow
+                                            .selectSingleItemNoon(index)
+                                        : bookContrlNow
+                                            .unselectSingleItemNoon(index: index,item: item);
+                                  } else {
+                                    Get.snackbar(
+                                        "can't select", 'Slot not available',
+                                        duration:
+                                            const Duration(milliseconds: 1700));
+                                  }
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  decoration: BoxDecoration(
+                                    color: item.isSelected == true
+                                        ? const Color.fromARGB(255, 0, 0, 0)
+                                        : Colors.white,
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(width: 1, color: grey),
+                                  ),
+                                  padding: const EdgeInsets.all(8),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: item.canBook
+                                        ? Text(
+                                            item.showTime.toString(),
+                                            style: const TextStyle(
+                                                color: Colors.green),
+                                          )
+                                        : Text(
+                                            item.showTime.toString(),
+                                            style: const TextStyle(
+                                                color: Colors.red),
+                                          ),
+                                  ),
+                                ),
+                              );
+                            }),
+                          );
+                        }),
+                        bookContrlNow.customRadio("Evening",
+                            data.turfPrice!.eveningPrice.toString(), 1),
+                        GetBuilder<ViewFullScreen>(builder: (bookContrlNow) {
+                          return Wrap(
+                            children: List.generate(
+                                bookContrlNow.eveningSlotes.length, (index) {
+                              final item = bookContrlNow.eveningSlotes[index];
+                              return InkWell(
+                                onTap: () {
+                                  if (item.canBook) {
+                                    item.isSelected  == false
+                                        ? bookContrlNow
+                                            .selectSingleItemEvening(index)
+                                        : bookContrlNow
+                                            .unselectSingleItemEvening(index: index,item: item);
+                                  } else {
+                                    Get.snackbar(
+                                        "can't select", 'Slot not available',
+                                        duration:
+                                            const Duration(milliseconds: 1700));
+                                  }
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  decoration: BoxDecoration(
+                                    color: item.isSelected == true
+                                        ? const Color.fromARGB(255, 0, 0, 0)
+                                        : Colors.white,
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(width: 1, color: grey),
+                                  ),
+                                  padding: const EdgeInsets.all(8),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: item.canBook
+                                        ? Text(
+                                            item.showTime.toString(),
+                                            style: const TextStyle(
+                                                color: Colors.green),
+                                          )
+                                        : Text(
+                                            item.showTime.toString(),
+                                            style: const TextStyle(
+                                                color: Colors.red),
+                                          ),
+                                  ),
+                                ),
+                              );
+                            }),
+                          );
+                        }),
+                      ],
+                    ),
                   ],
                 );
               },

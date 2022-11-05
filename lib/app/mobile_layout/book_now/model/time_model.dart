@@ -1,4 +1,5 @@
 String convertTo12hr({required String hour}) {
+  
   switch (hour) {
     case "1:00":
       return '01:00 - 02:00';

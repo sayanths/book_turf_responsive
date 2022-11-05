@@ -2,25 +2,31 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/afternoon_time.dart';
-import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/evening_time.dart';
-import 'package:turf_book_second_project/app/mobile_layout/book_now/controller/widgets/morning_timing.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/model/booking_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/model/time_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/service/booking_service.dart';
+import 'package:turf_book_second_project/app/mobile_layout/fullScreen/model/slot_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 
 class ViewFullScreen extends GetxController {
   Datum? dataum;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     dataum = Get.arguments as Datum;
     onTimePressed(dataum!);
-    getBookingDetailsFromApi();
+    timeListCreation();
+    await getBookingDetailsFromApi();
     checkTime();
+
     onTimeSlot();
+  }
+
+  @override
+  void onClose() {
+    bookingList.clear();
+    super.onClose();
   }
 
   bool isSelected = true;
@@ -50,7 +56,12 @@ class ViewFullScreen extends GetxController {
   //alreadyList data
 
   List<String> alreadyList = [];
-
+  late int? moringTimeStarts;
+  late int? moringTimeends;
+  late int? afternoonTimeStarts;
+  late int? afternoonTimeEnds;
+  late int? eveningTimeStarts;
+  late int? eveningTimeEnds;
   onTimePressed(Datum da) {
     timeBookedListMorning.clear();
     timeBookedListevening.clear();
@@ -59,12 +70,12 @@ class ViewFullScreen extends GetxController {
     afterNoonBookedTiming.clear();
     nightBookedTiming.clear();
 
-    int? moringTimeStarts = da.turfTime!.timeMorningStart;
-    int? moringTimeends = da.turfTime!.timeMorningEnd;
-    int? afternoonTimeStarts = da.turfTime!.timeAfternoonStart;
-    int? afternoonTimeEnds = da.turfTime!.timeAfternoonEnd;
-    int? eveningTimeStarts = da.turfTime!.timeEveningStart;
-    int? eveningTimeEnds = da.turfTime!.timeEveningEnd;
+    moringTimeStarts = da.turfTime!.timeMorningStart;
+    moringTimeends = da.turfTime!.timeMorningEnd;
+    afternoonTimeStarts = da.turfTime!.timeAfternoonStart;
+    afternoonTimeEnds = da.turfTime!.timeAfternoonEnd;
+    eveningTimeStarts = da.turfTime!.timeEveningStart;
+    eveningTimeEnds = da.turfTime!.timeEveningEnd;
 
     //iterating the values using for loop to get the //
     for (int i = moringTimeStarts!; i <= moringTimeends!; i++) {
@@ -118,6 +129,7 @@ class ViewFullScreen extends GetxController {
   }
 
   var bookedSlotList = [];
+  Map<String, dynamic> timeSlotesMap = {};
   getBookingDetailsFromApi() async {
     bookedSlotList.clear();
     BookingModel? bookingResult =
@@ -129,14 +141,14 @@ class ViewFullScreen extends GetxController {
           bookedTimingList.clear();
           log("sd");
           bookedTimingList.addAll(bookingResult.data);
-          log(bookedTimingList.length.toString());
+          log("allApiList ${bookedTimingList.toString()}");
+          await Future.forEach(bookedTimingList, (bookingData element) {
+            timeSlotesMap["${element.bookingDate}"] = element.timeSlot;
+          });
+          print("Maped Slotes Are");
+          print(timeSlotesMap);
 
-          for (var element in bookedTimingList) {
-            if (element.timeSlot.isNotEmpty) {
-              bookedSlotList.add(element.timeSlot);
-            }
-          }
-          log('timeBookedSlots ${bookedSlotList.toString()}');
+          //  log('timeBookedSlots ${bookedSlotList.toString()}');
         }
       }
     } catch (e) {
@@ -145,13 +157,169 @@ class ViewFullScreen extends GetxController {
     update();
   }
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///
+  List<int> selectedDateBookedList = [];
+  int todayHour = DateTime.now().hour;
+  String todayDate = DateFormat('yMd').format(DateTime.now());
+  convertToMap(DateTime date) {
+    String selectedDate = DateFormat('yMd').format(date);
+    selectedDateBookedList.clear();
+    if (selectedDate != todayDate) {
+      todayHour = 4;
+    } else {
+      todayHour = DateTime.now().hour;
+    }
+    print(selectedDate);
+    final result = timeSlotesMap.containsKey(selectedDate);
+    //  print('contains--->$result');
+    if (result) {
+      selectedDateBookedList = timeSlotesMap[selectedDate];
+      print(selectedDateBookedList);
+    }
+    createList();
+  }
+
+  List<int> morningTimeList = [];
+  List<int> noonTimeList = [];
+  List<int> eveningTimeList = [];
+
+  timeListCreation() {
+    morningTimeList.clear();
+    noonTimeList.clear();
+    eveningTimeList.clear();
+    for (int i = moringTimeStarts!; i <= moringTimeends!; i++) {
+      morningTimeList.add(i);
+    }
+    for (int i = afternoonTimeStarts!; i <= afternoonTimeEnds!; i++) {
+      noonTimeList.add(i);
+    }
+    for (int i = eveningTimeStarts! + 1; i <= eveningTimeEnds!; i++) {
+      eveningTimeList.add(i);
+    }
+  }
+
+  List<SlotModel> morningSlotes = [];
+  List<SlotModel> noonSlotes = [];
+  List<SlotModel> eveningSlotes = [];
+
+  createList() {
+    morningSlotes.clear();
+    noonSlotes.clear();
+    eveningSlotes.clear();
+    print("today hour--->$todayHour");
+    morningSlotes = morningTimeList
+        .map((e) => SlotModel(
+            time: e,
+            canBook: true,
+            showTime: convertTo12hr(hour: "$e:00"),
+            price: dataum!.turfPrice!.morningPrice!.toInt(),
+            isSelected: false))
+        .toList();
+    recheckBocked(morningSlotes);
+
+    noonSlotes = noonTimeList
+        .map((e) => SlotModel(
+            time: e,
+            canBook: true,
+            showTime: convertTo12hr(hour: "$e:00"),
+            price: dataum!.turfPrice!.afternoonPrice!.toInt(),
+            isSelected: false))
+        .toList();
+    recheckBocked(noonSlotes);
+    eveningSlotes = eveningTimeList
+        .map((e) => SlotModel(
+            time: e,
+            canBook: true,
+            showTime: convertTo12hr(hour: "$e:00"),
+            price: dataum!.turfPrice!.eveningPrice!.toInt(),
+            isSelected: false))
+        .toList();
+    recheckBocked(eveningSlotes);
+    update();
+  }
+
+  recheckBocked(List<SlotModel> list) {
+    for (var element in list) {
+      if (element.time <= todayHour) {
+        element.canBook = false;
+        element.isSelected = false;
+      } else if (selectedDateBookedList.contains(element.time)) {
+        element.canBook = false;
+        element.isSelected = false;
+      }
+    }
+    for (var e in list) {
+      print("${e.time}------->${e.canBook}");
+    }
+  }
+
+  selectSingleItemMorning(int index) {
+    morningSlotes[index].isSelected = true;
+    update();
+    addToAmountList(morningSlotes[index].price, morningSlotes[index].time);
+  }
+
+  unselectSingleItemMorning({required int index, required SlotModel item}) {
+    morningSlotes[index].isSelected = false;
+    update();
+    removeFromAmountList(item);
+  }
+
+  selectSingleItemNoon(int index) {
+    noonSlotes[index].isSelected = true;
+    update();
+    addToAmountList(noonSlotes[index].price, noonSlotes[index].time);
+  }
+
+  unselectSingleItemNoon({required int index, required SlotModel item}) {
+    noonSlotes[index].isSelected = false;
+    update();
+    removeFromAmountList(item);
+  }
+
+  selectSingleItemEvening(int index) {
+    eveningSlotes[index].isSelected = true;
+    update();
+    addToAmountList(eveningSlotes[index].price, eveningSlotes[index].time);
+  }
+
+  unselectSingleItemEvening({required int index, required SlotModel item}) {
+    eveningSlotes[index].isSelected = false;
+    update();
+    removeFromAmountList(item);
+  }
+
+  List<int> bookingList = [];
+  int totalAmount = 0;
+
+  addToAmountList(int amount, int time) {
+    print(time);
+    print("previous price--> $totalAmount");
+    totalAmount = totalAmount + amount;
+    print("current price--> $totalAmount");
+    bookingList.add(time);
+    print(bookingList);
+  }
+
+  removeFromAmountList(SlotModel item) {
+    print("previous price--> $totalAmount");
+    int index = bookingList.indexWhere((element) => element == item.time);
+    if (index != -1) {
+      bookingList.removeAt(index);
+    }
+    print(bookingList);
+    totalAmount = totalAmount - item.price;
+    print("current price--> $totalAmount");
+  }
+
 //based on the time check the time from the phone and the time coming from the api to check wheather the time slot is already booked or not
   checkTime() {
     alreadyList.clear();
     int? deviceTime24 =
         int.tryParse(DateFormat.Hm().format(DateTime.now()).split(':').first);
     log(yearMonthDateFormat.toString());
-    log(deviceTime24.toString());
+    //log(deviceTime24.toString());
     Future.forEach(bookedTimingList, (bookingData element) {
       if (element.bookingDate == yearMonthDateFormat) {
         for (int i = 0; i < element.timeSlot.length; i++) {
@@ -172,43 +340,42 @@ class ViewFullScreen extends GetxController {
         morningBookedTiming.clear();
         afterNoonBookedTiming.clear();
         nightBookedTiming.clear();
-        update();
+        // update();
       } else {
         checkTime();
         update();
       }
+      update();
     }
+    update();
   }
 
   List<bookingData> times = [];
   onTimeSlot() {
     times.clear();
-    log(bookedTimingList.length.toString());
+    // log(bookedTimingList.length.toString());
 
-    for (var element in bookedTimingList) {
-      // if (element.timeSlot.isNotEmpty) {
-      //   times.add(element);
-      // }
-      List timeSlot = [];
-      timeSlot.add(element.timeSlot.first);
-      log(timeSlot.length.toString());
-      log("sds");
-    }
+    // for (var element in bookedTimingList) {
+    //   // if (element.timeSlot.isNotEmpty) {
+    //   //   times.add(element);
+    //   // }
+    //   List timeSlot = [];
+    //   timeSlot.add(element.timeSlot.first);
+
+    // }
   }
 
-
-
-  onDropDownValueChange() {
-    if (dropDownValue == 'Morning') {
-      return const MorningTiming();
-    } else if (dropDownValue == 'afternoon') {
-      return const AfterNoonTiming();
-    } else if (dropDownValue == 'evening') {
-      return const EveningTiming();
-    } else {
-      return const MorningTiming();
-    }
-  }
+  // onDropDownValueChange() {
+  //   if (dropDownValue == 'Morning') {
+  //     return const MorningTiming();
+  //   } else if (dropDownValue == 'afternoon') {
+  //     return const AfterNoonTiming();
+  //   } else if (dropDownValue == 'evening') {
+  //     return const EveningTiming();
+  //   } else {
+  //     return const MorningTiming();
+  //   }
+  // }
 
   // DateTime dateTime = DateTime.now();
   String dropDownSelectedItem = "Morning";
@@ -255,16 +422,16 @@ class ViewFullScreen extends GetxController {
     );
   }
 
-  List<String> list = <String>[
-    'Morning',
-    'afternoon',
-    'evening',
-  ];
+  // List<String> list = <String>[
+  //   'Morning',
+  //   'afternoon',
+  //   'evening',
+  // ];
 
-  dropDownValueChange(String value) {
-    dropDownSelectedItem = value;
-    update();
-  }
+  // dropDownValueChange(String value) {
+  //   dropDownSelectedItem = value;
+  //   update();
+  // }
 
   customDatePicker(BuildContext context) async {
     final timeSelected = await showDatePicker(
@@ -284,7 +451,7 @@ class ViewFullScreen extends GetxController {
         lastDate: DateTime.now().add(const Duration(days: 60)));
     if (timeSelected != null && timeSelected != dateTime) {
       dateTime = timeSelected;
-      Get.find<ViewFullScreen>().checkTimeBasedOnDate(dateTime);
+      Get.find<ViewFullScreen>().convertToMap(dateTime);
       update();
     }
     update();
@@ -321,5 +488,4 @@ class ViewFullScreen extends GetxController {
     dateTime = datenow;
     update();
   }
-
 }
