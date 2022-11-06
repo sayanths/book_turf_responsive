@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/api_service/signup_api.dart';
 import 'package:turf_book_second_project/app/mobile_layout/signup_page/model/sign_up_model.dart';
@@ -32,6 +35,7 @@ class SignUpControllerMobile extends GetxController {
       isLoading.value = false;
       update();
       if (response.status!) {
+        onSaveId(response.id!);
         Get.offAll(() => const OtpPage());
       }
     } else {}
@@ -43,5 +47,11 @@ class SignUpControllerMobile extends GetxController {
       passwordController.dispose();
       conformPasswordController.dispose();
     }
+  }
+
+  onSaveId(String id) {
+    FlutterSecureStorage flutterSecureStorage = const FlutterSecureStorage();
+    flutterSecureStorage.write(key: 'userId', value: id);
+    log(id);
   }
 }

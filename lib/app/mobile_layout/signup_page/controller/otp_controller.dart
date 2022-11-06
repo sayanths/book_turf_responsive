@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/view/bottom_nav.dart';
@@ -13,23 +16,32 @@ class OptController extends GetxController {
   GlobalKey otpKey = GlobalKey<FormState>();
   bool isloading = false;
   otpData() async {
+    FlutterSecureStorage flutterSecureStorage = const FlutterSecureStorage();
+    String? userIdSignUpResponse =
+        await flutterSecureStorage.read(key: 'userId');
     final otp = {otp1.text + otp2.text + otp3.text + otp4.text};
     final otpJoin = otp.join();
-    final result = OtpModel(
-      otp: otpJoin,
-    );
-    isloading = true;    
+    final result = OtpModel(userOtp: otpJoin, id: userIdSignUpResponse);
+    isloading = true;
     update();
 
     OtpResponse? response = await OtpVerifyApi().verifyApi(result);
+    log(response.toString());
 
-    if (response != null) {   
-      OtpResponse(message: "sucess");
+    if (response != null) {
       if (response.status!) {
-        await saveUserData();   
+        await saveUserData();
         Get.offAll(() => const BottomNavigationMobile());
       }
+    } else {
+      log("otp fail");
     }
+  }
+
+  @override
+  void onInit() {
+    otpData();
+    super.onInit();
   }
 
   @override
@@ -45,4 +57,11 @@ class OptController extends GetxController {
     final obj = await SharedPreferences.getInstance();
     obj.setBool('userLoged', true);
   }
+
+  // onSaveUserId() {
+  //   FlutterSecureStorage flutterSecureStorage = const FlutterSecureStorage();
+  //   flutterSecureStorage.read(
+  //     key: 'userId',
+  //   );
+  // }
 }

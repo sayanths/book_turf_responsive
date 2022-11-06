@@ -47,7 +47,7 @@ class CustomSnackImageShower extends StatelessWidget {
                     top: -9,
                     child: IconButton(
                       onPressed: () {
-                        fav.addToFavorite(data);
+                       // fav.addToFavorite(data);
                       },
                       icon: const Padding(
                         padding:
