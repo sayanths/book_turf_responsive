@@ -1,25 +1,28 @@
 class OtpModel {
-  String? otp;
-  int? id;
-
   OtpModel({
+    this.userOtp,
     this.id,
-    this.otp,
   });
 
+  String? userOtp;
+  String? id;
+
+  // factory OtpModel.fromJson(Map<String, dynamic> json) => OtpModel(
+  //     userOtp: json["user_otp"],
+  //     id: json["_id"],
+  // );
+
   Map<String, dynamic> toJson() => {
-        "user_otp": otp,
+        "user_otp": userOtp,
         "_id": id,
       };
 }
 
-class OtpResponse {
-  bool? status;
-  String? message;
-  String? token;
-  String? refreshToken;
-  int? id;
+// To parse this JSON data, do
+//
+//     final otpResponse = otpResponseFromJson(jsonString);
 
+class OtpResponse {
   OtpResponse({
     this.status,
     this.message,
@@ -28,13 +31,25 @@ class OtpResponse {
     this.id,
   });
 
-  factory OtpResponse.fromJson(Map<String, dynamic> json) {
-    return OtpResponse(
-      status: json["status"],
-      message: json["message"],
-      token: json['token'],
-      refreshToken: json['refreshToken'],
-      id: json["_id"],
-    );
-  }
+  bool? status;
+  String? message;
+  String? token;
+  String? refreshToken;
+  String? id;
+
+  factory OtpResponse.fromJson(Map<String, dynamic> json) => OtpResponse(
+        status: json["status"],
+        message: json["message"],
+        token: json["token"],
+        refreshToken: json["refreshToken"],
+        id: json["_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "message": message,
+        "token": token,
+        "refreshToken": refreshToken,
+        "_id": id,
+      };
 }

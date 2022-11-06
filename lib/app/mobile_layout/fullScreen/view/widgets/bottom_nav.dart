@@ -38,11 +38,12 @@ class CustomBottomNav extends StatelessWidget {
           InkWell(
             onTap: () {
               Get.to(
-                  transition: Transition.cupertino,
-                  () => BookNow(
-                        data: data,
-                      ),
-                  arguments: data);
+                transition: Transition.cupertino,
+                () => BookNow(
+                  data: data,
+                ),
+                arguments: data
+              );
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

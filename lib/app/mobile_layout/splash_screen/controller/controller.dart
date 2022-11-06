@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:turf_book_second_project/app/mobile_layout/bottom_nav/view/bottom_nav.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/view/home_page.dart';
 import 'package:turf_book_second_project/app/mobile_layout/login_page/view/login_page.dart';
 
 class SplashScreenController extends GetxController {
@@ -40,7 +40,7 @@ class SplashScreenController extends GetxController {
   check() {
     Timer(const Duration(seconds: 2), () {
       data == 'true'
-          ? Get.offAll(() => const BottomNavigationMobile())
+          ? Get.offAll(() => const HomePageMobile())
           : Get.offAll(() => LoginPageMobile());
     });
     update();

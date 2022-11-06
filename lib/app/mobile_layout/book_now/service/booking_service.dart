@@ -10,7 +10,7 @@ class BookingService {
           .get("https://fauxspot.herokuapp.com/account/get-booking/$id");
       if (response.statusCode == 200) {
         log("sucess");
-        log(response.data.toString());
+       // log(response.data.toString());
         return BookingModel.fromJson(response.data);
       }
     }

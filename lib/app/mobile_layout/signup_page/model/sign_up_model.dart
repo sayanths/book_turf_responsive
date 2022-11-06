@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 class SignUpModel {
   String? email;
   String? password;
@@ -14,18 +18,26 @@ class SignUpModel {
 }
 
 class SignUpResponse {
-  bool? status;
-  String? id;
-
   SignUpResponse({
     this.status,
     this.id,
+    this.message,
   });
 
-  factory SignUpResponse.fromJson(Map<String, dynamic> json) {
-    return SignUpResponse(
-      status: json["status"],
-      id: json["id"],
-    );
-  }
+  bool? status;
+  String? id;
+  String? message;
+
+  factory SignUpResponse.fromJson(Map<String, dynamic> json) => SignUpResponse(
+        status: json["status"],
+        id: json["id"],
+        message: json["message"],
+      );
+
+  // Map<String, dynamic> toJson() => {
+  //     "status": status,
+  //     "id": id,
+  //     "message": message,
+  // };
+
 }

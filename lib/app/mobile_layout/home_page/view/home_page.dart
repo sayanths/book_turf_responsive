@@ -4,11 +4,9 @@ import 'package:turf_book_second_project/app/mobile_layout/home_page/controller/
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/search.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/widget/custom_view.dart';
 import 'package:turf_book_second_project/app/mobile_layout/location/service/location_service.dart';
-import 'package:turf_book_second_project/app/mobile_layout/view_all/view/view_all.dart';
 import 'package:turf_book_second_project/app/utiles/colors.dart';
 import 'package:turf_book_second_project/app/utiles/fonts.dart';
 import 'package:turf_book_second_project/app/utiles/simmer.dart';
-import 'package:turf_book_second_project/app/utiles/widgets.dart';
 
 class HomePageMobile extends StatelessWidget {
   const HomePageMobile({Key? key}) : super(key: key);
@@ -58,10 +56,11 @@ class HomePageMobile extends StatelessWidget {
                                     'Get your location',
                                     style: TextStyle(color: black),
                                   )
-                                : Text(
-                                    location.userDetails.toString(),
-                                    style: const TextStyle(color: black),
-                                  ));
+                                : Text(location.userDetails.toString(),
+                                    style: const TextStyle(
+                                      color: black,
+                                      overflow: TextOverflow.ellipsis,
+                                    )));
                       },
                     )),
               ),
@@ -76,11 +75,11 @@ class HomePageMobile extends StatelessWidget {
                     const Spacer(),
                     InkWell(
                       onTap: () {
-                        Get.to(() => const ViewAll(),
-                            transition: Transition.cupertino);
+                        // Get.to(() => const ViewAll(),
+                        //     transition: Transition.cupertino);
                       },
                       child: Text(
-                        "view All",
+                        "",
                         style: gfontsubtitlefont(cl: black),
                       ),
                     ),
@@ -99,78 +98,101 @@ class HomePageMobile extends StatelessWidget {
                         ),
                       )
                     : LimitedBox(
-                        maxHeight: size.height / 3,
-                        child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.all(5),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: homeController.vendorTurfList.length,
-                            itemBuilder: (context, index) {
-                              final data = homeController.vendorTurfList[index];
-                              return homeCntrl.vendorTurfList.isEmpty
-                                  ? SimmerCustomWidget(
-                                      hight: size.height / 3.6,
-                                      width: size.width / 2.2,
-                                      shapeBorder: ShapeDecoration(
-                                        color: Colors.grey[400]!,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                      ),
-                                    )
-                                  : CustomSnackImageShower(data: data);
-                            }),
-                      );
+                        maxHeight: size.height,
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2),
+                          itemCount: homeController.vendorTurfList.length,
+                          itemBuilder: (context, index) {
+                            final data = homeController.vendorTurfList[index];
+                            return homeCntrl.vendorTurfList.isEmpty
+                                ? SimmerCustomWidget(
+                                    hight: size.height / 3.6,
+                                    width: size.width / 2.2,
+                                    shapeBorder: ShapeDecoration(
+                                      color: Colors.grey[400]!,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                    ),
+                                  )
+                                : CustomSnackImageShower(data: data);
+                          },
+                          // ListView.builder(
+                          //     physics: const BouncingScrollPhysics(),
+                          //     shrinkWrap: true,
+                          //     padding: const EdgeInsets.all(5),
+                          //     scrollDirection: Axis.horizontal,
+                          //     itemCount: homeController.vendorTurfList.length,
+                          //     itemBuilder: (context, index) {
+                          //       final data = homeController.vendorTurfList[index];
+                          //       return homeCntrl.vendorTurfList.isEmpty
+                          //           ? SimmerCustomWidget(
+                          //               hight: size.height / 3.6,
+                          //               width: size.width / 2.2,
+                          //               shapeBorder: ShapeDecoration(
+                          //                 color: Colors.grey[400]!,
+                          //                 shape: RoundedRectangleBorder(
+                          //                     borderRadius:
+                          //                         BorderRadius.circular(5)),
+                          //               ),
+                          //             )
+                          //           : CustomSnackImageShower(data: data);
+                          //     }
+                          //     ),
+                        ));
               }),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Top Rated",
-                      style: Lato(cl: black, sz: 25, fw: FontWeight.bold),
-                    )),
-              ),
-              height10,
-              Container(
-                height: size.height / 3,
-                width: size.width,
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 217, 217, 217),
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20))),
-                child:
-                    GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
-                  return homeCntrl.topRatedList.isEmpty
-                      ? SimmerCustomWidget(
-                          hight: size.height / 3.6,
-                          width: size.width / 2.2,
-                          shapeBorder: ShapeDecoration(
-                            color: Colors.grey[400]!,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                          ),
-                        )
-                      : LimitedBox(
-                          maxHeight: size.height / 3,
-                          child: ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              shrinkWrap: true,
-                              padding: const EdgeInsets.all(5),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: homeController.topRatedList.length,
-                              itemBuilder: (context, index) {
-                                final data = homeController.topRatedList[index];
-                                return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: CustomSnackImageShower(data: data),
-                                );
-                              }),
-                        );
-                }),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 15),
+              //   child: Align(
+              //       alignment: Alignment.centerLeft,
+              //       child: Text(
+              //         "Top Rated",
+              //         style: Lato(cl: black, sz: 25, fw: FontWeight.bold),
+              //       )),
+              // ),
+              // height10,
+              // Container(
+              //   height: size.height / 3,
+              //   width: size.width,
+              //   decoration: const BoxDecoration(
+              //       color: Color.fromARGB(255, 217, 217, 217),
+              //       borderRadius: BorderRadius.only(
+              //           topLeft: Radius.circular(20),
+              //           topRight: Radius.circular(20))),
+              //   child:
+              //       GetBuilder<HomePageControllerMobile>(builder: (homeCntrl) {
+              //     return homeCntrl.topRatedList.isEmpty
+              //         ? SimmerCustomWidget(
+              //             hight: size.height / 3.6,
+              //             width: size.width / 2.2,
+              //             shapeBorder: ShapeDecoration(
+              //               color: Colors.grey[400]!,
+              //               shape: RoundedRectangleBorder(
+              //                   borderRadius: BorderRadius.circular(5)),
+              //             ),
+              //           )
+              //         : LimitedBox(
+              //             maxHeight: size.height / 3,
+              //             child: ListView.builder(
+              //                 physics: const BouncingScrollPhysics(),
+              //                 shrinkWrap: true,
+              //                 padding: const EdgeInsets.all(5),
+              //                 scrollDirection: Axis.horizontal,
+              //                 itemCount: homeController.topRatedList.length,
+              //                 itemBuilder: (context, index) {
+              //                   final data = homeController.topRatedList[index];
+              //                   return Padding(
+              //                     padding: const EdgeInsets.all(8.0),
+              //                     child: CustomSnackImageShower(
+              //                       data: data,
+              //                     ),
+              //                   );
+              //                 }),
+              //           );
+              //   }),
+              // ),
             ],
           ),
         ),

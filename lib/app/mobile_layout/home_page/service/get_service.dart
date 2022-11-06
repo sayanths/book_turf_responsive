@@ -30,7 +30,7 @@ class GetApiService {
 class HomeService {
   void addWishlist(TurfHomeModel data) async {
     
-    log(data.toJson().toString());
+  log(data.toJson().toString());
     try {
       var response = await Dio().post(BaseUrl.addWishlist, data: data.toJson());
       if (response.statusCode! >= 200 && response.statusCode! <= 299) {
