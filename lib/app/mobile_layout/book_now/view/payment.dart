@@ -82,7 +82,10 @@ class BookNow extends StatelessWidget {
                                       Get.snackbar(
                                           "can't select", 'Slot not available',
                                           duration: const Duration(
-                                              milliseconds: 1700));
+                                              milliseconds: 1700),
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          backgroundColor: red,
+                                          colorText: white);
                                     }
                                   },
                                   child: Container(
@@ -185,10 +188,10 @@ class BookNow extends StatelessWidget {
                                               .unselectSingleItemEvening(
                                                   index: index, item: item);
                                     } else {
-                                      Get.snackbar(
-                                          "can't select", 'Slot not available',
-                                          duration: const Duration(
-                                              milliseconds: 1700));
+                                      // Get.snackbar(
+                                      //     "can't select", 'Slot not available',
+                                      //     duration: const Duration(
+                                      //         milliseconds: 1700),snackPosition: SnackPosition.BOTTOM,backgroundColor: red);
                                     }
                                   },
                                   child: Container(

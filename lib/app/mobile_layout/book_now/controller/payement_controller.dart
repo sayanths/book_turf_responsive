@@ -1,10 +1,11 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:turf_book_second_project/app/mobile_layout/book_now/model/booking_addpost_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view_model/view_model_controller.dart';
+import 'package:turf_book_second_project/app/mobile_layout/home_page/view/home_page.dart';
+
 
 class PaymentController extends GetxController {
   bool payment = false;
@@ -21,6 +22,7 @@ class PaymentController extends GetxController {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     addBooking();
+    Get.to(() => const HomePageMobile());
   }
 
   _handlePaymentError(PaymentFailureResponse response) {
@@ -37,7 +39,7 @@ class PaymentController extends GetxController {
     var options = {
       "key": "rzp_test_g9wjrkJkmYw27N",
       "amount": Get.put(ViewFullScreen()).totalAmount * 100,
-      "name": "new project",
+      "name": "Majestic Turf",
       "description": "payment for our work",
       "prefill": {"contact": "7055451245", "email": "mveli620@gmail.com"},
       "external": {

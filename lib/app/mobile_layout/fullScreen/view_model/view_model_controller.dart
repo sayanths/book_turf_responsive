@@ -38,7 +38,7 @@ class ViewFullScreen extends GetxController {
 
   //alreadyList data
 
-  List<String> alreadyList = [];
+  // List<String> alreadyList = [];
   late int? moringTimeStarts;
   late int? moringTimeends;
   late int? afternoonTimeStarts;
@@ -102,7 +102,7 @@ class ViewFullScreen extends GetxController {
     //  print('contains--->$result');
     if (result) {
       selectedDateBookedList = timeSlotesMap[selectedDate];
-      print(selectedDateBookedList);
+      print("selectedDateBookedList--> $selectedDateBookedList");
     }
     createList();
   }
@@ -299,7 +299,6 @@ class ViewFullScreen extends GetxController {
     if (timeSelected != null && timeSelected != dateTime) {
       dateTime = timeSelected;
       Get.find<ViewFullScreen>().convertToMap(dateTime);
-      update();
     }
     update();
   }
