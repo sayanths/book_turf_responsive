@@ -5,12 +5,10 @@ import 'package:location/location.dart';
 import 'package:turf_book_second_project/app/mobile_layout/location/model/location_model.dart';
 
 class GetUserLoction extends GetxController {
-  
-
   dynamic userDetails;
   Location? _location;
   Location? get location => _location;
-  getUserLocation() async {
+  Future<UserLocationModel?> getUserLocation() async {
     bool serviceEnabled;
     PermissionStatus permissionGrantend;
 
@@ -49,11 +47,13 @@ class GetUserLoction extends GetxController {
     } catch (e) {
       log("response  error : $e");
     }
+    return null;
   }
 
   @override
   void onInit() {
-   _location = Location();
+    _location = Location();
+    getUserLocation();
     super.onInit();
   }
 }

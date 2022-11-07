@@ -20,6 +20,7 @@ class ViewFullScreen extends GetxController {
     onTimePressed(dataum!);
     timeListCreation();
     await getBookingDetailsFromApi();
+    DateTime.now();
   }
 
   @override
