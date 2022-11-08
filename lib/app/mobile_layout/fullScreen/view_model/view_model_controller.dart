@@ -93,7 +93,7 @@ class ViewFullScreen extends GetxController {
     selectedDate = DateFormat('yMd').format(date);
     selectedDateBookedList.clear();
     if (selectedDate != todayDate) {
-      todayHour = 4;
+      todayHour = 0;
     } else {
       todayHour = DateTime.now().hour;
     }

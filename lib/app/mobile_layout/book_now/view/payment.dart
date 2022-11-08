@@ -1,6 +1,7 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:toast/toast.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/custom_appbar.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view/widgets/full_screen_title.dart';
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view_model/view_model_controller.dart';
@@ -262,5 +263,9 @@ class BookNow extends StatelessWidget {
                     "Total amount :-\n ${bookContrlNow.totalAmount.value}"))),
           ],
         ));
+  }
+
+  void showToast(String msg, {int? duration, int? gravity}) {
+    Toast.show(msg, duration: duration, gravity: gravity);
   }
 }

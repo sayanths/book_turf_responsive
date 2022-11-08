@@ -23,6 +23,7 @@ class PaymentController extends GetxController {
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     addBooking();
     Get.to(() => const HomePageMobile());
+    
   }
 
   _handlePaymentError(PaymentFailureResponse response) {
