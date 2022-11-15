@@ -63,7 +63,7 @@ class ViewAllMobileController extends GetxController {
     if (response != null) {
       if (response.status!) {
         allThings.clear();
-        allThings.addAll(response.data);
+        allThings.addAll(response.data!);
         forCricket();
         forFootBall();
         forBadminton();

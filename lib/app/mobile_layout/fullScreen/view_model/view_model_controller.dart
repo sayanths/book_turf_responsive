@@ -36,6 +36,13 @@ class ViewFullScreen extends GetxController {
   DateTime dateTime = DateTime.now();
   int dayToday = DateTime.now().day;
 
+  void changeDate(DateTime dateTime) {
+    this.dateTime = dateTime;
+    timeListCreation();
+    convertToMap(dateTime);
+    update();
+  }
+
   //alreadyList data
 
   // List<String> alreadyList = [];
@@ -56,10 +63,11 @@ class ViewFullScreen extends GetxController {
     turfId = da.id!;
   }
 
-  var bookedSlotList = [];
+  //var bookedSlotList = [];
   Map<String, dynamic> timeSlotesMap = {};
   getBookingDetailsFromApi() async {
-    bookedSlotList.clear();
+    // bookedSlotList.clear();
+    bookedTimingList.clear();
     BookingModel? bookingResult =
         await BookingService().getTurfData(dataum!.id.toString());
     try {

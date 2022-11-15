@@ -1,20 +1,26 @@
 class TurfHomeModel {
   TurfHomeModel({
     this.status,
-    required this.data,
+     this.data,
+    this.error,
+    this.message,
   });
 
   bool? status;
-  List<Datum> data;
+  List<Datum>? data;
+  bool? error;
+  String? message;
 
   factory TurfHomeModel.fromJson(Map<String, dynamic> json) => TurfHomeModel(
-        status: json["status"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-      );
+      status: json["status"],
+      data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+      
+      error: json['error'] ?? true);
+      
 
   Map<String, dynamic> toJson() => {
         "status": status,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
       };
 }
 

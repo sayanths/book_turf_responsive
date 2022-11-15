@@ -1,4 +1,5 @@
-import 'dart:developer';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 
 String handleError(e) {
@@ -6,7 +7,6 @@ String handleError(e) {
   String networkError = 'No connection';
 
   if (e is DioError) {
-    log(e.message);
     if (e.response == null) {
       return networkError;
     } else if (e.type == DioErrorType.connectTimeout ||
@@ -19,7 +19,19 @@ String handleError(e) {
       } else {
         return defaultApiError;
       }
-    } 
+    }
   }
   return defaultApiError;
+}
+
+Future<bool> checking() async {
+  try {
+    final result = await InternetAddress.lookup('example.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      return true;
+    }
+    return false;
+  } on SocketException catch (_) {
+    return false;
+  }
 }

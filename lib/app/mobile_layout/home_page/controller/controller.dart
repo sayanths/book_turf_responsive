@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/model/product_model.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/service/get_service.dart';
+import 'package:turf_book_second_project/app/mobile_layout/server/paeg.dart';
 
 class HomePageControllerMobile extends GetxController {
   RxBool isFavourite = false.obs;
@@ -18,10 +19,10 @@ class HomePageControllerMobile extends GetxController {
     if (response != null) {
       if (response.status!) {
         vendorTurfList.clear();
-        vendorTurfList.addAll(response.data);
+        vendorTurfList.addAll(response.data!);
         topRatedData();
       } else {
-        Get.snackbar('no network', '');
+        Get.to(ErrorDialogueWidget(text: response.message.toString()));
       }
     }
     update();

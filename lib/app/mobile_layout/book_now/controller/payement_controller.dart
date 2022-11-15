@@ -6,7 +6,6 @@ import 'package:turf_book_second_project/app/mobile_layout/book_now/model/bookin
 import 'package:turf_book_second_project/app/mobile_layout/fullScreen/view_model/view_model_controller.dart';
 import 'package:turf_book_second_project/app/mobile_layout/home_page/view/home_page.dart';
 
-
 class PaymentController extends GetxController {
   bool payment = false;
 
@@ -23,7 +22,6 @@ class PaymentController extends GetxController {
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     addBooking();
     Get.to(() => const HomePageMobile());
-    
   }
 
   _handlePaymentError(PaymentFailureResponse response) {
@@ -66,5 +64,6 @@ class PaymentController extends GetxController {
     } catch (e) {
       Get.snackbar('', e.toString());
     }
+    update();
   }
 }

@@ -46,7 +46,7 @@ class BookNow extends StatelessWidget {
                                       const Color.fromARGB(255, 11, 94, 2),
                                   selectedTextColor: Colors.white,
                                   onDateChange: (date) {
-                                controller.dateTimeOnChange(date);
+                                controller.changeDate(date);
                               }),
                             ),
                           ),
@@ -259,8 +259,16 @@ class BookNow extends StatelessWidget {
               ),
             ),
             Expanded(
-                child: Obx(() => Text(
-                    "Total amount :-\n ${bookContrlNow.totalAmount.value}"))),
+                child: Obx(() => Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text("Total amount :- "),
+                        Text(
+                          "${bookContrlNow.totalAmount.value}",
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ],
+                    ))),
           ],
         ));
   }

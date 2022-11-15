@@ -45,7 +45,7 @@ class LoginControllerMobile extends GetxController {
         Get.snackbar(response.message.toString(), '');
       }
     } else {
-      Get.snackbar('', 'internet not found');
+      Get.snackbar('', response!.message.toString());
     }
   }
 
